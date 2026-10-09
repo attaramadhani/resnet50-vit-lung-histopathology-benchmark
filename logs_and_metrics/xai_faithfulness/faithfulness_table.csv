@@ -1,0 +1,4 @@
+Metode XAI,Tipe Model,Deletion AUC (Drop tajam = Baik),Insertion AUC (Naik tajam = Baik),Faithfulness Ratio (Ins / Del)
+ResNet50 + Grad-CAM (Logits),CNN,0.3334 +/- 0.4689,0.3336 +/- 0.4687,1.00x
+ViT-S/16 + Attention Rollout (Residual),Transformer,0.3828 +/- 0.2271,0.3656 +/- 0.2127,0.96x
+Random Attribution Baseline,Control (Noise),0.3413 +/- 0.2624,0.3416 +/- 0.2630,1.00x

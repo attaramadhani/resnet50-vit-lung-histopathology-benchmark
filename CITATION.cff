@@ -1,0 +1,46 @@
+cff-version: 1.2.0
+message: "If you use this software, benchmarking code, or experimental data, please cite it as below."
+title: "Beyond the LC25000 ceiling: optimizer robustness and external validity of a convolutional network and a vision transformer for lung cancer histopathology classification"
+version: 1.0.0
+date-released: 2026-10-09
+url: "https://github.com/attaramadhani/resnet50-vit-lung-histopathology-benchmark"
+repository-code: "https://github.com/attaramadhani/resnet50-vit-lung-histopathology-benchmark"
+license: MIT
+authors:
+  - family-names: "Setiawan"
+    given-names: "Wahyudi"
+    orcid: "https://orcid.org/0000-0003-0068-1443"
+    affiliation: "Department of Information Systems, Faculty of Engineering, Universitas Trunojoyo Madura, Indonesia"
+    email: "wsetiawan@trunojoyo.ac.id"
+  - family-names: "Tri Hida"
+    given-names: "Attala Alif Ramadhani"
+    affiliation: "Department of Information Systems, Faculty of Engineering, Universitas Trunojoyo Madura, Indonesia"
+  - family-names: "Saputra"
+    given-names: "Ade Verdaus"
+    affiliation: "Department of Information Systems, Faculty of Engineering, Universitas Trunojoyo Madura, Indonesia"
+keywords:
+  - "lung cancer"
+  - "histopathology"
+  - "LC25000"
+  - "LungHist700"
+  - "ResNet50"
+  - "Vision Transformer"
+  - "Explainable AI"
+  - "Grad-CAM"
+  - "Attention Rollout"
+  - "External Validation"
+  - "Reproducibility"
+  - "BIMA 2026"
+preferred-citation:
+  type: article
+  authors:
+    - family-names: "Setiawan"
+      given-names: "Wahyudi"
+    - family-names: "Tri Hida"
+      given-names: "Attala Alif Ramadhani"
+    - family-names: "Saputra"
+      given-names: "Ade Verdaus"
+  title: "Beyond the LC25000 ceiling: optimizer robustness and external validity of a convolutional network and a vision transformer for lung cancer histopathology classification"
+  journal: "Computer Methods and Programs in Biomedicine Update"
+  year: 2026
+  publisher: "Elsevier"

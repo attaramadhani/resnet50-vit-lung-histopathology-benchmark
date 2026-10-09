@@ -1,0 +1,111 @@
+{
+  "mcnemar_tests": [
+    {
+      "comparison": "ResNet50 LC25000 vs ResNet50 ImageNet",
+      "b (M1 correct, M2 wrong)": 69,
+      "c (M1 wrong, M2 correct)": 45,
+      "discordant_total": 114,
+      "accuracy_difference_percentage_points": 3.47,
+      "exact_mcnemar_p_value": 0.03078,
+      "is_statistically_significant_alpha_005": true
+    },
+    {
+      "comparison": "ResNet50 LC25000 vs ViT-S/16 ImageNet",
+      "b (M1 correct, M2 wrong)": 116,
+      "c (M1 wrong, M2 correct)": 99,
+      "discordant_total": 215,
+      "accuracy_difference_percentage_points": 2.46,
+      "exact_mcnemar_p_value": 0.27515,
+      "is_statistically_significant_alpha_005": false
+    },
+    {
+      "comparison": "ViT-S/16 ImageNet vs ResNet50 ImageNet",
+      "b (M1 correct, M2 wrong)": 127,
+      "c (M1 wrong, M2 correct)": 120,
+      "discordant_total": 247,
+      "accuracy_difference_percentage_points": 1.01,
+      "exact_mcnemar_p_value": 0.70271,
+      "is_statistically_significant_alpha_005": false
+    }
+  ],
+  "bootstrap_patient_clustered_95ci": {
+    "resnet50_imagenet": {
+      "accuracy_percent_95ci": [
+        53.01,
+        69.79
+      ],
+      "balanced_accuracy_percent_95ci": [
+        58.78,
+        72.71
+      ],
+      "macro_roc_auc_95ci": [
+        0.7622,
+        0.8659
+      ]
+    },
+    "resnet50_lc25000": {
+      "accuracy_percent_95ci": [
+        56.8,
+        72.42
+      ],
+      "balanced_accuracy_percent_95ci": [
+        62.61,
+        75.06
+      ],
+      "macro_roc_auc_95ci": [
+        0.7663,
+        0.8789
+      ]
+    },
+    "vit_s_imagenet": {
+      "accuracy_percent_95ci": [
+        51.26,
+        72.51
+      ],
+      "balanced_accuracy_percent_95ci": [
+        54.18,
+        73.63
+      ],
+      "macro_roc_auc_95ci": [
+        0.7134,
+        0.8744
+      ]
+    }
+  },
+  "delta_differences_95ci": {
+    "delta_lc_minus_imagenet_acc_pts_95ci": [
+      -0.91,
+      7.81
+    ],
+    "delta_lc_minus_vit_acc_pts_95ci": [
+      -4.93,
+      10.18
+    ]
+  },
+  "comparison_table": [
+    {
+      "Model Architecture": "ResNet-50",
+      "Pretraining Weights": "ImageNet-1K V2",
+      "OOF Accuracy (%) [95% CI]": "60.78% [53.01 - 69.79%]",
+      "OOF Balanced Acc (%) [95% CI]": "65.46% [58.78 - 72.71%]",
+      "OOF Macro F1": "0.6153",
+      "OOF Macro ROC-AUC [95% CI]": "0.8145 [0.7622 - 0.8659]"
+    },
+    {
+      "Model Architecture": "ResNet-50",
+      "Pretraining Weights": "LC25000 (Sequential)",
+      "OOF Accuracy (%) [95% CI]": "64.25% [56.8 - 72.42%]",
+      "OOF Balanced Acc (%) [95% CI]": "68.28% [62.61 - 75.06%]",
+      "OOF Macro F1": "0.6596",
+      "OOF Macro ROC-AUC [95% CI]": "0.8229 [0.7663 - 0.8789]"
+    },
+    {
+      "Model Architecture": "ViT-S/16",
+      "Pretraining Weights": "ImageNet-1K",
+      "OOF Accuracy (%) [95% CI]": "61.79% [51.26 - 72.51%]",
+      "OOF Balanced Acc (%) [95% CI]": "63.01% [54.18 - 73.63%]",
+      "OOF Macro F1": "0.6277",
+      "OOF Macro ROC-AUC [95% CI]": "0.7922 [0.7134 - 0.8744]"
+    }
+  ]
+}

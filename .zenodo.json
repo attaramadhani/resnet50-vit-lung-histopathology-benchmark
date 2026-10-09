@@ -1,0 +1,39 @@
+{
+  "title": "Beyond the LC25000 ceiling: optimizer robustness and external validity of a convolutional network and a vision transformer for lung cancer histopathology classification",
+  "description": "Official replication package containing training and evaluation code, split manifests, configuration files, per-epoch logs, per-fold metrics, and publication figure scripts for comparative benchmarking of ResNet50 and ViT-S/16 on LC25000 and LungHist700 histopathology datasets.",
+  "creators": [
+    {
+      "name": "Setiawan, Wahyudi",
+      "affiliation": "Department of Information Systems, Faculty of Engineering, Universitas Trunojoyo Madura, Indonesia",
+      "orcid": "0000-0003-0068-1443"
+    },
+    {
+      "name": "Tri Hida, Attala Alif Ramadhani",
+      "affiliation": "Department of Information Systems, Faculty of Engineering, Universitas Trunojoyo Madura, Indonesia"
+    },
+    {
+      "name": "Saputra, Ade Verdaus",
+      "affiliation": "Department of Information Systems, Faculty of Engineering, Universitas Trunojoyo Madura, Indonesia"
+    }
+  ],
+  "access_right": "open",
+  "license": "MIT",
+  "upload_type": "software",
+  "keywords": [
+    "histopathology",
+    "lung cancer",
+    "LC25000",
+    "LungHist700",
+    "ResNet50",
+    "Vision Transformer",
+    "ViT-S/16",
+    "Explainable AI",
+    "Grad-CAM",
+    "Attention Rollout",
+    "External Validation",
+    "Reproducibility",
+    "BIMA 2026",
+    "CMPB Update"
+  ],
+  "notes": "Penelitian Terapan Unggulan Perguruan Tinggi — Hibah BIMA 2026 Kemendikbudristek RI, Universitas Trunojoyo Madura."
+}

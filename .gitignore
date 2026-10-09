@@ -1,0 +1,22 @@
+# Python & Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.ipynb_checkpoints/
+
+# Virtual Environment
+venv/
+.venv/
+env/
+
+# Model Checkpoints (Excluded to keep repository lightweight)
+*.pth
+*.pt
+*.bin
+*.onnx
+*.h5
+
+# OS generated
+.DS_Store
+Thumbs.db
+desktop.ini

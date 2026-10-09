@@ -1,0 +1,41 @@
+{
+  "model_type": "resnet50_lc25000",
+  "total_images": 691,
+  "total_patients": 45,
+  "zero_patient_leakage": true,
+  "fixed_epochs": 4,
+  "model_selection_leakage_prevented": true,
+  "oof_accuracy_percent": 64.25,
+  "oof_balanced_accuracy_percent": 68.28,
+  "oof_macro_f1": 0.6596,
+  "oof_macro_roc_auc": 0.8229,
+  "fold_mean_accuracy_percent": 63.97,
+  "fold_std_accuracy_percent": 5.2,
+  "fold_mean_balanced_accuracy_percent": 69.84,
+  "fold_std_balanced_accuracy_percent": 6.79,
+  "fold_mean_macro_f1": 0.6226,
+  "fold_std_macro_f1": 0.0445,
+  "fold_mean_macro_auc": 0.8373,
+  "fold_std_macro_auc": 0.019,
+  "duration_minutes": 23.9,
+  "per_class": {
+    "lung_aca": {
+      "precision": 0.6233,
+      "recall": 0.4786,
+      "f1": 0.5414,
+      "support": 280
+    },
+    "lung_n": {
+      "precision": 0.7234,
+      "recall": 0.9007,
+      "f1": 0.8024,
+      "support": 151
+    },
+    "lung_scc": {
+      "precision": 0.6042,
+      "recall": 0.6692,
+      "f1": 0.635,
+      "support": 260
+    }
+  }
+}

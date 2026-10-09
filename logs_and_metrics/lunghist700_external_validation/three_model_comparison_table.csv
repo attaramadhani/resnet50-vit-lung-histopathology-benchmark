@@ -1,0 +1,4 @@
+Model Architecture,Pretraining Weights,OOF Accuracy (%) [95% CI],OOF Balanced Acc (%) [95% CI],OOF Macro F1,OOF Macro ROC-AUC [95% CI]
+ResNet-50,ImageNet-1K V2,60.78% [53.01 - 69.79%],65.46% [58.78 - 72.71%],0.6153,0.8145 [0.7622 - 0.8659]
+ResNet-50,LC25000 (Sequential),64.25% [56.8 - 72.42%],68.28% [62.61 - 75.06%],0.6596,0.8229 [0.7663 - 0.8789]
+ViT-S/16,ImageNet-1K,61.79% [51.26 - 72.51%],63.01% [54.18 - 73.63%],0.6277,0.7922 [0.7134 - 0.8744]

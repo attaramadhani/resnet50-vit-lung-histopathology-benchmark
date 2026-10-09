@@ -1,0 +1,23 @@
+experiment_name: vit_s_adamw_1e4
+model_architecture: vit_s
+model_name: WinKawaks/vit-small-patch16-224
+img_size: 224
+num_classes: 3
+batch_size: 32
+epochs: 50
+n_folds: 5
+seed: 42
+optimizer: AdamW
+learning_rate: 0.0001
+weight_decay: 0.0001
+min_delta: 0.0001
+patience_es: 5
+patience_lr: 2
+lr_factor: 0.5
+min_lr: 1.0e-06
+fp16: true
+num_workers: 2
+use_augmentation: false
+freeze_layers:
+- 0
+- 1
