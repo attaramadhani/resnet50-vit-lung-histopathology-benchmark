@@ -3,7 +3,7 @@
 [![Python](https://img.shields.io/badge/python-3.11%20%7C%203.12-blue.svg)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.2%2B-ee4c2c.svg)](https://pytorch.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.pending.svg)](https://doi.org/10.5281/zenodo.pending)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23271475.svg)](https://doi.org/10.5281/zenodo.23271475)
 [![Target Journal](https://img.shields.io/badge/Elsevier-CMPB_Update-orange.svg)](https://www.sciencedirect.com/journal/computer-methods-and-programs-in-biomedicine-update)
 
 Official open-science replication package for the research article submitted to Elsevier's *Computer Methods and Programs in Biomedicine Update* (CMPB Update).

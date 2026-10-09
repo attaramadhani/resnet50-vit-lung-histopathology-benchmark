@@ -5,6 +5,10 @@ version: 1.0.0
 date-released: 2026-10-09
 url: "https://github.com/attaramadhani/resnet50-vit-lung-histopathology-benchmark"
 repository-code: "https://github.com/attaramadhani/resnet50-vit-lung-histopathology-benchmark"
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.23271475
+doi: 10.5281/zenodo.23271475
 license: MIT
 authors:
   - family-names: "Setiawan"
