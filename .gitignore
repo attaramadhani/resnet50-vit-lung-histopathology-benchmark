@@ -9,8 +9,9 @@ venv/
 .venv/
 env/
 
-# Datasets & Caches
+# Datasets, Caches & Local WP Outputs
 data/
+results_rev1/
 *.zip
 
 # Model Checkpoints (Excluded to keep repository lightweight)

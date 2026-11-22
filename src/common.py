@@ -10,6 +10,7 @@ import math
 import os
 import numpy as np
 import pandas as pd
+from PIL import Image
 try:
     import torch
     import torch.nn as nn

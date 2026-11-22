@@ -9,7 +9,28 @@
 
 Official **v2.0.0** open-science replication package for manuscript **CMPBUP-D-26-00450** submitted to Elsevier's *Computer Methods and Programs in Biomedicine Update* (CMPB Update).
 
-> **Version Note:** `v2.0.0` supersedes the initial `v1.0.0` release with the unified 14-scenario + group-aware benchmark, rotation-invariant ORB+RANSAC near-duplicate audit, updated GPU compute profiling, per-model random baseline XAI faithfulness evaluation, and leak-free LungHist700 inner-validation fine-tuning protocol. See [`CHANGELOG.md`](CHANGELOG.md) for full details.
+> **Version Note (`v1.0.0` Superseded):** Release `v1.0.0` (archived at git tag `v1.0.0`) is **superseded and obsolete**. It contained pre-revision draft code and logs that differed from the revised manuscript (`momentum: 0.9` in initial SGD configs, `use_augmentation: false`, `ReduceLROnPlateau` scheduler in `train.py`, HuggingFace ViT loader with dropout 0.1, perceptual-hash-only audit, and a 4-epoch LungHist700 script selecting checkpoints on the held-out fold without inner validation). **`v2.0.0`** contains the exact unified revision pipeline, configs, splits, raw logs, and figure scripts underlying the manuscript. See [`CHANGELOG.md`](CHANGELOG.md) for full details.
+
+---
+
+## Script → Manuscript Table & Figure Mapping
+
+| Script | Purpose | Manuscript Output(s) |
+| :--- | :--- | :--- |
+| `src/train_scenarios.py` | 14-scenario LC25000 5-fold CV & 3,000-image soft-voting test | **Table 2, Table 3 (rows 1–14), Fig. 2, Fig. 3, Fig. S1** |
+| `src/exp_stats_paired.py` | Paired & Nadeau–Bengio corrected resampled *t*-tests | **Section 4.1, Section 4.2** |
+| `src/exp4_duplicate_audit.py` | Rotation-invariant dihedral ResNet50 + ORB/RANSAC duplicate audit | **Section 3.2, Section 4.1 (1,779 groups)** |
+| `src/train_clean_grouped.py` | Group-aware re-training of S1 & S6 (`G1–G2`) | **Table 3 (rows G1–G2)** |
+| `src/exp3_compute_benchmark.py` | GPU-only throughput/latency/VRAM & wall-clock log summary | **Table 4, Fig. 4** |
+| `src/exp2_faithfulness.py` | Grad-CAM & Attention Rollout deletion/insertion AUC (`K=10/20`, 3 baselines) | **Table 5, Fig. 5** |
+| `src/exp1_zeroshot_ensemble.py` | Zero-shot 5-fold ensemble test on LungHist700 (`N=691`) | **Table 6 (Zero-shot), Fig. 7a–b** |
+| `src/exp7_lunghist_finetune.py` | Patient-grouped & image-level LungHist700 5-fold CV (inner val, patience 8) | **Table 6 (Fine-tuned & Image-level), Fig. 7c–e, Fig. 8** |
+| `src/lunghist_stats.py` | Durkalski clustered McNemar + Holm correction on LungHist700 | **Section 4.5** |
+| `src/verify_vit_checkpoint.py` | Pretrained weight equivalence (`timm` vs `WinKawaks/vit-small-patch16-224`) | **Section 3.3** |
+| `scripts/generate_manuscript_figures.py` | Reproduces 300 DPI plots from `logs_and_metrics/` | **Figs. 2, 3, 4, 5, 7, 8, Fig. S1** |
+| `scripts/generate_xai_visual_gallery_v2.py` | 6 test-image XAI gallery (first 2/class from `exp2_images.csv`) | **Fig. 6** |
+| `scripts/wp01_shortcut_lc25000.py` | LC25000 shallow-feature shortcut test (6 feature sets × 2 classifiers) | **Revision WP01** |
+| `scripts/wp02_audit_validation.py` | Synthetic sibling validation & sensitivity grid for Exp 4 audit | **Revision WP02** |
 
 ---
 
@@ -51,9 +72,11 @@ resnet50-vit-lung-histopathology-benchmark/
 │   ├── exp7_lunghist_finetune.py   # Patient-grouped 5-fold CV with inner validation (~15% patients, patience 8)
 │   ├── exp_stats_paired.py         # Paired & Nadeau–Bengio corrected resampled t-tests
 │   └── lunghist_stats.py           # Durkalski clustered McNemar + Holm correction
-├── scripts/                        # Publication figure generators (300 DPI)
+├── scripts/                        # Publication figure generators & revision checks
 │   ├── generate_manuscript_figures.py
-│   └── generate_xai_visual_gallery.py
+│   ├── generate_xai_visual_gallery_v2.py
+│   ├── wp01_shortcut_lc25000.py
+│   └── wp02_audit_validation.py
 ├── figures/                        # Reproduced figures matching manuscript Figs 2–8 & S1
 ├── logs_and_metrics/               # Raw experimental logs & compiled tables
 │   ├── tables_for_manuscript.md    # Auto-compiled Tables 2–6 with file provenance

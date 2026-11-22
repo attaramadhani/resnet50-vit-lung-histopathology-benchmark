@@ -1,8 +1,19 @@
 # Changelog
 
-## [2.0.0] - 2026-10-15 (Full Revision Package Aligned with CMPBUP-D-26-00450)
+## [2.0.1] - 2026-11-22 (Hotfix & Revision R1 Tooling)
+
+### Fixed & Added
+- **Fixed Missing PIL Import in `src/common.py`**: Added `from PIL import Image` so `ImageList.__getitem__` runs cleanly in standalone replication tests.
+- **Revised Fig. 6 (`figures/fig6_xai_multiclass_gallery.png`, `scripts/generate_xai_visual_gallery_v2.py`)**: Regenerated strictly from the first two test images per class in `data_splits/exp2_images.csv` (`lungaca2935`, `lungaca2984`, `lungn2089`, `lungn1327`, `lungscc4868`, `lungscc2554`) without figure title or unvalidated interpretive labels, and removed the superseded BIMA-titled gallery script.
+- **Included Revision Verification Scripts (`scripts/`)**: Added `scripts/wp01_shortcut_lc25000.py` (LC25000 shallow-feature shortcut test) and `scripts/wp02_audit_validation.py` (near-duplicate audit sensitivity validation).
+- **Updated Documentation (`README.md`)**: Added explicit deprecation notice for `v1.0.0` and a complete Script-to-Manuscript Table/Figure mapping table.
+
+## [2.0.0] - 2026-10-15 (Full Revision Package Aligned with CMPBUP-D-26-00450; Zenodo DOI: `10.5281/zenodo.24432592`)
 
 Replaces the initial `v1.0.0` draft artifacts with the unified revision pipeline executed on NVIDIA RTX 4090 (RunPod, Oct 14–15, 2026) and resolves all code–log–manuscript discrepancies:
+
+### Deprecation Notice for `v1.0.0` (Superseded)
+All `v1.0.0` artifacts (`10.5281/zenodo.23271475`) are **superseded** and preserved strictly at git tag `v1.0.0`. Specifically, `v1.0.0` is obsolete because: (1) its YAML configs specified `momentum: 0.9` for SGD and `use_augmentation: false`, (2) `src/train.py` used a `ReduceLROnPlateau` LR scheduler, (3) `src/models.py` loaded ViT-S/16 via HuggingFace with `0.1` dropout, (4) near-duplicate auditing relied only on non-rotation-invariant `phash_grouping.py`, and (5) `src/train_eval_grouped_kfold.py` trained for 4 fixed epochs while stepping its scheduler and selecting checkpoints on the held-out fold without an inner patient-grouped validation split. `v2.0.0`+ replaces every one of those components cleanly.
 
 ### Added & Updated
 - **Unified 14-Scenario LC25000 Training Engine (`src/train_scenarios.py`, `src/common.py`)**:

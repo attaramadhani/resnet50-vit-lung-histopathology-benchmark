@@ -1,4 +1,8 @@
-"""Generate the multi-case XAI visual gallery (Fig. 6) using v2.0.0 ResNet50 and ViT-S/16 models."""
+"""Generate Fig. 6 (revision R1): XAI gallery for six TEST images (first two per class of exp2_images.csv).
+
+No figure title (suptitle) and no interpretive labels such as "Tumor nests" are drawn: the maps were not
+reviewed by a pathologist. Column titles and the predicted class with its probability are kept.
+"""
 import argparse
 import os
 import sys
@@ -15,13 +19,16 @@ from common import build_model, load_checkpoint, eval_transform, MEAN, STD  # no
 from exp2_faithfulness import gradcam, rollout  # noqa: E402
 
 
+# Fig. 6 (revision R1): the first two images of each class in data_splits/exp2_images.csv,
+# i.e. the 150-image faithfulness subset drawn at random from the TEST set with seed 42 (Section 3.6).
+# Do NOT hand-pick images. All six are test images and were never used for training.
 CASES = [
-    ("lung_aca", "lungaca556.jpeg", "Case 1: Adenocarcinoma"),
-    ("lung_aca", "lungaca678.jpeg", "Case 2: Adenocarcinoma"),
-    ("lung_n", "lungn129.jpeg", "Case 3: Benign Tissue"),
-    ("lung_n", "lungn64.jpeg", "Case 4: Benign Tissue"),
-    ("lung_scc", "lungscc1015.jpeg", "Case 5: Squamous Cell Carcinoma"),
-    ("lung_scc", "lungscc1314.jpeg", "Case 6: Squamous Cell Carcinoma"),
+    ("lung_aca", "lungaca2935.jpeg", "Case 1: Adenocarcinoma"),
+    ("lung_aca", "lungaca2984.jpeg", "Case 2: Adenocarcinoma"),
+    ("lung_n", "lungn2089.jpeg", "Case 3: Benign tissue"),
+    ("lung_n", "lungn1327.jpeg", "Case 4: Benign tissue"),
+    ("lung_scc", "lungscc4868.jpeg", "Case 5: Squamous cell carcinoma"),
+    ("lung_scc", "lungscc2554.jpeg", "Case 6: Squamous cell carcinoma"),
 ]
 CLASSES = ["ACA", "N", "SCC"]
 
