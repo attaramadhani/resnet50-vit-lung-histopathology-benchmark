@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -eo pipefail
 source runpod_rev1/env_exports.sh 2>/dev/null || true
 mkdir -p results_rev1/WP03 results_rev1/WP05 results_rev1/logs
 

@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -eo pipefail
 
 echo "=========================================================================="
 echo "  RUNPOD REV1 ENVIRONMENT & DATASET SETUP (CMPBUP-D-26-00450)"

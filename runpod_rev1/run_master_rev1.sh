@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -eo pipefail
 
 MODE="${1:-paket_c}"
 SUB_ARG="${2:-}"
