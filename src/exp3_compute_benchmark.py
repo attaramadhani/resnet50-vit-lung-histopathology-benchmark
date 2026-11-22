@@ -110,6 +110,8 @@ def main():
     ap.add_argument("--iters", type=int, default=100)
     ap.add_argument("--warmup", type=int, default=20)
     ap.add_argument("--repeats", type=int, default=5)
+    ap.add_argument("--freeze_vit", type=int, default=1, choices=[0, 1])
+    ap.add_argument("--out", default=None)
     ap.add_argument("--summarize-real-time", action="store_true")
     args = ap.parse_args()
 
@@ -121,19 +123,21 @@ def main():
     arch_name = "vit_s16" if args.arch in ["vit_s16", "vit_s"] else "resnet50"
     dev = "cuda" if torch.cuda.is_available() else "cpu"
     gpu_info = get_gpu_info()
+    freeze_vit_flag = bool(args.freeze_vit)
 
     print(f"\n==========================================================================")
     print(f"  EXP 3: COMPUTATIONAL PROFILING (Table 4)")
-    print(f"  Arch: {arch_name} | Hardware: {gpu_info}")
+    print(f"  Arch: {arch_name} | Freeze ViT B0-1: {freeze_vit_flag} | Hardware: {gpu_info}")
     print(f"==========================================================================")
 
-    model = build_model(arch_name, num_classes=3, pretrained=False, freeze_vit_blocks=True).to(dev)
+    model = build_model(arch_name, num_classes=3, pretrained=False, freeze_vit_blocks=freeze_vit_flag).to(dev)
     total_params, trainable_params = count_parameters(model)
     params_M = round(total_params / 1e6, 2)
     trainable_M = round(trainable_params / 1e6, 2)
 
     res = {
         "arch": arch_name,
+        "freeze_vit_blocks": freeze_vit_flag,
         "hardware": gpu_info,
         "params_M": params_M,
         "trainable_params_M": trainable_M,
@@ -247,7 +251,9 @@ def main():
                                                   round(float(np.std(batch_latencies_ms)), 3)]
         res[f"latency_ms_per_image_bs{b_size}"] = round(float(np.mean(batch_latencies_ms)) / b_size, 3)
 
-    out_file = f"exp3_{arch_name}.json"
+    out_file = args.out if args.out else f"exp3_{arch_name}.json"
+    if os.path.dirname(out_file):
+        os.makedirs(os.path.dirname(out_file), exist_ok=True)
     with open(out_file, "w", encoding="utf-8") as f:
         json.dump(res, f, indent=2)
 

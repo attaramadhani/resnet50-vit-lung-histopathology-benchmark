@@ -11,7 +11,14 @@ env/
 
 # Datasets, Caches & Local WP Outputs
 data/
+cache/
+old_ckpts/
 results_rev1/
+lc25000_raw_root.txt
+lc25000_root.txt
+lunghist_root.txt
+cache_root.txt
+runpod_rev1/env_exports.sh
 *.zip
 
 # Model Checkpoints (Excluded to keep repository lightweight)

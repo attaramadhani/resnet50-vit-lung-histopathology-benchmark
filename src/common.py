@@ -26,28 +26,78 @@ CLASSES = ["ACA", "N", "SCC"]
 MEAN, STD = (0.485, 0.456, 0.406), (0.229, 0.224, 0.225)
 
 
-def get_lc25000_root(preferred_root=""):
-    """Finds LC25000 root directory containing lung_aca, lung_n, lung_scc.
-    Prioritizes fast 256px cache if available. Robust to any workspace folder variations.
-    """
+def resolve_split_csv(path):
+    """Resolve split CSV across cwd, data_splits/, parent dirs, or /workspace."""
+    if not path:
+        return path
+    if os.path.exists(path):
+        return path
+    base = os.path.basename(path)
     candidates = [
+        os.path.join("data_splits", base),
+        os.path.join("..", "data_splits", base),
+        os.path.join("/workspace", "resnet50-vit-lung-histopathology-benchmark", "data_splits", base),
+    ]
+    for cand in candidates:
+        if os.path.exists(cand):
+            return cand
+    return path
+
+
+def _is_full_lc25000_dir(folder, require_raw=False):
+    sample_dir = os.path.join(folder, "lung_aca")
+    if not os.path.isdir(sample_dir):
+        return False
+    try:
+        imgs = [fn for fn in os.listdir(sample_dir) if fn.lower().endswith((".jpeg", ".jpg", ".png"))]
+        if len(imgs) < 4000:
+            return False
+        if require_raw:
+            with Image.open(os.path.join(sample_dir, imgs[0])) as im:
+                return max(im.size) >= 512
+        return True
+    except Exception:
+        return False
+
+
+def get_lc25000_root(preferred_root="", require_raw=False):
+    """Finds LC25000 root directory containing lung_aca, lung_n, lung_scc.
+    When require_raw=True (WP02/WP06f), rejects 256px caches and resolves 768x768 originals.
+    """
+    raw_candidates = [
         preferred_root,
-        "cache_root.txt",
-        "data/cache_lc25000_256/",
-        "lc25000_root.txt",
+        os.environ.get("LC25000_RAW_ROOT", "") if require_raw else os.environ.get("LC25000_CACHE_ROOT", ""),
+        "lc25000_raw_root.txt",
+        "data/LC25000_raw/",
         "data/LC25000/",
         "LC25000/",
         "data/lung_image_sets/",
         "lung_image_sets/",
         "data/lung_colon_image_set/lung_image_sets/",
         "lung_colon_image_set/lung_image_sets/",
-        "/workspace/data/cache_lc25000_256/",
+        "/workspace/data/LC25000_raw/",
         "/workspace/data/LC25000/",
         "/workspace/LC25000/",
         "../data/LC25000/",
         "../LC25000/",
-        "./"
     ]
+    if require_raw:
+        candidates = raw_candidates
+    else:
+        candidates = [
+            preferred_root,
+            os.environ.get("LC25000_CACHE_ROOT", ""),
+            "cache_root.txt",
+            "data/cache_lc25000_256/",
+            "/workspace/data/cache_lc25000_256/",
+            "lc25000_root.txt",
+        ] + raw_candidates + ["./"]
+
+    def _matches(folder):
+        if not folder or not os.path.isdir(os.path.join(folder, "lung_aca")):
+            return False
+        return _is_full_lc25000_dir(folder, require_raw=require_raw)
+
     for c in candidates:
         if not c:
             continue
@@ -57,25 +107,27 @@ def get_lc25000_root(preferred_root=""):
                 with open(c, "r", encoding="utf-8") as f:
                     p = f.read().strip()
             except Exception:
-                pass
-        if p and os.path.isdir(os.path.join(p, "lung_aca")):
-            resolved = p if p.endswith(("/", "\\")) else p + "/"
-            return resolved
+                continue
+        if _matches(p):
+            return p if p.endswith(("/", "\\")) else p + "/"
 
-    # Dynamic fallback scan across workspace and parent directories
-    search_roots = [".", "..", "data", "/workspace"]
+    # Dynamic fallback scan across workspace, data, kagglehub cache, and parent directories
+    search_roots = [".", "..", "data", "/workspace", os.environ.get("KAGGLEHUB_CACHE_DIR", ""), os.path.expanduser("~/.cache/kagglehub")]
     for base in search_roots:
-        if not os.path.isdir(base):
+        if not base or not os.path.isdir(base):
             continue
         for root, dirs, _ in os.walk(base):
-            if "lung_aca" in dirs:
+            if "lung_aca" in dirs and _matches(root):
                 resolved = root if root.endswith(("/", "\\")) else root + "/"
-                with open("lc25000_root.txt", "w", encoding="utf-8") as f:
-                    f.write(resolved)
+                target_txt = "lc25000_raw_root.txt" if require_raw else "lc25000_root.txt"
+                try:
+                    with open(target_txt, "w", encoding="utf-8") as f:
+                        f.write(resolved)
+                except Exception:
+                    pass
                 return resolved
-            # Limit depth for performance
             depth = root.count(os.sep) - base.count(os.sep)
-            if depth >= 4:
+            if depth >= 6:
                 dirs.clear()
 
     return preferred_root if (preferred_root and preferred_root.endswith(("/", "\\"))) else (preferred_root + "/" if preferred_root else "")
@@ -83,11 +135,13 @@ def get_lc25000_root(preferred_root=""):
 
 def get_lunghist_root(preferred_root=""):
     """Finds LungHist700 root directory containing aca_bd.
-    Handles all folder variations: data/LungHist700, data/images, LungHist700, etc.
+    Handles all folder variations: data/LungHist700, data/images, LungHist700, /workspace/data/LungHist700, etc.
     """
     candidates = [
         preferred_root,
+        os.environ.get("LUNGHIST700_ROOT", ""),
         "lunghist_root.txt",
+        "data/LungHist700_images/",
         "data/LungHist700/",
         "data/images/",
         "images/",
@@ -95,7 +149,9 @@ def get_lunghist_root(preferred_root=""):
         "data/LungHist700/LungHist700/",
         "data/LungHist700/data/images/",
         "data/LungHist700/images/",
+        "/workspace/data/LungHist700_images/",
         "/workspace/data/LungHist700/",
+        "/workspace/data/LungHist700/data/images/",
         "/workspace/data/images/",
         "/workspace/LungHist700/",
         "../LungHist700/",
@@ -103,6 +159,15 @@ def get_lunghist_root(preferred_root=""):
         "data/",
         "./"
     ]
+    def _is_valid_lh(folder):
+        aca_dir = os.path.join(folder, "aca_bd")
+        if not folder or not os.path.isdir(aca_dir):
+            return False
+        try:
+            return len([x for x in os.listdir(aca_dir) if x.lower().endswith((".jpg", ".jpeg", ".png"))]) >= 50
+        except Exception:
+            return False
+
     for c in candidates:
         if not c:
             continue
@@ -112,46 +177,69 @@ def get_lunghist_root(preferred_root=""):
                 with open(c, "r", encoding="utf-8") as f:
                     p = f.read().strip()
             except Exception:
-                pass
-        if p and os.path.isdir(os.path.join(p, "aca_bd")):
-            resolved = p if p.endswith(("/", "\\")) else p + "/"
-            return resolved
+                continue
+        if _is_valid_lh(p):
+            return p if p.endswith(("/", "\\")) else p + "/"
 
-    # Dynamic fallback scan across workspace and parent directories
     search_roots = [".", "..", "data", "/workspace"]
     for base in search_roots:
         if not os.path.isdir(base):
             continue
         for root, dirs, _ in os.walk(base):
-            if "aca_bd" in dirs:
+            if "aca_bd" in dirs and _is_valid_lh(root):
                 resolved = root if root.endswith(("/", "\\")) else root + "/"
-                with open("lunghist_root.txt", "w", encoding="utf-8") as f:
-                    f.write(resolved)
+                try:
+                    with open("lunghist_root.txt", "w", encoding="utf-8") as f:
+                        f.write(resolved)
+                except Exception:
+                    pass
                 return resolved
             depth = root.count(os.sep) - base.count(os.sep)
-            if depth >= 4:
+            if depth >= 5:
                 dirs.clear()
 
     return preferred_root if (preferred_root and preferred_root.endswith(("/", "\\"))) else (preferred_root + "/" if preferred_root else "")
 
 
-def build_model(arch, num_classes=3, pretrained=False, freeze_vit_blocks=True):
-    """Must mirror Section 3.3 of the manuscript."""
+def build_model(arch, num_classes=3, pretrained=False, freeze_vit_blocks=True, head_dropout=None):
+    """Must mirror Section 3.3 of the manuscript.
+    When head_dropout is None, keeps v2 defaults (ResNet50 Dropout(0.3), ViT drop_rate=0.0).
+    """
     if arch == "resnet50":
         import torchvision
         w = torchvision.models.ResNet50_Weights.IMAGENET1K_V2 if pretrained else None
         m = torchvision.models.resnet50(weights=w)
-        m.fc = nn.Sequential(nn.Dropout(0.3), nn.Linear(2048, num_classes))
+        p_drop = 0.3 if head_dropout is None else float(head_dropout)
+        if p_drop > 0.0:
+            m.fc = nn.Sequential(nn.Dropout(p_drop), nn.Linear(2048, num_classes))
+        else:
+            m.fc = nn.Linear(2048, num_classes)
         return m
     if arch in ["vit_s16", "vit_s"]:
         import timm
+        p_drop = 0.0 if head_dropout is None else float(head_dropout)
         m = timm.create_model(
             "vit_small_patch16_224.augreg_in21k_ft_in1k",
             pretrained=pretrained,
-            num_classes=num_classes
+            num_classes=num_classes,
+            drop_rate=p_drop,
         )
         if freeze_vit_blocks:
             # Freeze encoder blocks 0 and 1 as specified in Section 3.3
+            for name, param in m.named_parameters():
+                if any(name.startswith(f"blocks.{b}.") for b in [0, 1]):
+                    param.requires_grad = False
+        return m
+    if arch == "deit_s16":
+        import timm
+        p_drop = 0.0 if head_dropout is None else float(head_dropout)
+        m = timm.create_model(
+            "deit_small_patch16_224.fb_in1k",
+            pretrained=pretrained,
+            num_classes=num_classes,
+            drop_rate=p_drop,
+        )
+        if freeze_vit_blocks:
             for name, param in m.named_parameters():
                 if any(name.startswith(f"blocks.{b}.") for b in [0, 1]):
                     param.requires_grad = False
@@ -167,17 +255,38 @@ def count_parameters(model):
 
 
 def resolve_checkpoint_path(path):
-    """Finds the actual checkpoint path regardless of folder naming variations."""
+    """Finds actual checkpoint path across folder aliases (old_ckpts, runs, results) and .pt/.pth extensions."""
     if not path:
         return path
-    if os.path.exists(path):
-        return path
+
+    def _check_ext(p):
+        if os.path.exists(p):
+            return p
+        if p.endswith(".pt") and os.path.exists(p + "h"):
+            return p + "h"
+        if p.endswith(".pth") and os.path.exists(p[:-1]):
+            return p[:-1]
+        return None
+
+    hit = _check_ext(path)
+    if hit:
+        return hit
 
     path_norm = path.replace("\\", "/")
-    if os.path.exists(path_norm):
-        return path_norm
+    hit = _check_ext(path_norm)
+    if hit:
+        return hit
 
     replacements = [
+        ("old_ckpts/runs/", "runs/"),
+        ("old_ckpts/runs/", "old_ckpts/"),
+        ("old_ckpts/", "old_ckpts/runs/"),
+        ("old_ckpts/", "runs/"),
+        ("runs/", "old_ckpts/runs/"),
+        ("runs/", "old_ckpts/"),
+        ("runs/", "results/"),
+        ("results/", "runs/"),
+        ("runs/", ""),
         ("vit_s_main", "vit_s16_main"),
         ("vit_s16_main", "vit_s_main"),
         ("vit_s16", "vit_s"),
@@ -192,28 +301,33 @@ def resolve_checkpoint_path(path):
         ("clean_r50", "clean_resnet50"),
         ("clean_vit_s16", "clean_vit_s"),
         ("clean_vit_s", "clean_vit_s16"),
-        ("runs/", "results/"),
-        ("results/", "runs/"),
-        ("runs/", "")
     ]
     for old_s, new_s in replacements:
-        cand = path_norm.replace(old_s, new_s)
-        if os.path.exists(cand):
-            return cand
-        cand_orig = path.replace(old_s, new_s)
-        if os.path.exists(cand_orig):
-            return cand_orig
+        for base_p in (path_norm, path):
+            cand = base_p.replace(old_s, new_s)
+            hit = _check_ext(cand)
+            if hit:
+                return hit
 
-    # Recursive fallback search across workspace
-    base_name = os.path.basename(path)
-    parent_target = os.path.basename(os.path.dirname(path))
-    for s_dir in ["runs", "results", "/workspace", "."]:
+    # Recursive fallback search across workspace (.pt and .pth) with canonical parent matching
+    def _canon(s):
+        return (s.lower()
+                .replace("vit_s16", "vit_s")
+                .replace("clean_r50", "clean_resnet50")
+                .replace("resnet50_adam", "resnet50_main")
+                .replace("sgdm_1e4", "sgdm"))
+
+    base_stem = os.path.splitext(os.path.basename(path_norm))[0]
+    parent_target = _canon(os.path.basename(os.path.dirname(path_norm)))
+    for s_dir in ["old_ckpts", "runs", "results", "/workspace", "."]:
         if os.path.isdir(s_dir):
             for r, _, fs in os.walk(s_dir):
-                if base_name in fs:
-                    curr_parent = os.path.basename(r)
-                    if not parent_target or parent_target in curr_parent or curr_parent in parent_target:
-                        return os.path.join(r, base_name)
+                for fn in fs:
+                    stem, ext = os.path.splitext(fn)
+                    if stem == base_stem and ext.lower() in (".pt", ".pth"):
+                        curr_parent = _canon(os.path.basename(r))
+                        if not parent_target or parent_target == curr_parent or parent_target in curr_parent or curr_parent in parent_target:
+                            return os.path.join(r, fn)
     return path
 
 
@@ -312,6 +426,11 @@ def wilson(k, n, z=1.959964):
 def metrics(y, prob):
     from sklearn.metrics import (accuracy_score, balanced_accuracy_score, f1_score, roc_auc_score,
                                  confusion_matrix)
+    prob = np.asarray(prob, dtype=np.float64)
+    if np.isnan(prob).any() or np.isinf(prob).any():
+        prob = np.nan_to_num(prob, nan=1.0 / 3.0, posinf=1.0, neginf=0.0)
+        row_sums = np.maximum(prob.sum(axis=1, keepdims=True), 1e-8)
+        prob = prob / row_sums
     pred = prob.argmax(1)
     out = dict(
         n=len(y),

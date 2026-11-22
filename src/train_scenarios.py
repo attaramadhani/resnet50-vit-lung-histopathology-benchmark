@@ -10,6 +10,7 @@ Fully aligned with implementation_plan2.md (revisi 2) approved by Dr. Wahyudi Se
 """
 import os
 import sys
+import math
 import shutil
 import argparse
 import time
@@ -76,6 +77,30 @@ def build_optimizer(model, opt_name, lr, weight_decay, momentum):
         raise ValueError(f"Unknown optimizer: {opt_name}")
 
 
+def compute_epoch_lr(base_lr, ep, total_epochs, sched, warmup_epochs):
+    if sched == "none":
+        return base_lr
+    if warmup_epochs > 0 and ep <= warmup_epochs:
+        return base_lr * (float(ep) / float(warmup_epochs))
+    denom = max(1, total_epochs - warmup_epochs)
+    progress = min(1.0, max(0.0, float(ep - warmup_epochs) / float(denom)))
+    return base_lr * 0.5 * (1.0 + math.cos(math.pi * progress))
+
+
+def set_optimizer_lr(optimizer, lr):
+    for pg in optimizer.param_groups:
+        pg["lr"] = lr
+
+
+def resolve_split_csv(path):
+    if os.path.exists(path):
+        return path
+    alt = os.path.join("data_splits", os.path.basename(path))
+    if os.path.exists(alt):
+        return alt
+    return path
+
+
 def sync_aliases(src_dir, alias_names):
     for alias in alias_names:
         dst_dir = os.path.join("runs", alias)
@@ -116,6 +141,20 @@ def main():
     ap.add_argument("--patience", type=int, default=5)
     ap.add_argument("--bs", type=int, default=32)
     ap.add_argument("--seed", type=int, default=42)
+    ap.add_argument("--opt", default=None, choices=[None, "Adam", "AdamW", "RMSprop", "SGD"],
+                    help="Override optimizer (default: use scenario definition)")
+    ap.add_argument("--lr", type=float, default=None, help="Override peak learning rate")
+    ap.add_argument("--wd", type=float, default=None, help="Override weight decay")
+    ap.add_argument("--mom", type=float, default=None, help="Override momentum")
+    ap.add_argument("--warmup_epochs", type=int, default=0, help="Linear warmup epochs (default: 0)")
+    ap.add_argument("--sched", default="none", choices=["none", "cosine"], help="LR schedule (default: none)")
+    ap.add_argument("--freeze_vit", type=int, default=1, choices=[0, 1], help="Freeze ViT blocks 0-1 (default: 1)")
+    ap.add_argument("--head_dropout", type=float, default=None, help="Override classification head dropout (default: v2 per-arch)")
+    ap.add_argument("--out_root", default="runs", help="Root output directory (default: runs)")
+    ap.add_argument("--arch", default=None, choices=[None, "resnet50", "vit_s16"],
+                    help="Run a single custom architecture instead of SCENARIOS_REGISTRY")
+    ap.add_argument("--run_name", default=None, help="Custom output folder name under out_root")
+    ap.add_argument("--no_aliases", action="store_true", help="Disable DIR_ALIASES duplication")
     ap.add_argument("--force", action="store_true")
     args = ap.parse_args()
 
@@ -125,12 +164,15 @@ def main():
     data_root = get_lc25000_root(args.data_root)
     print(f"[Dataset] Resolved LC25000 root directory: '{data_root}'")
 
-    # 1. Load and Verify Assertions on Splits (Section 1)
-    if not os.path.exists(args.dev_csv) or not os.path.exists(args.test_csv):
-        raise FileNotFoundError(f"Missing {args.dev_csv} or {args.test_csv}. Run scratch/generate_clean_splits.py first.")
+    dev_csv_path = resolve_split_csv(args.dev_csv)
+    test_csv_path = resolve_split_csv(args.test_csv)
 
-    dev_df = pd.read_csv(args.dev_csv)
-    test_df = pd.read_csv(args.test_csv)
+    # 1. Load and Verify Assertions on Splits (Section 1)
+    if not os.path.exists(dev_csv_path) or not os.path.exists(test_csv_path):
+        raise FileNotFoundError(f"Missing {dev_csv_path} or {test_csv_path}. Check data_splits/.")
+
+    dev_df = pd.read_csv(dev_csv_path)
+    test_df = pd.read_csv(test_csv_path)
 
     dev_df["label_id"] = dev_df["label"].map(label_to_int)
     test_df["label_id"] = test_df["label"].map(label_to_int)
@@ -155,58 +197,105 @@ def main():
         assert len(va_idx) == 2400, f"Expected 2400 val in fold {f_idx}, got {len(va_idx)}"
 
     # Determine scenarios to run
-    if args.scenarios == "all":
-        selected_keys = list(SCENARIOS_REGISTRY.keys())
-    elif args.scenarios == "main":
-        selected_keys = ["1", "6"]
-    elif args.scenarios == "sgdm":
-        selected_keys = ["11", "12", "13", "14"]
+    if args.arch is not None:
+        custom_opt = args.opt if args.opt is not None else ("Adam" if args.arch == "resnet50" else "AdamW")
+        custom_lr = args.lr if args.lr is not None else 1e-4
+        custom_wd = args.wd if args.wd is not None else 1e-4
+        custom_mom = args.mom if args.mom is not None else (0.9 if custom_opt == "SGD" else 0.0)
+        custom_name = args.run_name or f"{args.arch}_{custom_opt.lower()}_lr{custom_lr:.0e}_s{args.seed}"
+        run_items = [(0, {
+            "name": custom_name,
+            "model": "ResNet50" if args.arch == "resnet50" else "ViT-S/16",
+            "arch": args.arch,
+            "opt": custom_opt,
+            "lr": custom_lr,
+            "wd": custom_wd,
+            "mom": custom_mom,
+        })]
     else:
-        req = [s.strip() for s in args.scenarios.split(",")]
-        selected_keys = []
-        for r in req:
-            for k, v in SCENARIOS_REGISTRY.items():
-                if r == k or r == v["name"]:
-                    selected_keys.append(k)
+        if args.scenarios == "all":
+            selected_keys = list(SCENARIOS_REGISTRY.keys())
+        elif args.scenarios == "main":
+            selected_keys = ["1", "6"]
+        elif args.scenarios == "sgdm":
+            selected_keys = ["11", "12", "13", "14"]
+        else:
+            req = [s.strip() for s in args.scenarios.split(",")]
+            selected_keys = []
+            for r in req:
+                for k, v in SCENARIOS_REGISTRY.items():
+                    if r == k or r == v["name"]:
+                        selected_keys.append(k)
+        run_items = []
+        for sc_k in selected_keys:
+            base_cfg = dict(SCENARIOS_REGISTRY[sc_k])
+            if args.opt is not None:
+                base_cfg["opt"] = args.opt
+            if args.lr is not None:
+                base_cfg["lr"] = args.lr
+            if args.wd is not None:
+                base_cfg["wd"] = args.wd
+            if args.mom is not None:
+                base_cfg["mom"] = args.mom
+            run_items.append((int(sc_k), base_cfg))
 
-    print(f"[Execution] Queued {len(selected_keys)} scenarios ({len(selected_keys)*5} runs): {[SCENARIOS_REGISTRY[k]['name'] for k in selected_keys]}")
-    os.makedirs("runs", exist_ok=True)
+    print(f"[Execution] Queued {len(run_items)} scenarios ({len(run_items)*5} runs): {[c['name'] for _, c in run_items]}")
+    os.makedirs(args.out_root, exist_ok=True)
+    is_legacy_root = (os.path.normpath(args.out_root) == "runs")
+    val_csv_out = "per_fold_val.csv" if is_legacy_root else os.path.join(args.out_root, "per_fold_val.csv")
+    test_csv_out = "per_fold_test.csv" if is_legacy_root else os.path.join(args.out_root, "per_fold_test.csv")
 
     val_records = []
     test_records = []
-    if os.path.exists("per_fold_val.csv"):
-        try: val_records = pd.read_csv("per_fold_val.csv").to_dict(orient="records")
+    if os.path.exists(val_csv_out):
+        try: val_records = pd.read_csv(val_csv_out).to_dict(orient="records")
         except Exception: pass
-    if os.path.exists("per_fold_test.csv"):
-        try: test_records = pd.read_csv("per_fold_test.csv").to_dict(orient="records")
+    if os.path.exists(test_csv_out):
+        try: test_records = pd.read_csv(test_csv_out).to_dict(orient="records")
         except Exception: pass
 
-    val_map = {f"{r['scenario']}_{r['fold']}": r for r in val_records}
-    test_map = {f"{r['scenario']}_{r['fold']}": r for r in test_records}
+    def rec_key(r):
+        s_val = r.get("seed", 42)
+        return f"{r['scenario']}_{r['fold']}" if is_legacy_root else f"{r['scenario']}_s{s_val}_{r['fold']}"
 
-    for sc_num in selected_keys:
-        cfg = SCENARIOS_REGISTRY[sc_num]
-        sc_name = cfg["name"]
-        out_dir = os.path.join("runs", sc_name)
+    val_map = {rec_key(r): r for r in val_records}
+    test_map = {rec_key(r): r for r in test_records}
+
+    freeze_vit_flag = bool(args.freeze_vit)
+
+    for sc_num, cfg in run_items:
+        sc_name = args.run_name if (args.run_name and len(run_items) == 1) else cfg["name"]
+        if is_legacy_root:
+            out_dir = os.path.join(args.out_root, sc_name)
+        elif args.run_name and len(run_items) == 1:
+            out_dir = os.path.join(args.out_root, sc_name)
+        else:
+            out_dir = os.path.join(args.out_root, f"seed_{args.seed}", sc_name)
         os.makedirs(out_dir, exist_ok=True)
 
         summary_file = os.path.join(out_dir, "metrics.json")
+        ens_preds_file = os.path.join(out_dir, "ensemble_test_preds.csv")
         all_ckpts = [os.path.join(out_dir, f"fold{f}.pt") for f in range(5)]
 
-        if os.path.exists(summary_file) and all(os.path.exists(c) for c in all_ckpts) and not args.force:
-            print(f"\n[Skip] Scenario {sc_num}: {sc_name} already completed. Using cached metrics.")
-            if sc_name in DIR_ALIASES:
+        if os.path.exists(summary_file) and os.path.exists(ens_preds_file) and all(os.path.exists(c) for c in all_ckpts) and not args.force:
+            print(f"\n[Skip] Scenario {sc_num}: {sc_name} (seed={args.seed}) already completed. Using cached metrics & preds.")
+            if is_legacy_root and not args.no_aliases and sc_name in DIR_ALIASES:
                 sync_aliases(out_dir, DIR_ALIASES[sc_name])
             continue
 
-        print(f"\n{'='*75}\nSCENARIO {sc_num}: {sc_name.upper()} | Model: {cfg['model']} | Opt: {cfg['opt']} | LR: {cfg['lr']} | WD: {cfg['wd']} | Mom: {cfg['mom']}\n{'='*75}")
+        print(f"\n{'='*75}\nSCENARIO {sc_num}: {sc_name.upper()} (seed={args.seed}) | Model: {cfg['model']} | Opt: {cfg['opt']} | LR: {cfg['lr']} | WD: {cfg['wd']} | Mom: {cfg['mom']} | Sched: {args.sched} (warmup={args.warmup_epochs}) | FreezeViT: {freeze_vit_flag} | HeadDrop: {args.head_dropout}\n{'='*75}")
 
         # Write config.yaml and environment.txt
         record_environment(out_dir)
         with open(os.path.join(out_dir, "config.yaml"), "w", encoding="utf-8") as f:
             for k_cfg, v_cfg in cfg.items():
                 f.write(f"{k_cfg}: {v_cfg}\n")
-            f.write(f"epochs: {args.epochs}\npatience: {args.patience}\nmin_delta: 0.0\nseed: {args.seed} (re-seeded per fold)\ngrad_clip: none\nscheduler: none\nuse_augmentation: true\n")
+            f.write(
+                f"epochs: {args.epochs}\npatience: {args.patience}\nmin_delta: 0.0\n"
+                f"seed: {args.seed}\ngrad_clip: none\nscheduler: {args.sched}\n"
+                f"warmup_epochs: {args.warmup_epochs}\nfreeze_vit: {int(freeze_vit_flag)}\n"
+                f"head_dropout: {args.head_dropout}\nuse_augmentation: true\n"
+            )
 
         fold_val_accs = []
         fold_test_accs = []
@@ -223,7 +312,7 @@ def main():
 
             if os.path.exists(ckpt_path) and os.path.exists(hist_csv_path) and not args.force:
                 print(f"--- Fold {fold}/4: Checkpoint found. Loading ---")
-                m = build_model(cfg["arch"], pretrained=False).to(dev)
+                m = build_model(cfg["arch"], pretrained=False, freeze_vit_blocks=freeze_vit_flag, head_dropout=args.head_dropout).to(dev)
                 m.load_state_dict(torch.load(ckpt_path, map_location=dev))
                 df_hist = pd.read_csv(hist_csv_path)
                 best_val_loss = float(df_hist["val_loss"].min())
@@ -232,7 +321,7 @@ def main():
                 fold_epochs_run.append(stop_epoch)
             else:
                 print(f"\n--- Fold {fold}/4: Training (Train: 9,600, Val: 2,400) ---")
-                m = build_model(cfg["arch"], pretrained=True).to(dev)
+                m = build_model(cfg["arch"], pretrained=True, freeze_vit_blocks=freeze_vit_flag, head_dropout=args.head_dropout).to(dev)
                 tot_p, tr_p = count_parameters(m)
                 print(f"  Params: Total={tot_p/1e6:.2f}M | Trainable={tr_p/1e6:.2f}M")
 
@@ -253,6 +342,8 @@ def main():
                 history_rows = []
 
                 for ep in range(1, args.epochs + 1):
+                    ep_lr = compute_epoch_lr(cfg["lr"], ep, args.epochs, args.sched, args.warmup_epochs)
+                    set_optimizer_lr(opt, ep_lr)
                     t_ep_start = time.perf_counter()
                     m.train()
                     tr_loss, tr_corr, tr_tot = 0.0, 0, 0
@@ -291,6 +382,7 @@ def main():
 
                     history_rows.append({
                         "epoch": ep,
+                        "lr": ep_lr,
                         "train_loss": epoch_tr_loss,
                         "train_acc": epoch_tr_acc,
                         "val_loss": epoch_va_loss,
@@ -299,10 +391,12 @@ def main():
                     })
                     pd.DataFrame(history_rows).to_csv(hist_csv_path, index=False)
 
-                    print(f"Epoch {ep:02d}/{args.epochs:02d} ({ep_time:.1f}s) | Train Acc: {epoch_tr_acc*100:.2f}% | Val Loss: {epoch_va_loss:.4f} Acc: {epoch_va_acc*100:.2f}%")
+                    print(f"Epoch {ep:02d}/{args.epochs:02d} (lr={ep_lr:.2e}, {ep_time:.1f}s) | Train Acc: {epoch_tr_acc*100:.2f}% | Val Loss: {epoch_va_loss:.4f} Acc: {epoch_va_acc*100:.2f}%")
 
-                    # Section 3.4 Early stopping: min_delta = 0.0
-                    if epoch_va_loss < best_val_loss:
+                    # Section 3.4 Early stopping: min_delta = 0.0 (guard against NaN at extreme LRs)
+                    if not os.path.exists(ckpt_path):
+                        torch.save(m.state_dict(), ckpt_path)
+                    if math.isfinite(epoch_va_loss) and epoch_va_loss < best_val_loss:
                         best_val_loss = epoch_va_loss
                         best_epoch = ep
                         patience_counter = 0
@@ -331,8 +425,9 @@ def main():
             fold_val_accs.append(fold_val_acc)
 
             # Record per_fold_val.csv and flush immediately to disk
-            val_map[f"{sc_name}_{fold}"] = {
+            val_entry = {
                 "scenario": sc_name,
+                "seed": args.seed,
                 "fold": fold,
                 "n_val": 2400,
                 "correct": v_corr,
@@ -341,8 +436,10 @@ def main():
                 "best_epoch": best_epoch,
                 "stop_epoch": stop_epoch
             }
-            pd.DataFrame(list(val_map.values())).to_csv("per_fold_val.csv", index=False)
-            pd.DataFrame(list(val_map.values())).to_csv("per_fold.csv", index=False)
+            val_map[rec_key(val_entry)] = val_entry
+            pd.DataFrame(list(val_map.values())).to_csv(val_csv_out, index=False)
+            if is_legacy_root:
+                pd.DataFrame(list(val_map.values())).to_csv("per_fold.csv", index=False)
 
         # 2. Test Set Evaluation: Only after all 5 folds completed (Section 1 & 4)
         print(f"\n[Evaluating on 3,000 Independent Test Images]...")
@@ -351,7 +448,7 @@ def main():
 
         for fold in range(5):
             ckpt_path = os.path.join(out_dir, f"fold{fold}.pt")
-            m = build_model(cfg["arch"], pretrained=False).to(dev)
+            m = build_model(cfg["arch"], pretrained=False, freeze_vit_blocks=freeze_vit_flag, head_dropout=args.head_dropout).to(dev)
             m.load_state_dict(torch.load(ckpt_path, map_location=dev))
             m.eval()
             t_corr = 0
@@ -363,28 +460,51 @@ def main():
                     pr = torch.softmax(out.float(), dim=1).cpu().numpy()
                     t_probs_f.append(pr)
                     t_corr += (pr.argmax(1) == target.numpy()).sum()
+            probs_fold = np.concatenate(t_probs_f, axis=0)
             f_test_acc = (t_corr / 3000.0) * 100.0
             fold_test_accs.append(f_test_acc)
-            fold_test_probs.append(np.concatenate(t_probs_f, axis=0))
+            fold_test_probs.append(probs_fold)
 
-            test_map[f"{sc_name}_{fold}"] = {
+            # Save per-image predictions for this fold
+            f_pred_df = test_df[["path", "label", "label_id"]].copy()
+            f_pred_df[["p_ACA", "p_N", "p_SCC"]] = probs_fold
+            f_pred_df["pred"] = probs_fold.argmax(1)
+            f_pred_df.to_csv(os.path.join(out_dir, f"fold_{fold}", "test_preds.csv"), index=False)
+
+            test_entry = {
                 "scenario": sc_name,
+                "seed": args.seed,
                 "fold": fold,
                 "n_test": 3000,
-                "correct": t_corr,
+                "correct": int(t_corr),
                 "test_acc": round(f_test_acc, 4)
             }
+            test_map[rec_key(test_entry)] = test_entry
 
         # Soft voting ensemble of 5 folds on 3,000 test images
         ens_probs = np.mean(fold_test_probs, axis=0)
         y_test = test_df["label_id"].to_numpy()
         test_metrics_res = metrics(y_test, ens_probs)
 
+        ens_pred_df = test_df[["path", "label", "label_id"]].copy()
+        ens_pred_df[["p_ACA", "p_N", "p_SCC"]] = ens_probs
+        ens_pred_df["pred"] = ens_probs.argmax(1)
+        ens_pred_df.to_csv(ens_preds_file, index=False)
+
         # Save metrics.json
         summary = {
             "scenario_number": int(sc_num),
             "scenario": sc_name,
-            "config": cfg,
+            "seed": args.seed,
+            "config": {
+                **cfg,
+                "epochs": args.epochs,
+                "patience": args.patience,
+                "sched": args.sched,
+                "warmup_epochs": args.warmup_epochs,
+                "freeze_vit": int(freeze_vit_flag),
+                "head_dropout": args.head_dropout,
+            },
             "cv_val_accuracy": {
                 "n_val_per_fold": 2400,
                 "per_fold": [round(x, 4) for x in fold_val_accs],
@@ -403,18 +523,17 @@ def main():
 
         with open(summary_file, "w", encoding="utf-8") as f:
             json.dump(summary, f, indent=2)
-        # Keep metrics_summary.json alias
         with open(os.path.join(out_dir, "metrics_summary.json"), "w", encoding="utf-8") as f:
             json.dump(summary, f, indent=2)
 
-        if sc_name in DIR_ALIASES:
+        if is_legacy_root and not args.no_aliases and sc_name in DIR_ALIASES:
             sync_aliases(out_dir, DIR_ALIASES[sc_name])
 
         # Write per_fold_val.csv and per_fold_test.csv
-        pd.DataFrame(list(val_map.values())).to_csv("per_fold_val.csv", index=False)
-        pd.DataFrame(list(test_map.values())).to_csv("per_fold_test.csv", index=False)
-        # Also maintain per_fold.csv for backward compatibility
-        pd.DataFrame(list(val_map.values())).to_csv("per_fold.csv", index=False)
+        pd.DataFrame(list(val_map.values())).to_csv(val_csv_out, index=False)
+        pd.DataFrame(list(test_map.values())).to_csv(test_csv_out, index=False)
+        if is_legacy_root:
+            pd.DataFrame(list(val_map.values())).to_csv("per_fold.csv", index=False)
 
         print(f"\n[COMPLETED SCENARIO {sc_num}: {sc_name}]")
         print(f"  CV Val Acc (5x 2,400 val imgs) : {summary['cv_val_accuracy']['mean']:.2f} +/- {summary['cv_val_accuracy']['std']:.2f}%")

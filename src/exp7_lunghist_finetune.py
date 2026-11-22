@@ -30,8 +30,46 @@ from torch.utils.data import DataLoader
 import torchvision.transforms as T
 from sklearn.model_selection import StratifiedGroupKFold, StratifiedKFold
 
+from PIL import Image
 from common import (build_model, load_checkpoint, get_lunghist_root, ImageList,
                     MEAN, STD, metrics, cluster_bootstrap, label_to_int)
+from train_scenarios import resolve_split_csv
+
+
+class HEDJitter:
+    """Ruifrok-Johnston HED stain augmentation (Tellez et al., sigma per channel)."""
+
+    # Standard H&E&D optical density matrix and inverse
+    HED_FROM_RGB = np.array([
+        [1.87798274, -1.00767869, -0.55611582],
+        [-0.06590806, 1.13473037, -0.13550307],
+        [-0.60190736, -0.48041419, 1.57358807],
+    ], dtype=np.float32)
+    RGB_FROM_HED = np.array([
+        [0.65, 0.70, 0.29],
+        [0.07, 0.99, 0.11],
+        [0.27, 0.57, 0.78],
+    ], dtype=np.float32)
+
+    def __init__(self, sigma=0.05):
+        self.sigma = float(sigma)
+        # Normalize rows of RGB_FROM_HED
+        self.rgb_from_hed = self.RGB_FROM_HED / np.linalg.norm(self.RGB_FROM_HED, axis=1, keepdims=True)
+        self.hed_from_rgb = np.linalg.inv(self.rgb_from_hed)
+
+    def __call__(self, img):
+        if self.sigma <= 0:
+            return img
+        rgb = np.asarray(img, dtype=np.float32) / 255.0
+        rgb = np.clip(rgb, 1e-6, 1.0)
+        od = -np.log(rgb) / np.log(10.0)
+        hed = od @ self.hed_from_rgb
+        alpha = np.random.uniform(1.0 - self.sigma, 1.0 + self.sigma, size=(1, 1, 3)).astype(np.float32)
+        beta = np.random.uniform(-self.sigma, self.sigma, size=(1, 1, 3)).astype(np.float32)
+        hed_aug = np.clip(hed * alpha + beta, 0.0, None)
+        od_aug = hed_aug @ self.rgb_from_hed
+        rgb_aug = np.clip(np.power(10.0, -od_aug), 0.0, 1.0)
+        return Image.fromarray((rgb_aug * 255.0).round().astype(np.uint8))
 
 
 def main():
@@ -51,6 +89,8 @@ def main():
     ap.add_argument("--lr", type=float, default=1e-4)
     ap.add_argument("--bs", type=int, default=32)
     ap.add_argument("--seed", type=int, default=42)
+    ap.add_argument("--hed_jitter", type=float, default=0.0, help="WP06b HED stain jitter sigma (default: 0.0)")
+    ap.add_argument("--freeze_vit", type=int, default=1, choices=[0, 1])
     ap.add_argument("--out", required=True)
     ap.add_argument("--no-pretrained", action="store_true")
     args = ap.parse_args()
@@ -59,8 +99,11 @@ def main():
     dev = "cuda" if torch.cuda.is_available() else "cpu"
     torch.manual_seed(args.seed)
     np.random.seed(args.seed)
+    os.makedirs(os.path.dirname(args.out) or ".", exist_ok=True)
 
     root_dir = get_lunghist_root(args.data_root or args.root)
+    csv_path = resolve_split_csv(args.csv)
+    folds_path = resolve_split_csv(args.folds) if args.folds else None
 
     print(f"\n==========================================================================")
     print(f"  LUNGHIST700 FINE-TUNING: {args.out}")
@@ -69,7 +112,7 @@ def main():
     print(f"  Root: {root_dir}")
     print(f"==========================================================================")
 
-    df = pd.read_csv(args.csv)
+    df = pd.read_csv(csv_path)
     if args.magnification:
         df = df[df["magnification"].astype(str) == args.magnification].reset_index(drop=True)
 
@@ -77,9 +120,9 @@ def main():
     g_all = df["patient"].to_numpy()
 
     # Manage fold assignments
-    if args.folds and os.path.exists(args.folds):
-        print(f"Reusing existing fold file: {args.folds}")
-        f_df = pd.read_csv(args.folds)
+    if folds_path and os.path.exists(folds_path):
+        print(f"Reusing existing fold file: {folds_path}")
+        f_df = pd.read_csv(folds_path)
         if "path" in f_df.columns and "path" in df.columns:
             fold_map = dict(zip(f_df["path"], f_df["fold"]))
             df["fold"] = df["path"].map(fold_map).astype(int)
@@ -104,16 +147,18 @@ def main():
 
     # Transforms (Section 3.7)
     crop = T.Lambda(lambda im: T.CenterCrop(min(768, *im.size))(im))
-    tr_transform = T.Compose([
+    tr_list = [
         crop,
         T.Resize((args.size, args.size)),
         T.RandomHorizontalFlip(p=0.5),
         T.RandomVerticalFlip(p=0.5),
         T.RandomRotation(degrees=15),
         T.ColorJitter(brightness=0.1, contrast=0.1, saturation=0.05, hue=0.02),
-        T.ToTensor(),
-        T.Normalize(MEAN, STD)
-    ])
+    ]
+    if args.hed_jitter > 0:
+        tr_list.append(HEDJitter(args.hed_jitter))
+    tr_list.extend([T.ToTensor(), T.Normalize(MEAN, STD)])
+    tr_transform = T.Compose(tr_list)
     eval_transform_l = T.Compose([
         crop,
         T.Resize((args.size, args.size)),
@@ -122,7 +167,7 @@ def main():
     ])
 
     def make_model():
-        m = build_model(arch_name, num_classes=3, pretrained=not args.no_pretrained, freeze_vit_blocks=True)
+        m = build_model(arch_name, num_classes=3, pretrained=not args.no_pretrained, freeze_vit_blocks=bool(args.freeze_vit))
         if args.init:
             load_checkpoint(m, args.init, dev)
         return m
@@ -199,7 +244,7 @@ def main():
         test_loader = mk_loader(test_sub, eval_transform_l, False)
 
         best_val_loss = float("inf")
-        best_state = None
+        best_state = copy.deepcopy(model.state_dict())
         best_epoch = 0
         bad_epochs = 0
 
@@ -213,7 +258,7 @@ def main():
                 "val_loss": round(val_loss, 4)
             })
 
-            if val_loss < best_val_loss:
+            if np.isfinite(val_loss) and val_loss < best_val_loss:
                 best_val_loss = val_loss
                 best_state = copy.deepcopy(model.state_dict())
                 best_epoch = ep

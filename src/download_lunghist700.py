@@ -162,14 +162,22 @@ def main():
         with open("lunghist_root.txt", "w") as f:
             f.write(resolved_root)
     else:
-        print(f"\n[Warn] aca_bd not found directly at {resolved_root}. Searching data/...")
-        for root, dirs, _ in os.walk("data"):
-            if "aca_bd" in dirs:
-                final_p = root if root.endswith("/") else root + "/"
-                print(f">>> [SUCCESS] Discovered LungHist700 at: {final_p}")
-                with open("lunghist_root.txt", "w") as f:
-                    f.write(final_p)
+        found = False
+        for search_base in ["data", "/workspace"]:
+            if not os.path.isdir(search_base):
+                continue
+            for root, dirs, _ in os.walk(search_base):
+                if "aca_bd" in dirs:
+                    final_p = root if root.endswith("/") else root + "/"
+                    print(f">>> [SUCCESS] Discovered LungHist700 at: {final_p}")
+                    with open("lunghist_root.txt", "w") as f:
+                        f.write(final_p)
+                    found = True
+                    break
+            if found:
                 break
+        if not found:
+            raise RuntimeError(f"LungHist700 extraction failed (extracted={extracted}); directory 'aca_bd' not found!")
 
 
 if __name__ == "__main__":

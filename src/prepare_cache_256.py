@@ -38,7 +38,11 @@ def main():
     print(f"[Cache 256] Target cache dir   : {args.out_dir}")
 
     if not os.path.exists(args.csv):
-        raise FileNotFoundError(f"Cannot find CSV at {args.csv}")
+        alt_csv = os.path.join("data_splits", os.path.basename(args.csv))
+        if os.path.exists(alt_csv):
+            args.csv = alt_csv
+        else:
+            raise FileNotFoundError(f"Cannot find CSV at {args.csv}")
 
     df = pd.read_csv(args.csv)
     tasks = []
