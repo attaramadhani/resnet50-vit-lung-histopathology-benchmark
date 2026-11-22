@@ -30,6 +30,7 @@ export KAGGLEHUB_CACHE_DIR="$CACHE_BASE/kagglehub"
 export TORCH_HOME="$CACHE_BASE/torch"
 export HF_HOME="$CACHE_BASE/hf"
 export PIP_CACHE_DIR="$CACHE_BASE/pip"
+export PIP_BREAK_SYSTEM_PACKAGES=1
 
 # Persist exports in env_exports.sh for all runner scripts
 cat > runpod_rev1/env_exports.sh <<EOF
@@ -37,14 +38,14 @@ export KAGGLEHUB_CACHE_DIR="$CACHE_BASE/kagglehub"
 export TORCH_HOME="$CACHE_BASE/torch"
 export HF_HOME="$CACHE_BASE/hf"
 export PIP_CACHE_DIR="$CACHE_BASE/pip"
+export PIP_BREAK_SYSTEM_PACKAGES=1
 EOF
 
 # 3. Install dependencies
 which unzip >/dev/null 2>&1 || (apt-get update -qq && apt-get install -y -qq unzip p7zip-full unar curl wget rsync >/dev/null 2>&1 || true)
 (apt-get install -y -qq unrar >/dev/null 2>&1 || true)
-pip install -q --upgrade pip
-pip install -q -U "transformers>=4.45" huggingface_hub timm
-pip install -q fvcore thop scikit-learn scipy pandas opencv-python-headless kagglehub safetensors umap-learn matplotlib seaborn pyyaml tqdm boto3
+pip install -q --break-system-packages -U "transformers>=4.45" huggingface_hub timm
+pip install -q --break-system-packages fvcore thop scikit-learn scipy pandas opencv-python-headless kagglehub safetensors umap-learn matplotlib seaborn pyyaml tqdm boto3
 
 # 4. Prepare LC25000 (original 768x768) + 256px training cache
 echo -e "\n>>> Menyiapkan LC25000 (768x768 asli untuk WP02/WP06f + cache 256px untuk WP03/WP04)..."
