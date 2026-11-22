@@ -1,6 +1,7 @@
 {
   "title": "Beyond the LC25000 ceiling: optimizer robustness and external validity of a convolutional network and a vision transformer for lung cancer histopathology classification",
-  "description": "Official replication package containing training and evaluation code, split manifests, configuration files, per-epoch logs, per-fold metrics, and publication figure scripts for comparative benchmarking of ResNet50 and ViT-S/16 on LC25000 and LungHist700 histopathology datasets.",
+  "version": "2.0.0",
+  "description": "Official v2.0.0 replication package containing training and evaluation code, split manifests (image-level, rotation-invariant group-aware, and LungHist700 patient-grouped), all 16 YAML configuration files (S1-S14 + G1-G2), per-epoch logs, per-fold metrics, statistical tests, and publication figure scripts for comparative benchmarking of ResNet50 and ViT-S/16 on LC25000 and LungHist700 histopathology datasets.",
   "creators": [
     {
       "name": "Setiawan, Wahyudi",
@@ -32,8 +33,7 @@
     "Attention Rollout",
     "External Validation",
     "Reproducibility",
-    "BIMA 2026",
     "CMPB Update"
   ],
-  "notes": "Penelitian Terapan Unggulan Perguruan Tinggi — Hibah BIMA 2026 Kemendikbudristek RI, Universitas Trunojoyo Madura."
+  "notes": "Funded by the Ministry of Higher Education, Science, and Technology, Republic of Indonesia, BIMA Penelitian Fundamental Reguler grant no. B/036/UN46.1/PT.01.03/BIMA/PL-MULTITAHUNLANJUTAN/2026."
 }

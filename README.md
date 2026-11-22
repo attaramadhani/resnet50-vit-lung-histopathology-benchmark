@@ -1,16 +1,19 @@
-# Beyond the LC25000 Ceiling: Optimizer Robustness and External Validity of a Convolutional Network and a Vision Transformer for Lung Cancer Histopathology Classification
+# Beyond the LC25000 ceiling: optimizer robustness and external validity of a convolutional network and a vision transformer for lung cancer histopathology classification
 
-[![Python](https://img.shields.io/badge/python-3.11%20%7C%203.12-blue.svg)](https://www.python.org/)
-[![PyTorch](https://img.shields.io/badge/PyTorch-2.2%2B-ee4c2c.svg)](https://pytorch.org/)
+[![Python](https://img.shields.io/badge/python-3.12.3-blue.svg)](https://www.python.org/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.8.0%20%2B%20CUDA%2012.8-ee4c2c.svg)](https://pytorch.org/)
+[![Release](https://img.shields.io/badge/release-v2.0.0-success.svg)](https://github.com/attaramadhani/resnet50-vit-lung-histopathology-benchmark/releases/tag/v2.0.0)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23271475.svg)](https://doi.org/10.5281/zenodo.23271475)
-[![Target Journal](https://img.shields.io/badge/Elsevier-CMPB_Update-orange.svg)](https://www.sciencedirect.com/journal/computer-methods-and-programs-in-biomedicine-update)
+[![Elsevier](https://img.shields.io/badge/Elsevier-CMPB_Update-orange.svg)](https://www.sciencedirect.com/journal/computer-methods-and-programs-in-biomedicine-update)
 
-Official open-science replication package for the research article submitted to Elsevier's *Computer Methods and Programs in Biomedicine Update* (CMPB Update).
+Official **v2.0.0** open-science replication package for manuscript **CMPBUP-D-26-00450** submitted to Elsevier's *Computer Methods and Programs in Biomedicine Update* (CMPB Update).
+
+> **Version Note:** `v2.0.0` supersedes the initial `v1.0.0` release with the unified 14-scenario + group-aware benchmark, rotation-invariant ORB+RANSAC near-duplicate audit, updated GPU compute profiling, per-model random baseline XAI faithfulness evaluation, and leak-free LungHist700 inner-validation fine-tuning protocol. See [`CHANGELOG.md`](CHANGELOG.md) for full details.
 
 ---
 
-## 👥 Authors & Affiliations
+## Authors & Affiliations
 
 - **Wahyudi Setiawan** (Corresponding author: `wsetiawan@trunojoyo.ac.id`, ORCID: [0000-0003-0068-1443](https://orcid.org/0000-0003-0068-1443))
 - **Attala Alif Ramadhani Tri Hida**
@@ -20,199 +23,128 @@ Official open-science replication package for the research article submitted to 
 
 ---
 
-## 📌 Replication Package Overview
-
-In accordance with the *Checklist for Artificial Intelligence in Medical Imaging* (CLAIM 2024 Update) and the Data Availability statement of the manuscript, this repository provides:
-1. **Source Code (`src/`)**: Clean PyTorch implementations for model architectures (ResNet50 & ViT-S/16), stratified 5-fold cross-validation training, metric evaluation, patient-grouped cross-validation, and quantitative XAI perturbation testing.
-2. **Split Manifests (`data_splits/`)**: Deterministic split files for the LC25000 benchmark, audited perceptual hashing groups, and patient-grouped 5-fold cross-validation on the clinical LungHist700 cohort.
-3. **Configuration Files (`configs/`)**: Exact YAML configuration files for all 10 experimental scenarios.
-4. **Per-Epoch Telemetry (`logs_and_metrics/`)**: Complete fold-by-fold epoch progression histories (`history.csv`) capturing training/validation loss, accuracy, and learning rate trajectories across all runs.
-5. **Per-Fold & Benchmark Metrics (`logs_and_metrics/`)**: Detailed evaluation JSON metrics and cross-validation summaries (Accuracy, Macro F1, Precision, Recall, AUC-ROC, Out-of-Fold predictions).
-6. **Publication Figure Scripts (`scripts/`) & 300 DPI Outputs (`figures/`)**: Automated reproduction scripts to generate high-resolution ROC curves, confusion matrices, XAI faithfulness perturbation curves, and visual heatmaps.
-
----
-
-## 🧪 Experimental Design & Scenarios
-
-### 1. Controlled 10-Scenario Grid (LC25000 Benchmark)
-Comparative benchmarking of **ResNet50** (25.6M parameters) and **ViT-S/16** (22.1M parameters) under identical 5-fold cross-validation:
-
-| Scenario | Model | Optimizer | Base Learning Rate | Weight Decay | Scheduler |
-|:---:|:---:|:---:|:---:|:---:|:---:|
-| **S1 (Main)** | ResNet50 | AdamW | $1 \times 10^{-4}$ | $1 \times 10^{-2}$ | Cosine Annealing |
-| **S2** | ResNet50 | SGD + Momentum (0.9) | $1 \times 10^{-2}$ | $1 \times 10^{-4}$ | StepLR |
-| **S3** | ResNet50 | RMSprop (alpha=0.99) | $1 \times 10^{-4}$ | 0.0 | Cosine Annealing |
-| **S4** | ResNet50 | AdamW (High LR) | $1 \times 10^{-3}$ | $1 \times 10^{-2}$ | Cosine Annealing |
-| **S5** | ResNet50 | AdamW (Low LR) | $1 \times 10^{-5}$ | $1 \times 10^{-2}$ | Cosine Annealing |
-| **S6 (Main)** | ViT-S/16 | AdamW | $1 \times 10^{-4}$ | $5 \times 10^{-2}$ | Linear Warmup + Cosine |
-| **S7** | ViT-S/16 | SGD + Momentum (0.9) | $1 \times 10^{-2}$ | $1 \times 10^{-4}$ | StepLR |
-| **S8** | ViT-S/16 | RMSprop (alpha=0.99) | $1 \times 10^{-4}$ | 0.0 | Cosine Annealing |
-| **S9** | ViT-S/16 | AdamW (High LR) | $1 \times 10^{-3}$ | $5 \times 10^{-2}$ | Linear Warmup + Cosine |
-| **S10** | ViT-S/16 | AdamW (Low LR) | $1 \times 10^{-5}$ | $5 \times 10^{-2}$ | Linear Warmup + Cosine |
-
-### 2. External Clinical Generalization (LungHist700 Cohort)
-Evaluation on 691 clinical histological patches across 37 unique patients (adenocarcinoma, squamous cell carcinoma, benign tissue) using **patient-grouped 5-fold cross-validation** to prevent patient-level data leakage.
-
----
-
-## 📊 Key Findings & Empirical Results
-
-### LC25000 5-Fold Cross-Validation Performance
-
-| Architecture | Scenario | Test Accuracy (Mean ± SD) | Macro F1-Score | Status |
-|:---|:---|:---:|:---:|:---:|
-| **ResNet50** | AdamW ($10^{-4}$) | **99.93% ± 0.07%** | **0.9993** | Optimal convergence |
-| ResNet50 | SGD ($10^{-2}$) | 98.30% ± 0.42% | 0.9830 | Stable |
-| ResNet50 | RMSprop ($10^{-4}$) | 99.80% ± 0.12% | 0.9980 | Highly competitive |
-| ResNet50 | AdamW ($10^{-3}$) | 99.77% ± 0.15% | 0.9977 | Robust |
-| ResNet50 | AdamW ($10^{-5}$) | 99.63% ± 0.20% | 0.9963 | Slow convergence |
-| **ViT-S/16** | AdamW ($10^{-4}$) | **99.97% ± 0.04%** | **0.9997** | Ceiling performance |
-| ViT-S/16 | SGD ($10^{-2}$) | **80.77% ± 3.45%** | **0.8062** | **Severe degradation (-19.2%)** |
-| ViT-S/16 | RMSprop ($10^{-4}$) | 99.87% ± 0.08% | 0.9987 | Stable |
-| ViT-S/16 | AdamW ($10^{-3}$) | 99.53% ± 0.28% | 0.9953 | Optimization strain |
-| ViT-S/16 | AdamW ($10^{-5}$) | 99.30% ± 0.35% | 0.9930 | Suboptimal |
-
-> **Key Insight:** While ViT-S/16 matches ResNet50 under adaptive optimizers (AdamW/RMSprop > 99.9%), it exhibits severe fragility under plain SGD (falling to 80.77%), whereas ResNet50 retains 98.30% accuracy due to its built-in inductive spatial bias.
-
-### LungHist700 External Cohort Benchmark (Patient-Grouped 5-Fold CV)
-
-| Model Configuration | Pretraining | External Test Acc | Macro F1 | External AUC-ROC | Statistical Significance |
-|:---|:---:|:---:|:---:|:---:|:---:|
-| ResNet50 (Fine-tuned) | LC25000 Pretrained | **64.25% ± 4.31%** | **0.6120** | **0.8124** | **Baseline (+15.05% vs. direct transfer)** |
-| ResNet50 (Standard) | ImageNet-1k | 55.43% ± 5.22% | 0.5218 | 0.7431 | Welch's $t(4) = 5.34, p = 0.006$ |
-| ViT-S/16 (Standard) | ImageNet-1k | 53.11% ± 6.10% | 0.4985 | 0.7180 | ViT lag under small cohort ($N=691$) |
-
-> Direct transfer of models trained strictly on LC25000 to LungHist700 yields 49.20% accuracy, demonstrating that near-100% scores on LC25000 are inflated by domain artifacts. Patient-grouped fine-tuning restores ResNet50 to 64.25% (AUC 0.8124).
-
-### Quantitative XAI Faithfulness Audit ($K = 10$ Pixel Degradation Steps)
-Sequential pixel perturbation across 150 test patches (50 per class) demonstrates:
-- **ResNet50 Grad-CAM**: Attribution Degradation AUC = **0.421 ± 0.034**
-- **ViT-S/16 Attention Rollout**: Attribution Degradation AUC = **0.448 ± 0.029**
-- **Random Baseline**: Attribution Degradation AUC = **0.435 ± 0.031**
-- **Finding:** Neither Grad-CAM nor Attention Rollout significantly outperformed random pixel degradation in quantitative faithfulness, cautioning against uncritical clinical reliance on saliency heatmaps without rigorous validation.
-
----
-
-## 📁 Repository Structure
+## Repository Structure
 
 ```text
 resnet50-vit-lung-histopathology-benchmark/
-├── configs/                                 # [3] Exact YAML scenario configs
-│   ├── resnet50_main.yaml
-│   ├── resnet50_sgd.yaml
-│   ├── resnet50_rmsprop.yaml
-│   ├── resnet50_lr_1e3.yaml
-│   ├── resnet50_lr_1e5.yaml
-│   ├── vit_s_main.yaml
-│   ├── vit_s_sgd.yaml
-│   ├── vit_s_rmsprop.yaml
-│   ├── vit_s_lr_1e3.yaml
-│   └── vit_s_lr_1e5.yaml
-│
-├── data_splits/                             # [2] Portable split manifests
-│   ├── splits_lc25000.csv                   # LC25000 5-fold CV splits
-│   ├── splits_lunghist700_patient_kfold.csv # LungHist700 patient-grouped 5-fold splits
-│   └── splits_group_aware_audited.csv       # Audited perceptual hashing deduplication
-│
-├── figures/                                 # Publication-grade figures (300 DPI)
-│   ├── comparison_before_after_resnet50.png
-│   ├── confusion_matrix_lc25000_to_lunghist700.png
-│   ├── patient_kfold_confusion_matrix.png
-│   ├── patient_kfold_roc_curves.png
-│   ├── side_by_side_confusion_matrices.png
-│   ├── side_by_side_roc_comparison.png
-│   ├── epoch_computation_comparison.png
-│   ├── per_class_metrics_comparison.png
-│   ├── training_validation_curves_lc25000.png
-│   ├── xai_quantitative_faithfulness_curves.png
-│   └── xai_gradcam_lunghist700_gallery.png
-│
-├── logs_and_metrics/                        # [4 & 5] Complete experimental telemetry
-│   ├── lc25000_scenarios/                   # 10 scenario folders with fold histories & metrics
-│   │   ├── resnet50_main/ (fold_1..5 history.csv + metrics_summary.json)
-│   │   ├── resnet50_sgd/
-│   │   ├── resnet50_rmsprop/
-│   │   ├── resnet50_lr_1e3/
-│   │   ├── resnet50_lr_1e5/
-│   │   ├── vit_s_main/
-│   │   ├── vit_s_sgd/
-│   │   ├── vit_s_rmsprop/
-│   │   ├── vit_s_lr_1e3/
-│   │   └── vit_s_lr_1e5/
-│   ├── lunghist700_external_validation/     # External cohort metrics & OOF predictions
-│   └── xai_faithfulness/                    # Quantitative pixel degradation logs
-│
-├── scripts/                                 # [6] Figure & analysis generation scripts
-│   ├── generate_all_scenario_figures.py
-│   ├── generate_xai_visual_gallery.py
-│   └── phash_grouping.py
-│
-├── src/                                     # [1] Training and evaluation code
-│   ├── dataset.py                           # Dataset loading & augmentation pipelines
-│   ├── models.py                            # ResNet50 & ViT-S/16 model factories
-│   ├── train.py                             # Main stratified 5-fold training engine
-│   ├── evaluate.py                          # Multi-class metrics & confusion matrix evaluator
-│   ├── train_eval_grouped_kfold.py          # Patient-grouped cross-validation engine
-│   └── evaluate_xai_faithfulness.py         # Quantitative pixel-flipping perturbation engine
-│
-├── .gitignore
-├── .zenodo.json                             # Metadata for permanent Zenodo DOI archiving
-├── CITATION.cff                             # Machine-readable academic citation metadata
-├── LICENSE                                  # MIT Open Source License
-├── README.md                                # Comprehensive replication documentation
-└── requirements.txt                         # Python dependencies
+├── configs/                        # All 14 scenario YAMLs (S1–S14) + group-aware G1–G2
+├── data_splits/                    # Deterministic split manifests & SHA-256 verified CSVs
+│   ├── lc25000_lung_all.csv        # 15,000 LC25000 lung images
+│   ├── lc25000_dev.csv             # 12,000 development images (4,000/class)
+│   ├── lc25000_test.csv            # 3,000 held-out test images (1,000/class)
+│   ├── exp4_grouped_split.csv      # 1,779 rotation-invariant duplicate groups split
+│   ├── exp4_groups.csv             # Image-to-group cluster map (Exp 4)
+│   ├── exp2_images.csv             # 150 test images (50/class, seed 42) for Exp 2
+│   ├── lunghist700.csv             # 691 LungHist700 images with patient & magnification IDs
+│   └── folds_patient.csv           # 5-fold patient-grouped LungHist700 splits (136–142 imgs/fold)
+├── src/                            # Unified PyTorch experimental pipeline (v2.0.0)
+│   ├── common.py                   # ResNet50 & timm ViT-S/16 builders, augmentations, metrics, bootstrap
+│   ├── prepare_cache_256.py        # Pre-caches 256×256 LC25000 copies (runtime I/O optimization)
+│   ├── download_lunghist700.py     # Automatic LungHist700 fetcher (Figshare DOI)
+│   ├── verify_vit_checkpoint.py    # Weight equivalence test: timm augreg vs WinKawaks/vit-small-patch16-224
+│   ├── train_scenarios.py          # 14-scenario 5-fold CV + soft-voting test evaluator
+│   ├── exp4_duplicate_audit.py     # Dihedral ResNet50 embeddings + k-NN + ORB/RANSAC + union-find
+│   ├── train_clean_grouped.py      # Group-aware re-training (G1 & G2)
+│   ├── exp3_compute_benchmark.py   # Synthetic GPU-only profiling + wall-clock log summarizer
+│   ├── exp2_faithfulness.py        # Grad-CAM & Attention Rollout deletion/insertion AUC (K=10/20, 3 baselines)
+│   ├── exp1_zeroshot_ensemble.py   # Zero-shot ensemble evaluation on LungHist700
+│   ├── exp7_lunghist_finetune.py   # Patient-grouped 5-fold CV with inner validation (~15% patients, patience 8)
+│   ├── exp_stats_paired.py         # Paired & Nadeau–Bengio corrected resampled t-tests
+│   └── lunghist_stats.py           # Durkalski clustered McNemar + Holm correction
+├── scripts/                        # Publication figure generators (300 DPI)
+│   ├── generate_manuscript_figures.py
+│   └── generate_xai_visual_gallery.py
+├── figures/                        # Reproduced figures matching manuscript Figs 2–8 & S1
+├── logs_and_metrics/               # Raw experimental logs & compiled tables
+│   ├── tables_for_manuscript.md    # Auto-compiled Tables 2–6 with file provenance
+│   ├── environment.txt             # Software versions, NVIDIA RTX 4090 info, and SHA-256 checksums
+│   ├── vit_checkpoint_check.json   # Verified max_abs_diff = 2.24e-5, top1_agreement = 1.0
+│   ├── run_all.log                 # Complete RunPod execution log (5,706 lines)
+│   ├── runs/                       # Per-scenario config.yaml, fold histories, and metrics.json (S1–S14, G1–G2)
+│   ├── exp2_faithfulness/          # Per-image & summary CSV/TXT/JSON (K=10/20, grey/blur/tissue_mean, logits)
+│   ├── exp4/                       # Duplicate audit pairs, group stats, and clean benchmark results
+│   └── lunghist700/                # OOF predictions, fold logs, metrics JSONs, and clustered McNemar tests
+├── run_all.sh                      # Master shell script executing the full pipeline end-to-end
+├── requirements.txt                # Exact package versions (§3.8)
+├── CHANGELOG.md
+└── CITATION.cff
 ```
 
 ---
 
-## 🚀 Quickstart & Replication Guide
+## Key Protocols & Architectural Specifications (v2.0.0)
 
-### 1. Environment Setup
+1. **Models (§3.3)**:
+   - **ResNet50**: `torchvision` `IMAGENET1K_V2` with `Dropout(0.3) + Linear(2048, 3)` (`23.51M` parameters).
+   - **ViT-S/16**: `timm` `vit_small_patch16_224.augreg_in21k_ft_in1k` without dropout (`0.0`), encoder blocks `0` and `1` frozen (`21.67M` total / `18.12M` trainable parameters). Tensor equivalence against HuggingFace `WinKawaks/vit-small-patch16-224` was verified to within `2.24 × 10⁻⁵` (`top1_agreement = 1.0`, see `logs_and_metrics/vit_checkpoint_check.json`).
+   - Both architectures receive `224 × 224` RGB inputs normalized with ImageNet statistics.
+2. **Training Protocol (§3.4)**:
+   - Mixed precision FP16, batch size `32`, cross-entropy loss, weight decay `1e-4`, **no LR scheduler**, **no gradient clipping**, max `50` epochs, early stopping patience `5` on `val_loss` (`min_delta = 0.0`), seed `42` reset at the start of every fold.
+   - On-the-fly training augmentations: horizontal flip (`p=0.5`), random rotation (`±20°`), random affine (`scale=0.9–1.1`, `shear=±10°`), and color jitter (`brightness=0.2`, `contrast=0.2`). *(LC25000 raw `768×768` images were cached once at `256×256` px in `data/` via `src/prepare_cache_256.py` purely to eliminate disk I/O overhead; `224×224` resizing and augmentations occurred on the fly.)*
+3. **Near-Duplicate Audit (§3.2, Exp 4)**:
+   - Rotation-invariant audit via 8-dihedral averaged ImageNet-pretrained ResNet50 embeddings, class-wise top-30 cosine nearest neighbors (`cos >= 0.90`), geometric verification with `ORB` + `RANSAC` (`>= 25` inliers), and union–find clustering (`1,779` groups) followed by `StratifiedGroupKFold` re-training (`G1–G2`).
+4. **XAI Faithfulness (§3.6, Exp 2)**:
+   - Evaluates Grad-CAM (`layer4`, raw logit) and Attention Rollout (residual identity across 12 blocks) on 150 balanced test patches (`data_splits/exp2_images.csv`, seed `42`), using `K=10` (primary) and `K=20` steps under `grey`, `blur`, and `tissue_mean` baselines, compared against **separate per-model random attribution baselines** via paired two-sided Wilcoxon signed-rank tests.
+5. **External Validation on LungHist700 (§3.7, Exp 1, 6, 7)**:
+   - Zero-shot evaluation of the 5-fold S1 & S6 ensembles across all `691` images (`45` patients).
+   - Patient-grouped 5-fold fine-tuning (`data_splits/folds_patient.csv`, 136–142 images per fold) using **inner patient-grouped validation (~15% patients)** for early stopping (`patience=8` on `val_loss`, no LR scheduler), ensuring held-out test folds never inform training or checkpoint selection. Includes image-level split ablation (`Exp 6`) and per-magnification models (`20×`, `40×`), with 95% patient-level cluster bootstrap CIs and Durkalski clustered McNemar tests.
 
-Clone the repository and install required dependencies:
+---
+
+## Summary of Main Empirical Results
+
+### LC25000 14 Scenarios + Group-Aware Re-runs (Table 3)
+
+| No. | Scenario | Model | Optimizer & LR | 5-Fold CV Acc (%) | Held-out Test Acc (%) | Macro F1 |
+| :---: | :--- | :--- | :--- | :---: | :---: | :---: |
+| 1 | `resnet50_main` | ResNet50 | Adam `1e-4` | `99.99 ± 0.02` | `100.00` [99.9–100.0] | `1.0000` |
+| 2 | `resnet50_rmsprop` | ResNet50 | RMSprop `1e-4` | `100.00 ± 0.00` | `100.00` [99.9–100.0] | `1.0000` |
+| 3 | `resnet50_lr_1e3` | ResNet50 | Adam `1e-3` | `98.62 ± 0.76` | `99.50` [99.2–99.7] | `0.9950` |
+| 4 | `resnet50_lr_1e5` | ResNet50 | Adam `1e-5` | `99.99 ± 0.02` | `100.00` [99.9–100.0] | `1.0000` |
+| 5 | `resnet50_sgd` | ResNet50 | SGD (`m=0.0`) `1e-4` | `94.35 ± 0.41` | `95.00` [94.2–95.7] | `0.9500` |
+| 6 | `vit_s_main` | ViT-S/16 | AdamW `1e-4` | `99.99 ± 0.02` | `100.00` [99.9–100.0] | `1.0000` |
+| 7 | `vit_s_rmsprop` | ViT-S/16 | RMSprop `1e-4` | `99.97 ± 0.03` | `100.00` [99.9–100.0] | `1.0000` |
+| 8 | `vit_s_lr_1e3` | ViT-S/16 | AdamW `1e-3` | `94.79 ± 1.45` | `96.27` [95.5–96.9] | `0.9627` |
+| 9 | `vit_s_lr_1e5` | ViT-S/16 | AdamW `1e-5` | `100.00 ± 0.00` | `100.00` [99.9–100.0] | `1.0000` |
+| 10 | `vit_s_sgd` | ViT-S/16 | SGD (`m=0.0`) `1e-4` | `98.79 ± 0.27` | `98.83` [98.4–99.2] | `0.9883` |
+| 11 | `resnet50_sgdm` | ResNet50 | SGD (`m=0.9`) `1e-4` | `99.37 ± 0.26` | `99.30` [98.9–99.5] | `0.9930` |
+| 12 | `vit_s_sgdm` | ViT-S/16 | SGD (`m=0.9`) `1e-4` | `99.93 ± 0.06` | `99.97` [99.8–100.0] | `0.9997` |
+| 13 | `resnet50_sgdm_lr_1e3` | ResNet50 | SGD (`m=0.9`) `1e-3` | `99.99 ± 0.02` | `100.00` [99.9–100.0] | `1.0000` |
+| 14 | `vit_s_sgdm_lr_1e3` | ViT-S/16 | SGD (`m=0.9`) `1e-3` | `100.00 ± 0.00` | `100.00` [99.9–100.0] | `1.0000` |
+| G1 | `clean_resnet50` | ResNet50 | Adam `1e-4` (group-aware) | `98.93 ± 0.60` | `99.97` [99.8–100.0] | `0.9997` |
+| G2 | `clean_vit_s16` | ViT-S/16 | AdamW `1e-4` (group-aware) | `99.14 ± 0.43` | `99.93` [99.8–100.0] | `0.9993` |
+
+### LungHist700 External Validation (Table 6, N = 691 Images, 45 Patients)
+
+| Setting | Model | OOF Accuracy (%) [Cluster 95% CI] | Balanced Acc (%) | Macro F1 | Macro ROC-AUC |
+| :--- | :--- | :---: | :---: | :---: | :---: |
+| Zero-shot | ResNet50 (S1 ensemble) | `53.11` [41.4–65.1] | `48.83` | `0.4661` | `0.7145` |
+| Zero-shot | ViT-S/16 (S6 ensemble) | `54.41` [43.2–66.2] | `49.92` | `0.4830` | `0.7422` |
+| Patient-grouped FT | ResNet50 (ImageNet) | `68.89` [62.7–75.2] | `70.92` | `0.7073` | `0.8511` |
+| Patient-grouped FT | ResNet50 (LC25000 init) | `70.77` [64.3–76.8] | `73.31` | `0.7212` | `0.8585` |
+| Patient-grouped FT | ViT-S/16 (ImageNet) | `69.46` [62.6–76.3] | `72.16` | `0.7163` | `0.8621` |
+| Image-level ablation | ResNet50 (ImageNet) | `84.37` [80.8–88.2] | `85.36` | `0.8483` | `0.9521` |
+| Image-level ablation | ViT-S/16 (ImageNet) | `85.09` [80.7–88.9] | `85.91` | `0.8548` | `0.9557` |
+
+---
+
+## Reproducing Experiments & Figures
+
 ```bash
 git clone https://github.com/attaramadhani/resnet50-vit-lung-histopathology-benchmark.git
 cd resnet50-vit-lung-histopathology-benchmark
 pip install -r requirements.txt
-```
 
-### 2. Dataset Preparation
-- **LC25000**: Available via Kaggle (`andrewmvd/lung-and-colon-cancer-histopathological-images`) or Academic Torrents. Extract the lung subset containing `lung_aca`, `lung_bma`, and `lung_n`.
-- **LungHist700**: Available via Diosdado et al. (Zenodo / Hospital Universitario de Gran Canaria Dr. Negrín).
+# 1. Reproduce all manuscript figures (Figs 2-5, 7-8, S1) directly from logs_and_metrics/:
+python scripts/generate_manuscript_figures.py
 
-Place datasets into local directories and verify paths against `data_splits/splits_lc25000.csv` and `data_splits/splits_lunghist700_patient_kfold.csv`.
-
-### 3. Re-running Training Scenarios
-
-To train a specific scenario (e.g., S1: ResNet50 AdamW):
-```bash
-python src/train.py --config configs/resnet50_main.yaml --data_dir /path/to/lc25000/
-```
-
-To run patient-grouped 5-fold cross-validation on LungHist700:
-```bash
-python src/train_eval_grouped_kfold.py --split_csv data_splits/splits_lunghist700_patient_kfold.csv --data_dir /path/to/lunghist700/
-```
-
-### 4. Evaluating Quantitative XAI Faithfulness
-
-To reproduce the 150-sample pixel degradation audit:
-```bash
-python src/evaluate_xai_faithfulness.py --model_type resnet50 --steps 10 --samples_per_class 50
-```
-
-### 5. Regenerating Figures
-
-To reproduce publication figures from experimental logs:
-```bash
-python scripts/generate_all_scenario_figures.py
+# 2. Run the full end-to-end training & evaluation pipeline on GPU (requires Kaggle/Figshare datasets):
+bash run_all.sh
 ```
 
 ---
 
-## 📜 Citation
-
-If you use this benchmark, code, or experimental telemetry in your research, please cite our article:
+## Citation
 
 ```bibtex
 @article{setiawan2026beyond,
@@ -221,12 +153,10 @@ If you use this benchmark, code, or experimental telemetry in your research, ple
   journal={Computer Methods and Programs in Biomedicine Update},
   year={2026},
   publisher={Elsevier},
-  note={Official replication package archived on Zenodo}
+  note={Replication package v2.0.0 archived at Zenodo: https://doi.org/10.5281/zenodo.23271475}
 }
 ```
 
----
+## Funding
 
-## 🏆 Funding & Acknowledgments
-
-This research was funded by **Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi Republik Indonesia (Kemendikbudristek RI)** under the **BIMA 2026 Research Grant** (*Penelitian Terapan Unggulan Perguruan Tinggi*), hosted at **Universitas Trunojoyo Madura**.
+Funded by the **Ministry of Higher Education, Science, and Technology, Republic of Indonesia**, through the **BIMA** research grant scheme *Penelitian Fundamental Reguler*, no. `B/036/UN46.1/PT.01.03/BIMA/PL-MULTITAHUNLANJUTAN/2026`.

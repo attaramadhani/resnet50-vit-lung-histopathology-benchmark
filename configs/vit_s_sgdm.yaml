@@ -1,0 +1,29 @@
+scenario_id: 12
+experiment_name: vit_s_sgdm
+model_label: ViT-S/16
+architecture: vit_s16
+model_loader: timm
+pretrained_weights: vit_small_patch16_224.augreg_in21k_ft_in1k
+dropout: none (0.0)
+frozen_blocks: [0, 1]
+img_size: 224
+num_classes: 3
+normalization_mean: [0.485, 0.456, 0.406]
+normalization_std: [0.229, 0.224, 0.225]
+split_protocol: standard_image_level
+n_folds: 5
+batch_size: 32
+epochs: 50
+early_stopping_patience: 5
+early_stopping_min_delta: 0.0
+early_stopping_monitor: val_loss
+optimizer: SGD
+learning_rate: 0.0001
+weight_decay: 0.0001
+momentum: 0.9
+lr_scheduler: none
+grad_clip: none
+fp16_mixed_precision: true
+use_augmentation: true
+augmentation_ops: [RandomHorizontalFlip(p=0.5), RandomRotation(20), RandomAffine(scale=(0.9,1.1), shear=10), ColorJitter(brightness=0.2, contrast=0.2)]
+seed: 42 (re-seeded per fold)

@@ -1,0 +1,66 @@
+{
+  "n": 691,
+  "correct": 588,
+  "acc": 85.09406657018813,
+  "bal_acc": 85.91035344346602,
+  "macro_f1": 0.854790566329506,
+  "macro_auc": 0.9557207544569942,
+  "acc_ci": [
+    82.2448490294758,
+    87.55524620100402
+  ],
+  "f1_per_class": [
+    0.8287,
+    0.8774,
+    0.8582
+  ],
+  "confusion": [
+    [
+      225,
+      16,
+      39
+    ],
+    [
+      12,
+      136,
+      3
+    ],
+    [
+      26,
+      7,
+      227
+    ]
+  ],
+  "acc_cluster_ci": [
+    80.68950781019747,
+    88.90364635322202
+  ],
+  "recall_per_class": [
+    80.35714285714286,
+    90.06622516556291,
+    87.3076923076923
+  ],
+  "acc_by_mag": {
+    "40x": 83.73,
+    "20x": 86.35
+  },
+  "config": {
+    "csv": "lunghist700.csv",
+    "root": "data/LungHist700/data/images/",
+    "data_root": "",
+    "arch": "vit_s16",
+    "init": null,
+    "split": "image",
+    "folds": null,
+    "folds_out": null,
+    "magnification": null,
+    "size": 224,
+    "epochs": 50,
+    "patience": 8,
+    "lr": 0.0001,
+    "bs": 32,
+    "seed": 42,
+    "out": "e6_vit_image",
+    "no_pretrained": false
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "arch": "resnet50",
+  "hardware": "NVIDIA GeForce RTX 4090, 595.91.07, 49140 MiB",
+  "params_M": 23.51,
+  "trainable_params_M": 23.51,
+  "batch_size": 32,
+  "precision": "FP16 (torch.autocast)",
+  "MACs_G": 4.11,
+  "GMACs": 4.11,
+  "train_img_per_s": [
+    1252.7,
+    13.3
+  ],
+  "train_epoch_s_9600_imgs_gpu_only": 7.7,
+  "peak_mem_GB_train": 1.81,
+  "latency_ms_per_batch_bs32": [
+    5.774,
+    0.009
+  ],
+  "latency_ms_per_image_bs32": 0.18,
+  "latency_ms_per_batch_bs1": [
+    5.035,
+    0.09
+  ],
+  "latency_ms_per_image_bs1": 5.035
+}

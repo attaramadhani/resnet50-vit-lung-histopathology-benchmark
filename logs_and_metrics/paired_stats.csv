@@ -1,0 +1,5 @@
+label,scenario_a,scenario_b,mean_a,std_a,mean_b,std_b,mean_diff,paired_t,paired_p,corrected_resampled_t,corrected_resampled_p,welch_t_ref,welch_p_ref,n_train,n_test,ratio_r
+Scenario 1 vs 6 (Adam 1e-4 vs AdamW 1e-4 (Primary)),resnet50_main,vit_s_main,99.9917,0.0186,99.9917,0.0186,0.0,0.0,1.0,0.0,1.0,0.0,1.0,9600,2400,0.25
+Scenario 5 vs 10 (SGD m=0 lr=1e-4),resnet50_sgd,vit_s_sgd,94.35,0.4142,98.7917,0.2668,-4.4417,-17.257,7e-05,-11.504,0.00033,-20.16,0.0,9600,2400,0.25
+Scenario 11 vs 12 (SGD m=0.9 lr=1e-4 (Exp 5)),resnet50_sgdm,vit_s_sgdm,99.3666,0.2558,99.9333,0.0559,-0.5667,-4.732,0.00909,-3.155,0.03435,-4.839,0.00667,9600,2400,0.25
+Scenario 13 vs 14 (SGD m=0.9 lr=1e-3 (Exp 5)),resnet50_sgdm_lr_1e3,vit_s_sgdm_lr_1e3,99.9917,0.0186,100.0,0.0,-0.0083,-1.0,0.3739,-0.667,0.54147,-1.0,0.3739,9600,2400,0.25

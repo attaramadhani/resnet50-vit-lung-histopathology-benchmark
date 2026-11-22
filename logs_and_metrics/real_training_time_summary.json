@@ -1,0 +1,105 @@
+{
+  "total_runs_analyzed": 80,
+  "total_duration_seconds": 23042.6,
+  "total_duration_hours": 6.4,
+  "mean_epoch_seconds_overall": 11.06,
+  "mean_epochs_at_stop": 26.02,
+  "by_scenario": {
+    "clean_resnet50": {
+      "runs": 5,
+      "mean_epochs": 10.4,
+      "mean_epoch_seconds": 12.12,
+      "total_seconds": 629.01
+    },
+    "clean_vit_s16": {
+      "runs": 5,
+      "mean_epochs": 11.4,
+      "mean_epoch_seconds": 10.44,
+      "total_seconds": 595.6
+    },
+    "resnet50_lr_1e3": {
+      "runs": 5,
+      "mean_epochs": 14.0,
+      "mean_epoch_seconds": 11.24,
+      "total_seconds": 785.86
+    },
+    "resnet50_lr_1e5": {
+      "runs": 5,
+      "mean_epochs": 30.8,
+      "mean_epoch_seconds": 11.36,
+      "total_seconds": 1747.34
+    },
+    "resnet50_main": {
+      "runs": 5,
+      "mean_epochs": 17.2,
+      "mean_epoch_seconds": 11.22,
+      "total_seconds": 963.5
+    },
+    "resnet50_rmsprop": {
+      "runs": 5,
+      "mean_epochs": 15.0,
+      "mean_epoch_seconds": 10.93,
+      "total_seconds": 820.14
+    },
+    "resnet50_sgd": {
+      "runs": 5,
+      "mean_epochs": 50.0,
+      "mean_epoch_seconds": 10.87,
+      "total_seconds": 2718.47
+    },
+    "resnet50_sgdm": {
+      "runs": 5,
+      "mean_epochs": 47.4,
+      "mean_epoch_seconds": 11.51,
+      "total_seconds": 2724.73
+    },
+    "resnet50_sgdm_lr_1e3": {
+      "runs": 5,
+      "mean_epochs": 34.6,
+      "mean_epoch_seconds": 11.28,
+      "total_seconds": 1952.34
+    },
+    "vit_s_lr_1e3": {
+      "runs": 5,
+      "mean_epochs": 19.6,
+      "mean_epoch_seconds": 10.62,
+      "total_seconds": 1042.55
+    },
+    "vit_s_lr_1e5": {
+      "runs": 5,
+      "mean_epochs": 20.2,
+      "mean_epoch_seconds": 10.7,
+      "total_seconds": 1083.99
+    },
+    "vit_s_main": {
+      "runs": 5,
+      "mean_epochs": 14.4,
+      "mean_epoch_seconds": 10.81,
+      "total_seconds": 778.46
+    },
+    "vit_s_rmsprop": {
+      "runs": 5,
+      "mean_epochs": 21.4,
+      "mean_epoch_seconds": 10.72,
+      "total_seconds": 1149.53
+    },
+    "vit_s_sgd": {
+      "runs": 5,
+      "mean_epochs": 50.0,
+      "mean_epoch_seconds": 10.91,
+      "total_seconds": 2727.22
+    },
+    "vit_s_sgdm": {
+      "runs": 5,
+      "mean_epochs": 33.6,
+      "mean_epoch_seconds": 11.02,
+      "total_seconds": 1850.17
+    },
+    "vit_s_sgdm_lr_1e3": {
+      "runs": 5,
+      "mean_epochs": 26.4,
+      "mean_epoch_seconds": 11.2,
+      "total_seconds": 1473.69
+    }
+  }
+}

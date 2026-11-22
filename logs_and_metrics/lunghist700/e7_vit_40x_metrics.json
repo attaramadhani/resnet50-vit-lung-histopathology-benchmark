@@ -1,0 +1,65 @@
+{
+  "n": 332,
+  "correct": 222,
+  "acc": 66.86746987951807,
+  "bal_acc": 70.1266395296246,
+  "macro_f1": 0.6900177195815408,
+  "macro_auc": 0.8211792040405553,
+  "acc_ci": [
+    61.63680994249921,
+    71.71225910129228
+  ],
+  "f1_per_class": [
+    0.635,
+    0.8085,
+    0.6265
+  ],
+  "confusion": [
+    [
+      87,
+      10,
+      37
+    ],
+    [
+      7,
+      57,
+      2
+    ],
+    [
+      46,
+      8,
+      78
+    ]
+  ],
+  "acc_cluster_ci": [
+    57.70544712980753,
+    75.0866064268263
+  ],
+  "recall_per_class": [
+    64.92537313432835,
+    86.36363636363636,
+    59.09090909090909
+  ],
+  "acc_by_mag": {
+    "40x": 66.87
+  },
+  "config": {
+    "csv": "lunghist700.csv",
+    "root": "data/LungHist700/data/images/",
+    "data_root": "",
+    "arch": "vit_s16",
+    "init": null,
+    "split": "patient",
+    "folds": "folds_patient.csv",
+    "folds_out": null,
+    "magnification": "40x",
+    "size": 224,
+    "epochs": 50,
+    "patience": 8,
+    "lr": 0.0001,
+    "bs": 32,
+    "seed": 42,
+    "out": "e7_vit_40x",
+    "no_pretrained": false
+  }
+}

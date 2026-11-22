@@ -1,0 +1,63 @@
+=== ENVIRONMENT PROVENANCE ===
+Thu Oct 15 05:46:54 UTC 2026
+Python: Python 3.12.3
+PyTorch: 2.8.0+cu128 CUDA available: True NVIDIA GeForce RTX 4090
+Git commit: Not a git repo
+
+=== NVIDIA-SMI ===
+Thu Oct 15 05:46:56 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 595.91.07              Driver Version: 595.91.07      CUDA Version: 13.2     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 4090        On  |   00000000:C1:00.0 Off |                  Off |
+| 30%   29C    P8             16W /  450W |       1MiB /  49140MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+
+=== PIP PACKAGES ===
+fvcore                    0.1.5.post20221221
+numpy                     2.5.2
+pandas                    3.0.6
+scikit-learn              1.9.1
+scipy                     1.18.1
+thop                      0.1.1-2209072238
+timm                      1.0.30
+torch                     2.8.0+cu128
+torchaudio                2.8.0+cu128
+torchvision               0.23.0+cu128
+transformers              5.19.0
+
+=== SPLIT FILE CHECKSUMS (sha256) ===
+7503d3f6fde25789dcc9db459db8db653d781f347dcf675390a58ac6ed30f617  lc25000_dev.csv
+4763e6b36a1db7c48e706fbdc3865629a3a2ad15b6843958e3b134803e35c2cf  lc25000_test.csv
+2782f7ebc34f4cb3872a9683c9d2a740d8383b06243c478ed303e6b116c56b31  lc25000_lung_all.csv
+e19ddd48d33fb52558518db54c289929df48e58eaf15fc580824b746de7d7ba9  lunghist700.csv
+
+=== CODE CHECKSUMS (sha256) ===
+4de666d6ed4ca4530cbe4a364fe6a2eb923386ed231776a494b2667abdd490f3  common.py
+d60a71a6eb8346c50bdbf95c03e1ea8e46af21e7d02a9ac3a9f6f7a294c89286  download_lunghist700.py
+d146b3402944e4ad49ea3bdea133bc83d29277c3cfc052743be0341b6daa5df3  exp1_zeroshot_ensemble.py
+922c272290a20f594b1c138eeefc77f257e687688fa826e93d39aca075b37b72  exp2_faithfulness.py
+e6b16675d6c9d8632d61d9eba58c081a1ee3dd21994cc1994add5378609428aa  exp3_compute_benchmark.py
+9ae34b956bfcd43a86b8c666139f46d7f1fbac5186906d31aebc458da50bb8f1  exp4_duplicate_audit.py
+4904f71499dde02004e2b2f4732e9686ca5a8a857b47c3052458058395155dc2  exp7_lunghist_finetune.py
+0761a8e8aca942703b7baf424b0704699b579de4b9d6e25dd0aee76ed44f42db  exp_stats_paired.py
+f27f845cfebda98aeb781eebeaba33b25a801c847123184a18e5e0f63bca5d2b  lunghist_stats.py
+ecd356bc697976e439b75219cd0c92be5092f5d3ebcddf53a11e4229f26556a0  package_results.py
+aa9fdba826f4e15154f931cb510ee66a23d28f1a7de2015f2c1cc9eedbcc0063  prepare_cache_256.py
+5ba7949562b14988546d946599939e42d15c9bff3e6d452be9c1fb633c38f52b  train_clean_grouped.py
+6fefa63fb687fa6f6d0423c6eddf60d62b093928f0a9660f6e7e26ae17d9e8f8  train_scenarios.py
+b8c8ce6dd9b255729f840c31372125510b3eb5316d97b776dbc7048c15162879  verify_vit_checkpoint.py
+857d422de608bf457514ee1c3632d1f5bd2e19de078996cbea1b8ea3e36b1434  run_all.sh

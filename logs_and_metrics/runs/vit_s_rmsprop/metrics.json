@@ -1,0 +1,78 @@
+{
+  "scenario_number": 7,
+  "scenario": "vit_s_rmsprop",
+  "config": {
+    "name": "vit_s_rmsprop",
+    "model": "ViT-S/16",
+    "arch": "vit_s16",
+    "opt": "RMSprop",
+    "lr": 0.0001,
+    "wd": 0.0001,
+    "mom": 0.0
+  },
+  "cv_val_accuracy": {
+    "n_val_per_fold": 2400,
+    "per_fold": [
+      99.9583,
+      99.9583,
+      100.0,
+      100.0,
+      99.9167
+    ],
+    "mean": 99.97,
+    "std": 0.03
+  },
+  "fold_test_accuracy": {
+    "n_test": 3000,
+    "per_fold": [
+      99.7667,
+      99.9,
+      99.9333,
+      99.9333,
+      99.9333
+    ],
+    "mean": 99.89,
+    "std": 0.07
+  },
+  "ensemble_test": {
+    "n": 3000,
+    "correct": 3000,
+    "acc": 100.0,
+    "bal_acc": 100.0,
+    "macro_f1": 1.0,
+    "macro_auc": 1.0,
+    "acc_ci": [
+      99.87211512545248,
+      99.99999999999997
+    ],
+    "f1_per_class": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "confusion": [
+      [
+        1000,
+        0,
+        0
+      ],
+      [
+        0,
+        1000,
+        0
+      ],
+      [
+        0,
+        0,
+        1000
+      ]
+    ]
+  },
+  "epochs_completed": [
+    19,
+    29,
+    17,
+    21,
+    21
+  ]
+}

@@ -1,0 +1,171 @@
+================================================================================
+EXP 2 FAITHFULNESS SUMMARY: RESNET50
+Checkpoint: runs/resnet50_main/fold0.pt
+SHA256: f9167bfa83146b85bacd654e53d72349d81624c55f7ddc2fa7c6f7355e56b94d
+================================================================================
+
+== 1. OVERALL AUC (Mean +/- SD) ==
+                   deletion_auc_prob_k10         insertion_auc_prob_k10         deletion_auc_prob_k20         insertion_auc_prob_k20         deletion_auc_logit_k10         insertion_auc_logit_k10         deletion_auc_logit_k20         insertion_auc_logit_k20        
+                                    mean     std                   mean     std                  mean     std                   mean     std                   mean     std                    mean     std                   mean     std                    mean     std
+method baseline                                                                                                                                                                                                                                                           
+method blur                       0.8954  0.1574                 0.9296  0.1246                0.8961  0.1556                 0.9295  0.1246                 4.4438  2.0297                  7.7633  3.2366                 4.4068  2.0361                  7.7713  3.2710
+       grey                       0.6973  0.1583                 0.8634  0.1469                0.6984  0.1600                 0.8742  0.1566                 2.7371  1.1920                  7.1955  3.1104                 2.6960  1.2198                  7.2428  3.1710
+       tissue_mean                0.7670  0.1414                 0.9266  0.0784                0.7688  0.1401                 0.9375  0.0822                 3.0610  1.0412                  7.3239  2.7447                 3.0336  1.0155                  7.3663  2.7734
+random blur                       0.8487  0.2586                 0.8500  0.2574                0.8450  0.2634                 0.8458  0.2631                 5.2252  3.1468                  5.2126  3.1388                 5.1696  3.2119                  5.1526  3.2104
+       grey                       0.5085  0.3582                 0.5092  0.3581                0.5075  0.3590                 0.5080  0.3594                 1.5301  2.5200                  1.5293  2.5158                 1.4227  2.5193                  1.4242  2.5179
+       tissue_mean                0.5613  0.3355                 0.5563  0.3394                0.5601  0.3379                 0.5559  0.3407                 3.0788  4.1224                  3.0530  4.1343                 3.0229  4.1986                  3.0056  4.2126
+
+== 2. PER-CLASS PRIMARY AUC (K=10, Softmax Prob) ==
+                               deletion_auc_prob_k10  insertion_auc_prob_k10
+method baseline    true_label                                               
+method blur        0                          0.9188                  0.9787
+                   1                          0.9778                  0.9963
+                   2                          0.7897                  0.8138
+       grey        0                          0.7417                  0.9398
+                   1                          0.7422                  0.9503
+                   2                          0.6080                  0.7002
+       tissue_mean 0                          0.7271                  0.9348
+                   1                          0.7232                  0.9537
+                   2                          0.8506                  0.8913
+random blur        0                          0.5940                  0.5981
+                   1                          0.9613                  0.9610
+                   2                          0.9908                  0.9909
+       grey        0                          0.1907                  0.1887
+                   1                          0.3391                  0.3433
+                   2                          0.9958                  0.9956
+       tissue_mean 0                          0.2137                  0.2028
+                   1                          0.4743                  0.4703
+                   2                          0.9959                  0.9959
+
+== 3. COLLAPSE DIAGNOSTIC: PREDICTED CLASS AFTER STEP 1 (Grey Baseline, K=10) ==
+method  deletion_pred_step1_k10
+method  0                          0.373
+        1                          0.333
+        2                          0.293
+random  2                          0.440
+        1                          0.333
+        0                          0.227
+
+== 4. METHOD vs RANDOM (Wilcoxon Signed-Rank Test, Paired by Image) ==
+{
+  "grey/deletion_auc_prob_k10": {
+    "mean_diff": 0.1887,
+    "p_value": 2.2976556249467897e-06,
+    "significant_005": true
+  },
+  "grey/insertion_auc_prob_k10": {
+    "mean_diff": 0.3542,
+    "p_value": 1.0101909060693023e-15,
+    "significant_005": true
+  },
+  "grey/deletion_auc_prob_k20": {
+    "mean_diff": 0.1909,
+    "p_value": 1.788451952300314e-06,
+    "significant_005": true
+  },
+  "grey/insertion_auc_prob_k20": {
+    "mean_diff": 0.3663,
+    "p_value": 5.637206494569263e-16,
+    "significant_005": true
+  },
+  "grey/deletion_auc_logit_k10": {
+    "mean_diff": 1.207,
+    "p_value": 7.885683040252512e-06,
+    "significant_005": true
+  },
+  "grey/insertion_auc_logit_k10": {
+    "mean_diff": 5.6662,
+    "p_value": 1.946045068202337e-19,
+    "significant_005": true
+  },
+  "grey/deletion_auc_logit_k20": {
+    "mean_diff": 1.2733,
+    "p_value": 3.7303204644806906e-06,
+    "significant_005": true
+  },
+  "grey/insertion_auc_logit_k20": {
+    "mean_diff": 5.8186,
+    "p_value": 1.786316939406355e-19,
+    "significant_005": true
+  },
+  "blur/deletion_auc_prob_k10": {
+    "mean_diff": 0.0467,
+    "p_value": 0.7221795554567124,
+    "significant_005": false
+  },
+  "blur/insertion_auc_prob_k10": {
+    "mean_diff": 0.0796,
+    "p_value": 0.01177383010396473,
+    "significant_005": true
+  },
+  "blur/deletion_auc_prob_k20": {
+    "mean_diff": 0.051,
+    "p_value": 0.5703321156772132,
+    "significant_005": false
+  },
+  "blur/insertion_auc_prob_k20": {
+    "mean_diff": 0.0837,
+    "p_value": 0.009284249471688247,
+    "significant_005": true
+  },
+  "blur/deletion_auc_logit_k10": {
+    "mean_diff": -0.7814,
+    "p_value": 0.05947270881882341,
+    "significant_005": false
+  },
+  "blur/insertion_auc_logit_k10": {
+    "mean_diff": 2.5507,
+    "p_value": 1.4182031663944875e-10,
+    "significant_005": true
+  },
+  "blur/deletion_auc_logit_k20": {
+    "mean_diff": -0.7628,
+    "p_value": 0.08897846661642363,
+    "significant_005": false
+  },
+  "blur/insertion_auc_logit_k20": {
+    "mean_diff": 2.6187,
+    "p_value": 1.2230852795535685e-10,
+    "significant_005": true
+  },
+  "tissue_mean/deletion_auc_prob_k10": {
+    "mean_diff": 0.2056,
+    "p_value": 6.954185172002896e-12,
+    "significant_005": true
+  },
+  "tissue_mean/insertion_auc_prob_k10": {
+    "mean_diff": 0.3702,
+    "p_value": 3.5442269885385206e-16,
+    "significant_005": true
+  },
+  "tissue_mean/deletion_auc_prob_k20": {
+    "mean_diff": 0.2086,
+    "p_value": 5.708661659882639e-12,
+    "significant_005": true
+  },
+  "tissue_mean/insertion_auc_prob_k20": {
+    "mean_diff": 0.3816,
+    "p_value": 2.596606199876952e-16,
+    "significant_005": true
+  },
+  "tissue_mean/deletion_auc_logit_k10": {
+    "mean_diff": -0.0178,
+    "p_value": 0.9230231435100303,
+    "significant_005": false
+  },
+  "tissue_mean/insertion_auc_logit_k10": {
+    "mean_diff": 4.271,
+    "p_value": 8.153067897576599e-16,
+    "significant_005": true
+  },
+  "tissue_mean/deletion_auc_logit_k20": {
+    "mean_diff": 0.0107,
+    "p_value": 0.8636923238345949,
+    "significant_005": false
+  },
+  "tissue_mean/insertion_auc_logit_k20": {
+    "mean_diff": 4.3607,
+    "p_value": 9.797698136737132e-16,
+    "significant_005": true
+  }
+}

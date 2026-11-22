@@ -1,0 +1,38 @@
+[
+  {
+    "n10": 86,
+    "n01": 90,
+    "n_clusters": 45,
+    "chisq_durkalski": 0.0332,
+    "p_durkalski": 0.8554296908847143,
+    "p_exact_mcnemar_ref": 0.8211772774694054,
+    "pair": "ResNet50 (ImageNet) vs ViT-S/16 (ImageNet)",
+    "file1": "e7_r50_oof.csv",
+    "file2": "e7_vit_oof.csv",
+    "p_durkalski_holm_adj": 1.0
+  },
+  {
+    "n10": 74,
+    "n01": 87,
+    "n_clusters": 45,
+    "chisq_durkalski": 0.3514,
+    "p_durkalski": 0.5533491579206133,
+    "p_exact_mcnemar_ref": 0.34431351459658854,
+    "pair": "ResNet50 (ImageNet) vs ResNet50 (LC25000 init)",
+    "file1": "e7_r50_oof.csv",
+    "file2": "e7_r50_lcinit_oof.csv",
+    "p_durkalski_holm_adj": 1.0
+  },
+  {
+    "n10": 77,
+    "n01": 68,
+    "n_clusters": 45,
+    "chisq_durkalski": 0.3011,
+    "p_durkalski": 0.5831841077491899,
+    "p_exact_mcnemar_ref": 0.5065964185708862,
+    "pair": "ResNet50 (LC25000 init) vs ViT-S/16 (ImageNet)",
+    "file1": "e7_r50_lcinit_oof.csv",
+    "file2": "e7_vit_oof.csv",
+    "p_durkalski_holm_adj": 1.0
+  }
+]

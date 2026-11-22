@@ -9,6 +9,10 @@ venv/
 .venv/
 env/
 
+# Datasets & Caches
+data/
+*.zip
+
 # Model Checkpoints (Excluded to keep repository lightweight)
 *.pth
 *.pt

@@ -1,0 +1,20 @@
+{
+  "ACA": {
+    "n_groups": 576,
+    "median_size": 9.0,
+    "max_size": 25,
+    "singletons": 74
+  },
+  "N": {
+    "n_groups": 596,
+    "median_size": 9.0,
+    "max_size": 28,
+    "singletons": 86
+  },
+  "SCC": {
+    "n_groups": 607,
+    "median_size": 8.0,
+    "max_size": 26,
+    "singletons": 104
+  }
+}

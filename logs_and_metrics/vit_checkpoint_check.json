@@ -1,0 +1,7 @@
+{
+  "timm_model": "vit_small_patch16_224.augreg_in21k_ft_in1k",
+  "hf_model": "WinKawaks/vit-small-patch16-224",
+  "max_abs_diff": 2.2411346435546875e-05,
+  "top1_agreement": 1.0,
+  "identical": true
+}

@@ -1,0 +1,28 @@
+================================================================================
+LUNGHIST700 STATISTICAL TESTS: CLUSTERED MCNEMAR (DURKALSKI ET AL., 2003)
+================================================================================
+
+Pair: ResNet50 (ImageNet) vs ViT-S/16 (ImageNet)
+  Discordant: n10=86 (M1 correct, M2 incorrect), n01=90 (M1 incorrect, M2 correct)
+  Clusters (Patients): 45
+  Durkalski Chi-Square(1): 0.0332
+  Raw Durkalski p-value  : 8.5543e-01
+  Holm-adjusted p-value  : 1.0000e+00
+  Exact McNemar p (ref)  : 8.2118e-01
+
+Pair: ResNet50 (ImageNet) vs ResNet50 (LC25000 init)
+  Discordant: n10=74 (M1 correct, M2 incorrect), n01=87 (M1 incorrect, M2 correct)
+  Clusters (Patients): 45
+  Durkalski Chi-Square(1): 0.3514
+  Raw Durkalski p-value  : 5.5335e-01
+  Holm-adjusted p-value  : 1.0000e+00
+  Exact McNemar p (ref)  : 3.4431e-01
+
+Pair: ResNet50 (LC25000 init) vs ViT-S/16 (ImageNet)
+  Discordant: n10=77 (M1 correct, M2 incorrect), n01=68 (M1 incorrect, M2 correct)
+  Clusters (Patients): 45
+  Durkalski Chi-Square(1): 0.3011
+  Raw Durkalski p-value  : 5.8318e-01
+  Holm-adjusted p-value  : 1.0000e+00
+  Exact McNemar p (ref)  : 5.0660e-01
+

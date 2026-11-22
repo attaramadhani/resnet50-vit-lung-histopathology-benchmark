@@ -1,0 +1,13 @@
+name: resnet50_lr_1e3
+model: ResNet50
+arch: resnet50
+opt: Adam
+lr: 0.001
+wd: 0.0001
+mom: 0.0
+epochs: 50
+patience: 5
+min_delta: 0.0
+seed: 42 (re-seeded per fold)
+grad_clip: none
+limit_debug: 0
