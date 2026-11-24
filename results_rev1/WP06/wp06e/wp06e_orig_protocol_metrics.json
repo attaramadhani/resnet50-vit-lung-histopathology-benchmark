@@ -1,0 +1,116 @@
+{
+  "20x": {
+    "split0_acc": 72.0,
+    "mean_5splits_acc": 68.5,
+    "std_5splits_acc": 11.73,
+    "splits": [
+      {
+        "split": 0,
+        "n_train": 248,
+        "n_val": 36,
+        "n_test": 75,
+        "best_epoch": 17,
+        "acc": 72.0,
+        "macro_f1": 0.7324,
+        "macro_auc": 0.9064
+      },
+      {
+        "split": 1,
+        "n_train": 234,
+        "n_val": 72,
+        "n_test": 53,
+        "best_epoch": 14,
+        "acc": 52.83,
+        "macro_f1": 0.5493,
+        "macro_auc": 0.7402
+      },
+      {
+        "split": 2,
+        "n_train": 262,
+        "n_val": 27,
+        "n_test": 70,
+        "best_epoch": 6,
+        "acc": 65.71,
+        "macro_f1": 0.6921,
+        "macro_auc": 0.9762
+      },
+      {
+        "split": 3,
+        "n_train": 274,
+        "n_val": 31,
+        "n_test": 54,
+        "best_epoch": 19,
+        "acc": 66.67,
+        "macro_f1": 0.7056,
+        "macro_auc": 0.8374
+      },
+      {
+        "split": 4,
+        "n_train": 283,
+        "n_val": 42,
+        "n_test": 34,
+        "best_epoch": 4,
+        "acc": 85.29,
+        "macro_f1": 0.8011,
+        "macro_auc": 0.9688
+      }
+    ]
+  },
+  "40x": {
+    "split0_acc": 85.71,
+    "mean_5splits_acc": 77.03,
+    "std_5splits_acc": 7.41,
+    "splits": [
+      {
+        "split": 0,
+        "n_train": 236,
+        "n_val": 40,
+        "n_test": 56,
+        "best_epoch": 13,
+        "acc": 85.71,
+        "macro_f1": 0.8524,
+        "macro_auc": 0.9783
+      },
+      {
+        "split": 1,
+        "n_train": 263,
+        "n_val": 30,
+        "n_test": 39,
+        "best_epoch": 5,
+        "acc": 79.49,
+        "macro_f1": 0.7133,
+        "macro_auc": 0.9159
+      },
+      {
+        "split": 2,
+        "n_train": 250,
+        "n_val": 23,
+        "n_test": 59,
+        "best_epoch": 9,
+        "acc": 66.1,
+        "macro_f1": 0.6616,
+        "macro_auc": 0.96
+      },
+      {
+        "split": 3,
+        "n_train": 235,
+        "n_val": 37,
+        "n_test": 60,
+        "best_epoch": 8,
+        "acc": 80.0,
+        "macro_f1": 0.7811,
+        "macro_auc": 0.9016
+      },
+      {
+        "split": 4,
+        "n_train": 238,
+        "n_val": 29,
+        "n_test": 65,
+        "best_epoch": 5,
+        "acc": 73.85,
+        "macro_f1": 0.6872,
+        "macro_auc": 0.8221
+      }
+    ]
+  }
+}

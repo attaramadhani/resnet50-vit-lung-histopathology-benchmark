@@ -1,0 +1,4 @@
+Pool: 1500 images, 150 families
+Candidates (k<= 50, cos>= 0.8): 34115; computing ORB/RANSAC inliers...
+
+DEFAULT (cos 0.90, k 30, inliers 25): recall 48.62%, precision 89.5%, FNR 51.38%, 295 groups for 150 families, 0.0% families fully recovered

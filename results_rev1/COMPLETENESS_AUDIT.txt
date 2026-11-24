@@ -1,0 +1,12 @@
+=== REVISION R1 COMPLETENESS AUDIT (PAKET C) ===
+Total indexed files : 3328
+Total .pt/.pth files: 460
+Total size (raw)    : 39.83 GB
+
+[WP02] OK         | .pt/.pth=0 (min 0) | preds/oof=0 | missing=[]
+[WP03] OK         | .pt/.pth=60 (min 60) | preds/oof=72 | missing=[]
+[WP05] OK         | .pt/.pth=0 (min 0) | preds/oof=12 | missing=[]
+[WP04c] OK         | .pt/.pth=60 (min 60) | preds/oof=72 | missing=[]
+[WP06] OK         | .pt/.pth=40 (min 20) | preds/oof=8 | missing=[]
+[WP04a] OK         | .pt/.pth=160 (min 160) | preds/oof=192 | missing=[]
+[WP04b] OK         | .pt/.pth=140 (min 140) | preds/oof=168 | missing=[]

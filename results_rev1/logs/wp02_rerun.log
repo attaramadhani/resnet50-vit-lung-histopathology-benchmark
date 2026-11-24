@@ -1,0 +1,25 @@
+==========================================================================
+  WP02: VALIDASI AUDIT NEAR-DUPLICATE (GAMBAR ASLI 768x768)
+  Root: /root/.cache/kagglehub/datasets/andrewmvd/lung-and-colon-cancer-histopathological-images/versions/1/lung_colon_image_set/lung_image_sets/
+==========================================================================
+Pool: 1500 images, 150 families
+Candidates (k<= 50, cos>= 0.8): 34115; computing ORB/RANSAC inliers...
+
+DEFAULT (cos 0.90, k 30, inliers 25): recall 48.62%, precision 89.5%, FNR 51.38%, 295 groups for 150 families, 0.0% families fully recovered
+[OK] results_rev1/_archives/WP02_metrics_logs_preds.zip: 1508 files (917.01 MB)
+
+[OK] results_rev1/_archives/MANIFEST_SHA256.txt: 3328 files indexed (460 .pt/.pth checkpoints, total 39.83 GB)
+
+=== REVISION R1 COMPLETENESS AUDIT (PAKET C) ===
+Total indexed files : 3328
+Total .pt/.pth files: 460
+Total size (raw)    : 39.83 GB
+
+[WP02] OK         | .pt/.pth=0 (min 0) | preds/oof=0 | missing=[]
+[WP03] OK         | .pt/.pth=60 (min 60) | preds/oof=72 | missing=[]
+[WP05] OK         | .pt/.pth=0 (min 0) | preds/oof=12 | missing=[]
+[WP04c] OK         | .pt/.pth=60 (min 60) | preds/oof=72 | missing=[]
+[WP06] OK         | .pt/.pth=40 (min 20) | preds/oof=8 | missing=[]
+[WP04a] OK         | .pt/.pth=160 (min 160) | preds/oof=192 | missing=[]
+[WP04b] OK         | .pt/.pth=140 (min 140) | preds/oof=168 | missing=[]
+WP02_EXIT=$?

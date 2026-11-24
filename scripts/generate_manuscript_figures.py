@@ -1,4 +1,5 @@
 """Reproduce publication figures (Figs 2-5, 7-8, and Fig S1) directly from logs_and_metrics/."""
+import argparse
 import json
 import os
 import numpy as np
@@ -7,7 +8,7 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import roc_curve, auc
 
 LOGS = "logs_and_metrics"
-FIGS = "figures"
+FIGS = "figures_rev1"
 os.makedirs(FIGS, exist_ok=True)
 
 plt.rcParams.update({
@@ -278,6 +279,11 @@ def figS1_training_curves():
 
 
 if __name__ == "__main__":
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--out-dir", default="figures_rev1", help="Output folder (default: figures_rev1 so v2.0.0 figures/ are preserved)")
+    args = ap.parse_args()
+    FIGS = args.out_dir
+    os.makedirs(FIGS, exist_ok=True)
     fig2_scenarios()
     fig3_sensitivity()
     fig4_compute()
@@ -285,4 +291,4 @@ if __name__ == "__main__":
     fig7_confusion()
     fig8_roc()
     figS1_training_curves()
-    print("[OK] Generated Figs 2, 3, 4, 5, 7, 8, and Fig S1 cleanly in figures/!")
+    print(f"[OK] Generated Figs 2, 3, 4, 5, 7, 8, and Fig S1 cleanly in {FIGS}/!")

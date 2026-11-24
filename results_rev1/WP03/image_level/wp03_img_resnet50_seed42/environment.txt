@@ -1,0 +1,5 @@
+Python: 3.12.3
+PyTorch: 2.8.0+cu128
+Device: NVIDIA GeForce RTX 4090
+CUDA: 12.8
+Git Commit: 24fd325fafb4bbc7d1b7e038d5191ab5b774caf6

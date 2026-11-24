@@ -1,0 +1,17 @@
+arch,metric,baseline_type,method_mean,method_std,baseline_mean,baseline_std,mean_diff,wilcoxon_p
+resnet50,deletion_auc_prob_k10,random_indep,0.6337,0.174,0.5478,0.2679,0.0859,0.02794806914450557
+resnet50,insertion_auc_prob_k10,random_indep,0.8425,0.1733,0.5481,0.2677,0.2944,5.03096497450052e-13
+resnet50,deletion_auc_prob_k20,random_indep,0.6328,0.1748,0.5482,0.2666,0.0846,0.031026140442948373
+resnet50,insertion_auc_prob_k20,random_indep,0.8495,0.1837,0.5478,0.2665,0.3017,4.3814719182836503e-13
+resnet50,deletion_auc_prob_k10,random_spatial_matched,0.6337,0.174,0.7914,0.1526,-0.1577,6.2388485879782405e-21
+resnet50,insertion_auc_prob_k10,random_spatial_matched,0.8425,0.1733,0.7937,0.1627,0.0488,2.5829318787561073e-09
+resnet50,deletion_auc_prob_k20,random_spatial_matched,0.6328,0.1748,0.7926,0.1547,-0.1598,4.525497407296732e-21
+resnet50,insertion_auc_prob_k20,random_spatial_matched,0.8495,0.1837,0.795,0.1631,0.0546,9.619278048970314e-10
+vit_s16,deletion_auc_prob_k10,random_indep,0.7457,0.2922,0.8283,0.1617,-0.0825,0.4149429272518361
+vit_s16,insertion_auc_prob_k10,random_indep,0.7293,0.2833,0.8256,0.1646,-0.0963,0.3186571125482769
+vit_s16,deletion_auc_prob_k20,random_indep,0.7531,0.3004,0.8283,0.164,-0.0753,0.4312335956433597
+vit_s16,insertion_auc_prob_k20,random_indep,0.7315,0.2891,0.8254,0.1674,-0.0939,0.32139631787793665
+vit_s16,deletion_auc_prob_k10,random_spatial_matched,0.7457,0.2922,0.7228,0.318,0.023,0.0012914384727243013
+vit_s16,insertion_auc_prob_k10,random_spatial_matched,0.7293,0.2833,0.7172,0.3183,0.0121,0.1881129656126821
+vit_s16,deletion_auc_prob_k20,random_spatial_matched,0.7531,0.3004,0.7278,0.3307,0.0253,0.004449798900100027
+vit_s16,insertion_auc_prob_k20,random_spatial_matched,0.7315,0.2891,0.7239,0.3336,0.0076,0.1788431251670337

@@ -9,19 +9,20 @@ venv/
 .venv/
 env/
 
-# Datasets, Caches & Local WP Outputs
+# Datasets, Caches & Heavy Binary Checkpoints / Pools (keep lightweight CSV/JSON/YAML/log results_rev1 tracked)
 data/
 cache/
 old_ckpts/
-results_rev1/
+results_rev1/WP02/pool/
+results_rev1/_archives/
 lc25000_raw_root.txt
 lc25000_root.txt
 lunghist_root.txt
 cache_root.txt
 runpod_rev1/env_exports.sh
 *.zip
-
-# Model Checkpoints (Excluded to keep repository lightweight)
+*.npz
+*.npy
 *.pth
 *.pt
 *.bin

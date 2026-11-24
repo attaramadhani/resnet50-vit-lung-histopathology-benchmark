@@ -1,0 +1,27 @@
+{
+  "arch": "vit_s16",
+  "freeze_vit_blocks": false,
+  "hardware": "NVIDIA GeForce RTX 4090, 595.112.07, 24564 MiB",
+  "params_M": 21.67,
+  "trainable_params_M": 21.67,
+  "batch_size": 32,
+  "precision": "FP16 (torch.autocast)",
+  "MACs_G": 4.25,
+  "GMACs": 4.25,
+  "train_img_per_s": [
+    2088.5,
+    1.5
+  ],
+  "train_epoch_s_9600_imgs_gpu_only": 4.6,
+  "peak_mem_GB_train": 1.49,
+  "latency_ms_per_batch_bs32": [
+    3.541,
+    0.014
+  ],
+  "latency_ms_per_image_bs32": 0.111,
+  "latency_ms_per_batch_bs1": [
+    1.774,
+    0.009
+  ],
+  "latency_ms_per_image_bs1": 1.774
+}

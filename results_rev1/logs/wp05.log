@@ -1,0 +1,3 @@
+[OK] G1_clean_resnet50: Ensemble Test Acc = 99.97% (n=3000)
+[OK] G2_clean_vit_s16: Ensemble Test Acc = 99.93% (n=3000)
+[OK] WP05 old G1/G2 predictions exported to results_rev1/WP05

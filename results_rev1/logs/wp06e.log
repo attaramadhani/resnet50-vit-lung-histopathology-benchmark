@@ -1,0 +1,13 @@
+[WP06e Tile resnet50] Fold 0: selected_lr=3e-05, inner_val_losses={'3e-05': 0.7604, '0.0001': 0.828, '0.0003': 0.8517}, test_acc=64.79%
+[WP06e Tile resnet50] Fold 1: selected_lr=0.0001, inner_val_losses={'3e-05': 0.5846, '0.0001': 0.4669, '0.0003': 0.6233}, test_acc=71.53%
+[WP06e Tile resnet50] Fold 2: selected_lr=0.0001, inner_val_losses={'3e-05': 0.6294, '0.0001': 0.4935, '0.0003': 0.646}, test_acc=78.68%
+[WP06e Tile resnet50] Fold 3: selected_lr=0.0003, inner_val_losses={'3e-05': 0.7111, '0.0001': 0.6435, '0.0003': 0.4964}, test_acc=78.83%
+[WP06e Tile resnet50] Fold 4: selected_lr=0.0001, inner_val_losses={'3e-05': 0.5873, '0.0001': 0.4458, '0.0003': 0.5643}, test_acc=72.66%
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[WP06e Tile vit_s16] Fold 0: selected_lr=3e-05, inner_val_losses={'3e-05': 0.691, '0.0001': 0.7026, '0.0003': 0.7569}, test_acc=73.94%
+[WP06e Tile vit_s16] Fold 1: selected_lr=0.0003, inner_val_losses={'3e-05': 0.6618, '0.0001': 0.6987, '0.0003': 0.6598}, test_acc=74.45%
+[WP06e Tile vit_s16] Fold 2: selected_lr=0.0003, inner_val_losses={'3e-05': 0.8376, '0.0001': 0.9611, '0.0003': 0.6043}, test_acc=69.85%
+[WP06e Tile vit_s16] Fold 3: selected_lr=0.0003, inner_val_losses={'3e-05': 0.7333, '0.0001': 0.7069, '0.0003': 0.4879}, test_acc=78.83%
+[WP06e Tile vit_s16] Fold 4: selected_lr=3e-05, inner_val_losses={'3e-05': 0.6482, '0.0001': 0.8908, '0.0003': 0.8262}, test_acc=74.10%
+[WP06e Orig 80/10/10] Mag=20x (300x400 ResNet50): split0=72.00% | 5-split mean=68.50 +/- 11.73%
+[WP06e Orig 80/10/10] Mag=40x (300x400 ResNet50): split0=85.71% | 5-split mean=77.03 +/- 7.41%

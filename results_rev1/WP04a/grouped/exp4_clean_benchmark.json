@@ -1,0 +1,282 @@
+{
+  "resnet50_seed1": {
+    "arch": "resnet50",
+    "seed": 1,
+    "opt": "Adam",
+    "lr": 0.0001,
+    "wd": 0.0001,
+    "sched": "none",
+    "warmup_epochs": 0,
+    "freeze_vit": 1,
+    "head_dropout": null,
+    "cv_val_accuracy": {
+      "per_fold": [
+        98.7083,
+        98.8333,
+        99.6667,
+        98.5,
+        99.4583
+      ],
+      "mean": 99.03,
+      "std": 0.5
+    },
+    "fold_test_accuracy": [
+      99.6333,
+      99.2667,
+      99.6,
+      99.2,
+      99.1
+    ],
+    "ensemble_clean_test": {
+      "n": 3000,
+      "correct": 2997,
+      "acc": 99.9,
+      "bal_acc": 99.9,
+      "macro_f1": 0.9989999977499949,
+      "macro_auc": 1.0,
+      "acc_ci": [
+        99.70638561684126,
+        99.96598527836034
+      ],
+      "f1_per_class": [
+        0.9985,
+        1.0,
+        0.9985
+      ],
+      "confusion": [
+        [
+          1000,
+          0,
+          0
+        ],
+        [
+          0,
+          1000,
+          0
+        ],
+        [
+          3,
+          0,
+          997
+        ]
+      ]
+    },
+    "epochs_completed": [
+      8,
+      20,
+      11,
+      7,
+      10
+    ]
+  },
+  "vit_s16_seed1": {
+    "arch": "vit_s16",
+    "seed": 1,
+    "opt": "AdamW",
+    "lr": 0.0001,
+    "wd": 0.0001,
+    "sched": "none",
+    "warmup_epochs": 0,
+    "freeze_vit": 1,
+    "head_dropout": null,
+    "cv_val_accuracy": {
+      "per_fold": [
+        97.125,
+        99.2083,
+        99.9167,
+        98.75,
+        99.5
+      ],
+      "mean": 98.9,
+      "std": 1.08
+    },
+    "fold_test_accuracy": [
+      98.8333,
+      99.3667,
+      99.6333,
+      99.7,
+      98.6333
+    ],
+    "ensemble_clean_test": {
+      "n": 3000,
+      "correct": 2997,
+      "acc": 99.9,
+      "bal_acc": 99.9,
+      "macro_f1": 0.99899999975,
+      "macro_auc": 0.999997,
+      "acc_ci": [
+        99.70638561684126,
+        99.96598527836034
+      ],
+      "f1_per_class": [
+        0.9985,
+        1.0,
+        0.9985
+      ],
+      "confusion": [
+        [
+          998,
+          0,
+          2
+        ],
+        [
+          0,
+          1000,
+          0
+        ],
+        [
+          1,
+          0,
+          999
+        ]
+      ]
+    },
+    "epochs_completed": [
+      14,
+      8,
+      23,
+      16,
+      11
+    ]
+  },
+  "resnet50_seed2": {
+    "arch": "resnet50",
+    "seed": 2,
+    "opt": "Adam",
+    "lr": 0.0001,
+    "wd": 0.0001,
+    "sched": "none",
+    "warmup_epochs": 0,
+    "freeze_vit": 1,
+    "head_dropout": null,
+    "cv_val_accuracy": {
+      "per_fold": [
+        98.5,
+        99.2083,
+        99.7083,
+        99.25,
+        99.375
+      ],
+      "mean": 99.21,
+      "std": 0.44
+    },
+    "fold_test_accuracy": [
+      99.6333,
+      99.8333,
+      99.8333,
+      99.2667,
+      99.4667
+    ],
+    "ensemble_clean_test": {
+      "n": 3000,
+      "correct": 3000,
+      "acc": 100.0,
+      "bal_acc": 100.0,
+      "macro_f1": 1.0,
+      "macro_auc": 1.0,
+      "acc_ci": [
+        99.87211512545248,
+        99.99999999999997
+      ],
+      "f1_per_class": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "confusion": [
+        [
+          1000,
+          0,
+          0
+        ],
+        [
+          0,
+          1000,
+          0
+        ],
+        [
+          0,
+          0,
+          1000
+        ]
+      ]
+    },
+    "epochs_completed": [
+      8,
+      15,
+      22,
+      12,
+      15
+    ]
+  },
+  "vit_s16_seed2": {
+    "arch": "vit_s16",
+    "seed": 2,
+    "opt": "AdamW",
+    "lr": 0.0001,
+    "wd": 0.0001,
+    "sched": "none",
+    "warmup_epochs": 0,
+    "freeze_vit": 1,
+    "head_dropout": null,
+    "cv_val_accuracy": {
+      "per_fold": [
+        96.625,
+        99.4583,
+        99.4167,
+        99.125,
+        99.1667
+      ],
+      "mean": 98.76,
+      "std": 1.2
+    },
+    "fold_test_accuracy": [
+      98.5,
+      99.4333,
+      99.5667,
+      99.5333,
+      98.7667
+    ],
+    "ensemble_clean_test": {
+      "n": 3000,
+      "correct": 2996,
+      "acc": 99.86666666666667,
+      "bal_acc": 99.86666666666667,
+      "macro_f1": 0.9986666613333121,
+      "macro_auc": 0.9999996666666666,
+      "acc_ci": [
+        99.65765204972412,
+        99.94813743539383
+      ],
+      "f1_per_class": [
+        0.998,
+        1.0,
+        0.998
+      ],
+      "confusion": [
+        [
+          1000,
+          0,
+          0
+        ],
+        [
+          0,
+          1000,
+          0
+        ],
+        [
+          4,
+          0,
+          996
+        ]
+      ]
+    },
+    "epochs_completed": [
+      15,
+      10,
+      16,
+      13,
+      10
+    ]
+  }
+}

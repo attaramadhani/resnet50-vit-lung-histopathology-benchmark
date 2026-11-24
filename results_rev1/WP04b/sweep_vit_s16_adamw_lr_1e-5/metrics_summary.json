@@ -1,0 +1,85 @@
+{
+  "scenario_number": 0,
+  "scenario": "sweep_vit_s16_adamw_lr_1e-5",
+  "seed": 42,
+  "config": {
+    "name": "sweep_vit_s16_adamw_lr_1e-5",
+    "model": "ViT-S/16",
+    "arch": "vit_s16",
+    "opt": "AdamW",
+    "lr": 1e-05,
+    "wd": 0.0001,
+    "mom": 0.0,
+    "epochs": 50,
+    "patience": 5,
+    "sched": "none",
+    "warmup_epochs": 0,
+    "freeze_vit": 1,
+    "head_dropout": null
+  },
+  "cv_val_accuracy": {
+    "n_val_per_fold": 2400,
+    "per_fold": [
+      100.0,
+      100.0,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "mean": 100.0,
+    "std": 0.0
+  },
+  "fold_test_accuracy": {
+    "n_test": 3000,
+    "per_fold": [
+      100.0,
+      99.9667,
+      99.9333,
+      100.0,
+      99.9333
+    ],
+    "mean": 99.97,
+    "std": 0.03
+  },
+  "ensemble_test": {
+    "n": 3000,
+    "correct": 3000,
+    "acc": 100.0,
+    "bal_acc": 100.0,
+    "macro_f1": 1.0,
+    "macro_auc": 1.0,
+    "acc_ci": [
+      99.87211512545248,
+      99.99999999999997
+    ],
+    "f1_per_class": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "confusion": [
+      [
+        1000,
+        0,
+        0
+      ],
+      [
+        0,
+        1000,
+        0
+      ],
+      [
+        0,
+        0,
+        1000
+      ]
+    ]
+  },
+  "epochs_completed": [
+    25,
+    16,
+    15,
+    24,
+    21
+  ]
+}

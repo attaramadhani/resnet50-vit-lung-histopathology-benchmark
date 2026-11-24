@@ -1,0 +1,36 @@
+[
+  {
+    "model": "phikon",
+    "dim": 768,
+    "oof_acc": 86.69,
+    "cluster_ci_low": 81.08,
+    "cluster_ci_high": 91.37,
+    "bal_acc": 88.0,
+    "macro_f1": 0.8728,
+    "macro_auc": 0.9668,
+    "selected_C": [
+      0.01,
+      0.01,
+      0.01,
+      0.01,
+      0.01
+    ]
+  },
+  {
+    "model": "ctranspath",
+    "dim": 768,
+    "oof_acc": 86.11,
+    "cluster_ci_low": 80.42,
+    "cluster_ci_high": 90.94,
+    "bal_acc": 87.68,
+    "macro_f1": 0.871,
+    "macro_auc": 0.9636,
+    "selected_C": [
+      0.01,
+      0.01,
+      0.01,
+      0.01,
+      0.01
+    ]
+  }
+]

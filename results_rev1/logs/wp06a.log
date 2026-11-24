@@ -1,0 +1,9 @@
+[Target] LC25000 reference image (seed=42): lung_scc/lungscc2012.jpeg
+[WP06a] macenko  | resize  | resnet50 -> Acc: 38.78% [23.83-55.83%] | AUC: 0.6018
+[WP06a] macenko  | resize  | vit_s16  -> Acc: 40.67% [26.01-57.33%] | AUC: 0.6676
+[WP06a] macenko  | crop768 | resnet50 -> Acc: 40.09% [25.49-56.82%] | AUC: 0.6329
+[WP06a] macenko  | crop768 | vit_s16  -> Acc: 41.53% [27.43-57.85%] | AUC: 0.6954
+[WP06a] reinhard | resize  | resnet50 -> Acc: 42.55% [29.00-57.24%] | AUC: 0.6793
+[WP06a] reinhard | resize  | vit_s16  -> Acc: 45.59% [31.98-59.97%] | AUC: 0.6597
+[WP06a] reinhard | crop768 | resnet50 -> Acc: 48.05% [35.76-60.87%] | AUC: 0.7445
+[WP06a] reinhard | crop768 | vit_s16  -> Acc: 52.24% [41.21-63.99%] | AUC: 0.7532
