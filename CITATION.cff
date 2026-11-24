@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: "If you use this software, benchmarking code, or experimental data, please cite it as below."
 title: "Beyond the LC25000 ceiling: optimizer robustness and external validity of a convolutional network and a vision transformer for lung cancer histopathology classification"
-version: 2.1.0
+version: 2.1.1
 date-released: 2026-11-24
 url: "https://github.com/attaramadhani/resnet50-vit-lung-histopathology-benchmark"
 repository-code: "https://github.com/attaramadhani/resnet50-vit-lung-histopathology-benchmark"

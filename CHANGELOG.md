@@ -1,5 +1,8 @@
 # Changelog
 
+## [2.1.1] - 2026-11-24 (Final Minor Polish on Fig. 6 Header)
+- Deduplicated Column 4 top title in `figures_rev1/fig6_xai_gallery_rev1.png` and `results_rev1/FIG6/fig6_xai_gallery_rev1.png` (and `scripts/generate_xai_visual_gallery_v2.py`) to render a single crisp header line: `4. ViT-S/16 rollout map`.
+
 ## [2.1.0] - 2026-11-24 (Final Revision R1 Release — Preserves `v2.0.0` / `v2.0.1` Baselines)
 
 All Revision R1 artifacts are added under `results_rev1/`, `figures_rev1/`, and `runpod_rev1/` **without overwriting** existing `v2.0.0`/`v2.0.1` `logs_and_metrics/` or `figures/`:

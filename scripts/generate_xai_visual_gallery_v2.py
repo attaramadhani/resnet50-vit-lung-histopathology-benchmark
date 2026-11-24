@@ -90,7 +90,8 @@ def main():
             else:
                 ax.imshow(panel)
             if row_idx == 0:
-                ax.set_title(f"{col_titles[col_idx]}\n{st}", fontsize=9, fontweight="bold")
+                ttl = col_titles[col_idx] if col_idx == 3 else f"{col_titles[col_idx]}\n{st}"
+                ax.set_title(ttl, fontsize=9, fontweight="bold")
             else:
                 ax.set_title(st, fontsize=8.5)
             ax.set_xticks([])
