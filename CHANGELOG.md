@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.1.0-rev1] - 2026-11-24 (Additive Revision R1 Artifacts — Preserves `v2.0.0` / `v2.0.1` Baselines)
+## [2.1.0] - 2026-11-24 (Final Revision R1 Release — Preserves `v2.0.0` / `v2.0.1` Baselines)
 
 All Revision R1 artifacts are added under `results_rev1/`, `figures_rev1/`, and `runpod_rev1/` **without overwriting** existing `v2.0.0`/`v2.0.1` `logs_and_metrics/` or `figures/`:
 - **WP01 (`results_rev1/WP01/`)**: LC25000 shallow-feature shortcut validation (`colour_hist` RF `97.83%` group-aware / `100.00%` image-level).

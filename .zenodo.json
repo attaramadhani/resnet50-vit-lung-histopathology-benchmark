@@ -1,7 +1,7 @@
 {
   "title": "Beyond the LC25000 ceiling: optimizer robustness and external validity of a convolutional network and a vision transformer for lung cancer histopathology classification",
-  "version": "2.0.1",
-  "description": "Official v2.0.0 replication package containing training and evaluation code, split manifests (image-level, rotation-invariant group-aware, and LungHist700 patient-grouped), all 16 YAML configuration files (S1-S14 + G1-G2), per-epoch logs, per-fold metrics, statistical tests, and publication figure scripts for comparative benchmarking of ResNet50 and ViT-S/16 on LC25000 and LungHist700 histopathology datasets.",
+  "version": "2.1.0",
+  "description": "Final Revision R1 replication package (v2.1.0) aligned with CMPBUP-D-26-00450. Preserves all v2.0.0/v2.0.1 baselines untouched under logs_and_metrics/ and figures/, and adds Revision R1 experiments (WP01 shallow-feature shortcut test, WP02 synthetic near-duplicate audit validation, WP03 matched-recipe 3-seed benchmark, WP04a multi-seed replication, WP04b 7-point LR sweep with SGDM, WP04c warmup+cosine ablation, WP05 clean G1/G2 OOF exports, WP06 LungHist700 stain-norm zero-shot/HED/Phikon/CTransPath/tiling/domain-shift, WP07 lightweight Adebayo & spatially-matched XAI tests, single-session 3-model GPU compute benchmark, updated figures_rev1/, Statistik_CI_Kalibrasi_SensSpec.csv, and wp05_wp06_bootstrap_stats.py).",
   "creators": [
     {
       "name": "Setiawan, Wahyudi",
