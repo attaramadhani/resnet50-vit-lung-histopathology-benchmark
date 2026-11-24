@@ -135,13 +135,27 @@ def main():
     params_M = round(total_params / 1e6, 2)
     trainable_M = round(trainable_params / 1e6, 2)
 
+    driver_ver = "N/A"
+    if isinstance(gpu_info, str) and "," in gpu_info:
+        parts = [p.strip() for p in gpu_info.split(",")]
+        if len(parts) >= 2:
+            driver_ver = parts[1]
+
     res = {
         "arch": arch_name,
         "freeze_vit_blocks": freeze_vit_flag,
         "hardware": gpu_info,
+        "driver_version": driver_ver,
+        "cuda_version": getattr(torch.version, "cuda", None) or "N/A",
+        "torch_version": torch.__version__,
         "params_M": params_M,
         "trainable_params_M": trainable_M,
         "batch_size": args.bs,
+        "batch_size_throughput": args.bs,
+        "batch_size_latency": [args.bs, 1],
+        "warmup_iterations": args.warmup,
+        "repeats": args.repeats,
+        "iters_per_repeat": args.iters,
         "precision": "FP16 (torch.autocast)"
     }
 
