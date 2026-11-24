@@ -1,0 +1,84 @@
+
+==========================================================================
+  LUNGHIST700 FINE-TUNING: results_rev1/WP06/wp06c/e7_vit_lcinit
+  Arch: vit_s16 | Split: patient | Magnification: All (20x + 40x)
+  Init: old_ckpts/runs/vit_s_main/fold0.pt
+  Root: data/LungHist700/data/images/
+==========================================================================
+Reusing existing fold file: data_splits/folds_patient.csv
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fold 0: stopped at epoch 14 (best: 6), test acc 64.79% (n=142)
+Fold 1: stopped at epoch 16 (best: 8), test acc 72.99% (n=137)
+Fold 2: stopped at epoch 9 (best: 1), test acc 60.29% (n=136)
+Fold 3: stopped at epoch 13 (best: 5), test acc 79.56% (n=137)
+Fold 4: stopped at epoch 9 (best: 1), test acc 57.55% (n=139)
+
+[OK] Results saved for results_rev1/WP06/wp06c/e7_vit_lcinit:
+{
+  "n": 691,
+  "correct": 463,
+  "acc": 67.00434153400869,
+  "bal_acc": 69.60222448633044,
+  "macro_f1": 0.6757327077136853,
+  "macro_auc": 0.8471536080238128,
+  "acc_ci": [
+    63.41295851427101,
+    70.40770618503366
+  ],
+  "f1_per_class": [
+    0.647,
+    0.7232,
+    0.6571
+  ],
+  "confusion": [
+    [
+      175,
+      44,
+      61
+    ],
+    [
+      17,
+      128,
+      6
+    ],
+    [
+      69,
+      31,
+      160
+    ]
+  ],
+  "acc_cluster_ci": [
+    60.06225886429225,
+    73.56514024466084
+  ],
+  "recall_per_class": [
+    62.5,
+    84.76821192052981,
+    61.53846153846154
+  ],
+  "acc_by_mag": {
+    "40x": 72.59,
+    "20x": 61.84
+  },
+  "config": {
+    "csv": "data_splits/lunghist700.csv",
+    "root": "data/LungHist700/data/images/",
+    "data_root": "",
+    "arch": "vit_s16",
+    "init": "old_ckpts/runs/vit_s_main/fold0.pt",
+    "split": "patient",
+    "folds": "data_splits/folds_patient.csv",
+    "folds_out": null,
+    "magnification": null,
+    "size": 224,
+    "epochs": 50,
+    "patience": 8,
+    "lr": 0.0001,
+    "bs": 32,
+    "seed": 42,
+    "hed_jitter": 0.0,
+    "freeze_vit": 1,
+    "out": "results_rev1/WP06/wp06c/e7_vit_lcinit",
+    "no_pretrained": false
+  }
+}

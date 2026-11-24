@@ -1,0 +1,85 @@
+{
+  "scenario_number": 0,
+  "scenario": "sweep_resnet50_adam_lr_1e-5",
+  "seed": 42,
+  "config": {
+    "name": "sweep_resnet50_adam_lr_1e-5",
+    "model": "ResNet50",
+    "arch": "resnet50",
+    "opt": "Adam",
+    "lr": 1e-05,
+    "wd": 0.0001,
+    "mom": 0.0,
+    "epochs": 50,
+    "patience": 5,
+    "sched": "none",
+    "warmup_epochs": 0,
+    "freeze_vit": 1,
+    "head_dropout": null
+  },
+  "cv_val_accuracy": {
+    "n_val_per_fold": 2400,
+    "per_fold": [
+      100.0,
+      99.9583,
+      100.0,
+      100.0,
+      100.0
+    ],
+    "mean": 99.99,
+    "std": 0.02
+  },
+  "fold_test_accuracy": {
+    "n_test": 3000,
+    "per_fold": [
+      100.0,
+      99.9667,
+      99.9667,
+      99.9333,
+      99.8333
+    ],
+    "mean": 99.94,
+    "std": 0.06
+  },
+  "ensemble_test": {
+    "n": 3000,
+    "correct": 3000,
+    "acc": 100.0,
+    "bal_acc": 100.0,
+    "macro_f1": 1.0,
+    "macro_auc": 1.0,
+    "acc_ci": [
+      99.87211512545248,
+      99.99999999999997
+    ],
+    "f1_per_class": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "confusion": [
+      [
+        1000,
+        0,
+        0
+      ],
+      [
+        0,
+        1000,
+        0
+      ],
+      [
+        0,
+        0,
+        1000
+      ]
+    ]
+  },
+  "epochs_completed": [
+    32,
+    23,
+    30,
+    37,
+    32
+  ]
+}

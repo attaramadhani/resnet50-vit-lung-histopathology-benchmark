@@ -1,0 +1,7 @@
+[WP06f] Computing Macenko stain vectors & HED histograms...
+[WP06f] Extracting ResNet50 ImageNet features for MMD, FID & UMAP...
+/usr/local/lib/python3.12/dist-packages/umap/umap_.py:4160: FutureWarning: compatibility_layout was not set, so UMAP is using the legacy (0.5.x) nearest-neighbor, initialization and layout pipeline. In a future release the default will change to compatibility_layout=False, which uses recursive initialization and the Adam optimizer and produces different embeddings. Set compatibility_layout=True to keep the current behavior and silence this warning, or compatibility_layout=False (or optimizer='adam') to adopt the new behavior now.
+  self.fit(X, y, ensure_all_finite, **kwargs)
+/usr/local/lib/python3.12/dist-packages/umap/umap_.py:3099: UserWarning: n_jobs value -1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(
+[OK] WP06f Domain Shift: MMD^2=0.163341 | FID=76.69

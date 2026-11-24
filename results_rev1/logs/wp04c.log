@@ -1,0 +1,1194 @@
+[Dataset] Resolved LC25000 root directory: 'data/cache_lc25000_256/'
+[Assertions PASSED] Dev: 12,000 (4k/class) | Test: 3,000 (1k/class) | Leakage: 0.0%
+[Execution] Queued 4 scenarios (20 runs): ['resnet50_main', 'resnet50_lr_1e3', 'vit_s_main', 'vit_s_lr_1e3']
+
+===========================================================================
+SCENARIO 1: RESNET50_MAIN (seed=42) | Model: ResNet50 | Opt: Adam | LR: 0.0001 | WD: 0.0001 | Mom: 0.0 | Sched: cosine (warmup=5) | FreezeViT: True | HeadDrop: None
+===========================================================================
+
+--- Fold 0/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=23.51M | Trainable=23.51M
+Epoch 01/50 (lr=2.00e-05, 19.3s) | Train Acc: 88.98% | Val Loss: 0.1107 Acc: 97.04%
+Epoch 02/50 (lr=4.00e-05, 13.0s) | Train Acc: 96.27% | Val Loss: 0.0331 Acc: 99.29%
+Epoch 03/50 (lr=6.00e-05, 12.8s) | Train Acc: 97.83% | Val Loss: 0.0140 Acc: 99.75%
+Epoch 04/50 (lr=8.00e-05, 12.9s) | Train Acc: 98.93% | Val Loss: 0.0052 Acc: 99.96%
+Epoch 05/50 (lr=1.00e-04, 12.8s) | Train Acc: 99.04% | Val Loss: 0.0226 Acc: 99.33%
+Epoch 06/50 (lr=9.99e-05, 12.5s) | Train Acc: 99.57% | Val Loss: 0.0049 Acc: 99.96%
+Epoch 07/50 (lr=9.95e-05, 12.6s) | Train Acc: 99.64% | Val Loss: 0.0147 Acc: 99.71%
+Epoch 08/50 (lr=9.89e-05, 12.1s) | Train Acc: 99.31% | Val Loss: 0.0049 Acc: 99.88%
+Epoch 09/50 (lr=9.81e-05, 12.6s) | Train Acc: 99.56% | Val Loss: 0.0099 Acc: 99.75%
+Epoch 10/50 (lr=9.70e-05, 12.7s) | Train Acc: 99.67% | Val Loss: 0.0043 Acc: 99.83%
+Epoch 11/50 (lr=9.57e-05, 12.6s) | Train Acc: 99.84% | Val Loss: 0.0011 Acc: 99.96%
+Epoch 12/50 (lr=9.41e-05, 12.6s) | Train Acc: 99.62% | Val Loss: 0.0043 Acc: 99.88%
+Epoch 13/50 (lr=9.24e-05, 12.8s) | Train Acc: 99.91% | Val Loss: 0.0012 Acc: 99.96%
+Epoch 14/50 (lr=9.05e-05, 12.9s) | Train Acc: 99.76% | Val Loss: 0.0044 Acc: 99.92%
+Epoch 15/50 (lr=8.83e-05, 12.9s) | Train Acc: 99.65% | Val Loss: 0.0020 Acc: 99.96%
+Epoch 16/50 (lr=8.60e-05, 13.1s) | Train Acc: 99.72% | Val Loss: 0.0016 Acc: 99.96%
+[Early Stop] Triggered at epoch 16 (Best: epoch 11, val_loss: 0.0011)
+
+--- Fold 1/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=23.51M | Trainable=23.51M
+Epoch 01/50 (lr=2.00e-05, 12.4s) | Train Acc: 87.85% | Val Loss: 0.0952 Acc: 97.58%
+Epoch 02/50 (lr=4.00e-05, 12.5s) | Train Acc: 96.33% | Val Loss: 0.0421 Acc: 98.71%
+Epoch 03/50 (lr=6.00e-05, 12.3s) | Train Acc: 98.02% | Val Loss: 0.0231 Acc: 99.54%
+Epoch 04/50 (lr=8.00e-05, 12.4s) | Train Acc: 98.77% | Val Loss: 0.0105 Acc: 99.62%
+Epoch 05/50 (lr=1.00e-04, 12.2s) | Train Acc: 98.85% | Val Loss: 0.0157 Acc: 99.58%
+Epoch 06/50 (lr=9.99e-05, 12.0s) | Train Acc: 99.35% | Val Loss: 0.0068 Acc: 99.88%
+Epoch 07/50 (lr=9.95e-05, 12.4s) | Train Acc: 99.54% | Val Loss: 0.0037 Acc: 99.88%
+Epoch 08/50 (lr=9.89e-05, 12.6s) | Train Acc: 99.51% | Val Loss: 0.0090 Acc: 99.67%
+Epoch 09/50 (lr=9.81e-05, 12.2s) | Train Acc: 99.60% | Val Loss: 0.0024 Acc: 99.96%
+Epoch 10/50 (lr=9.70e-05, 12.3s) | Train Acc: 99.65% | Val Loss: 0.0077 Acc: 99.75%
+Epoch 11/50 (lr=9.57e-05, 12.2s) | Train Acc: 99.86% | Val Loss: 0.0079 Acc: 99.75%
+Epoch 12/50 (lr=9.41e-05, 12.1s) | Train Acc: 99.79% | Val Loss: 0.0025 Acc: 99.96%
+Epoch 13/50 (lr=9.24e-05, 12.3s) | Train Acc: 99.80% | Val Loss: 0.0016 Acc: 99.92%
+Epoch 14/50 (lr=9.05e-05, 12.4s) | Train Acc: 99.73% | Val Loss: 0.0055 Acc: 99.83%
+Epoch 15/50 (lr=8.83e-05, 12.2s) | Train Acc: 99.80% | Val Loss: 0.0092 Acc: 99.75%
+Epoch 16/50 (lr=8.60e-05, 12.1s) | Train Acc: 99.75% | Val Loss: 0.0026 Acc: 99.96%
+Epoch 17/50 (lr=8.35e-05, 12.3s) | Train Acc: 99.93% | Val Loss: 0.0022 Acc: 99.92%
+Epoch 18/50 (lr=8.08e-05, 12.2s) | Train Acc: 99.79% | Val Loss: 0.0006 Acc: 99.96%
+Epoch 19/50 (lr=7.80e-05, 12.8s) | Train Acc: 99.78% | Val Loss: 0.0036 Acc: 99.88%
+Epoch 20/50 (lr=7.50e-05, 12.3s) | Train Acc: 99.88% | Val Loss: 0.0091 Acc: 99.75%
+Epoch 21/50 (lr=7.19e-05, 12.7s) | Train Acc: 99.84% | Val Loss: 0.0047 Acc: 99.83%
+Epoch 22/50 (lr=6.87e-05, 12.2s) | Train Acc: 99.91% | Val Loss: 0.0048 Acc: 99.92%
+Epoch 23/50 (lr=6.55e-05, 12.7s) | Train Acc: 99.95% | Val Loss: 0.0028 Acc: 99.92%
+[Early Stop] Triggered at epoch 23 (Best: epoch 18, val_loss: 0.0006)
+
+--- Fold 2/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=23.51M | Trainable=23.51M
+Epoch 01/50 (lr=2.00e-05, 12.4s) | Train Acc: 88.29% | Val Loss: 0.1042 Acc: 96.92%
+Epoch 02/50 (lr=4.00e-05, 12.3s) | Train Acc: 96.54% | Val Loss: 0.0354 Acc: 99.08%
+Epoch 03/50 (lr=6.00e-05, 12.2s) | Train Acc: 98.10% | Val Loss: 0.0200 Acc: 99.58%
+Epoch 04/50 (lr=8.00e-05, 12.4s) | Train Acc: 99.11% | Val Loss: 0.0123 Acc: 99.50%
+Epoch 05/50 (lr=1.00e-04, 12.3s) | Train Acc: 98.94% | Val Loss: 0.0080 Acc: 99.79%
+Epoch 06/50 (lr=9.99e-05, 12.4s) | Train Acc: 99.40% | Val Loss: 0.0023 Acc: 99.96%
+Epoch 07/50 (lr=9.95e-05, 12.5s) | Train Acc: 99.44% | Val Loss: 0.0039 Acc: 99.83%
+Epoch 08/50 (lr=9.89e-05, 12.1s) | Train Acc: 99.49% | Val Loss: 0.0236 Acc: 99.25%
+Epoch 09/50 (lr=9.81e-05, 12.3s) | Train Acc: 99.62% | Val Loss: 0.0044 Acc: 99.92%
+Epoch 10/50 (lr=9.70e-05, 12.6s) | Train Acc: 99.73% | Val Loss: 0.0021 Acc: 99.96%
+Epoch 11/50 (lr=9.57e-05, 12.3s) | Train Acc: 99.72% | Val Loss: 0.0024 Acc: 99.92%
+Epoch 12/50 (lr=9.41e-05, 12.2s) | Train Acc: 99.70% | Val Loss: 0.0117 Acc: 99.50%
+Epoch 13/50 (lr=9.24e-05, 12.2s) | Train Acc: 99.76% | Val Loss: 0.0029 Acc: 99.96%
+Epoch 14/50 (lr=9.05e-05, 12.4s) | Train Acc: 99.79% | Val Loss: 0.0010 Acc: 100.00%
+Epoch 15/50 (lr=8.83e-05, 12.5s) | Train Acc: 99.82% | Val Loss: 0.0015 Acc: 99.96%
+Epoch 16/50 (lr=8.60e-05, 12.4s) | Train Acc: 99.94% | Val Loss: 0.0006 Acc: 99.96%
+Epoch 17/50 (lr=8.35e-05, 12.5s) | Train Acc: 99.65% | Val Loss: 0.0080 Acc: 99.67%
+Epoch 18/50 (lr=8.08e-05, 12.1s) | Train Acc: 99.88% | Val Loss: 0.0037 Acc: 99.92%
+Epoch 19/50 (lr=7.80e-05, 12.5s) | Train Acc: 99.86% | Val Loss: 0.0018 Acc: 99.92%
+Epoch 20/50 (lr=7.50e-05, 12.4s) | Train Acc: 99.76% | Val Loss: 0.0035 Acc: 99.92%
+Epoch 21/50 (lr=7.19e-05, 12.5s) | Train Acc: 99.95% | Val Loss: 0.0001 Acc: 100.00%
+Epoch 22/50 (lr=6.87e-05, 12.5s) | Train Acc: 99.96% | Val Loss: 0.0001 Acc: 100.00%
+Epoch 23/50 (lr=6.55e-05, 12.7s) | Train Acc: 99.93% | Val Loss: 0.0014 Acc: 99.96%
+Epoch 24/50 (lr=6.21e-05, 12.1s) | Train Acc: 99.99% | Val Loss: 0.0002 Acc: 100.00%
+Epoch 25/50 (lr=5.87e-05, 12.1s) | Train Acc: 99.82% | Val Loss: 0.0006 Acc: 100.00%
+Epoch 26/50 (lr=5.52e-05, 12.1s) | Train Acc: 99.89% | Val Loss: 0.0005 Acc: 100.00%
+[Early Stop] Triggered at epoch 26 (Best: epoch 21, val_loss: 0.0001)
+
+--- Fold 3/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=23.51M | Trainable=23.51M
+Epoch 01/50 (lr=2.00e-05, 12.5s) | Train Acc: 88.41% | Val Loss: 0.0929 Acc: 97.62%
+Epoch 02/50 (lr=4.00e-05, 12.3s) | Train Acc: 96.14% | Val Loss: 0.0431 Acc: 98.46%
+Epoch 03/50 (lr=6.00e-05, 12.5s) | Train Acc: 98.28% | Val Loss: 0.0172 Acc: 99.54%
+Epoch 04/50 (lr=8.00e-05, 12.1s) | Train Acc: 98.89% | Val Loss: 0.0178 Acc: 99.50%
+Epoch 05/50 (lr=1.00e-04, 12.3s) | Train Acc: 98.92% | Val Loss: 0.0225 Acc: 99.38%
+Epoch 06/50 (lr=9.99e-05, 12.4s) | Train Acc: 99.29% | Val Loss: 0.0049 Acc: 99.79%
+Epoch 07/50 (lr=9.95e-05, 12.7s) | Train Acc: 99.49% | Val Loss: 0.0110 Acc: 99.58%
+Epoch 08/50 (lr=9.89e-05, 12.3s) | Train Acc: 99.51% | Val Loss: 0.0022 Acc: 99.92%
+Epoch 09/50 (lr=9.81e-05, 12.5s) | Train Acc: 99.39% | Val Loss: 0.0055 Acc: 99.88%
+Epoch 10/50 (lr=9.70e-05, 12.2s) | Train Acc: 99.82% | Val Loss: 0.0018 Acc: 99.92%
+Epoch 11/50 (lr=9.57e-05, 12.4s) | Train Acc: 99.81% | Val Loss: 0.0061 Acc: 99.92%
+Epoch 12/50 (lr=9.41e-05, 12.2s) | Train Acc: 99.89% | Val Loss: 0.0010 Acc: 99.96%
+Epoch 13/50 (lr=9.24e-05, 12.3s) | Train Acc: 99.72% | Val Loss: 0.0010 Acc: 100.00%
+Epoch 14/50 (lr=9.05e-05, 12.1s) | Train Acc: 99.74% | Val Loss: 0.0038 Acc: 99.79%
+Epoch 15/50 (lr=8.83e-05, 12.1s) | Train Acc: 99.83% | Val Loss: 0.0005 Acc: 100.00%
+Epoch 16/50 (lr=8.60e-05, 12.0s) | Train Acc: 99.82% | Val Loss: 0.0017 Acc: 99.92%
+Epoch 17/50 (lr=8.35e-05, 12.1s) | Train Acc: 99.73% | Val Loss: 0.0059 Acc: 99.75%
+Epoch 18/50 (lr=8.08e-05, 12.2s) | Train Acc: 99.66% | Val Loss: 0.0060 Acc: 99.88%
+Epoch 19/50 (lr=7.80e-05, 12.0s) | Train Acc: 99.72% | Val Loss: 0.0026 Acc: 99.96%
+Epoch 20/50 (lr=7.50e-05, 12.3s) | Train Acc: 99.83% | Val Loss: 0.0889 Acc: 98.83%
+[Early Stop] Triggered at epoch 20 (Best: epoch 15, val_loss: 0.0005)
+
+--- Fold 4/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=23.51M | Trainable=23.51M
+Epoch 01/50 (lr=2.00e-05, 12.3s) | Train Acc: 88.36% | Val Loss: 0.1090 Acc: 96.38%
+Epoch 02/50 (lr=4.00e-05, 12.2s) | Train Acc: 96.04% | Val Loss: 0.0553 Acc: 98.08%
+Epoch 03/50 (lr=6.00e-05, 12.3s) | Train Acc: 98.42% | Val Loss: 0.0384 Acc: 98.71%
+Epoch 04/50 (lr=8.00e-05, 12.1s) | Train Acc: 98.91% | Val Loss: 0.0078 Acc: 99.79%
+Epoch 05/50 (lr=1.00e-04, 12.2s) | Train Acc: 98.86% | Val Loss: 0.0119 Acc: 99.71%
+Epoch 06/50 (lr=9.99e-05, 12.0s) | Train Acc: 99.36% | Val Loss: 0.0116 Acc: 99.50%
+Epoch 07/50 (lr=9.95e-05, 11.8s) | Train Acc: 99.56% | Val Loss: 0.0016 Acc: 99.92%
+Epoch 08/50 (lr=9.89e-05, 12.0s) | Train Acc: 99.46% | Val Loss: 0.0084 Acc: 99.67%
+Epoch 09/50 (lr=9.81e-05, 12.2s) | Train Acc: 99.67% | Val Loss: 0.0009 Acc: 100.00%
+Epoch 10/50 (lr=9.70e-05, 12.1s) | Train Acc: 99.62% | Val Loss: 0.0065 Acc: 99.79%
+Epoch 11/50 (lr=9.57e-05, 12.2s) | Train Acc: 99.66% | Val Loss: 0.0003 Acc: 100.00%
+Epoch 12/50 (lr=9.41e-05, 12.3s) | Train Acc: 99.84% | Val Loss: 0.0022 Acc: 99.96%
+Epoch 13/50 (lr=9.24e-05, 12.2s) | Train Acc: 99.58% | Val Loss: 0.0092 Acc: 99.71%
+Epoch 14/50 (lr=9.05e-05, 12.0s) | Train Acc: 99.84% | Val Loss: 0.0046 Acc: 99.88%
+Epoch 15/50 (lr=8.83e-05, 12.1s) | Train Acc: 99.85% | Val Loss: 0.0121 Acc: 99.71%
+Epoch 16/50 (lr=8.60e-05, 12.1s) | Train Acc: 99.65% | Val Loss: 0.0188 Acc: 99.38%
+[Early Stop] Triggered at epoch 16 (Best: epoch 11, val_loss: 0.0003)
+
+[Evaluating on 3,000 Independent Test Images]...
+
+[COMPLETED SCENARIO 1: resnet50_main]
+  CV Val Acc (5x 2,400 val imgs) : 99.98 +/- 0.02%
+  Ensemble Test Acc (3,000 imgs) : 100.00% [95% CI: 99.87-100.00%]
+  Macro F1: 1.0000 | Macro ROC-AUC: 1.000000
+
+===========================================================================
+SCENARIO 3: RESNET50_LR_1E3 (seed=42) | Model: ResNet50 | Opt: Adam | LR: 0.001 | WD: 0.0001 | Mom: 0.0 | Sched: cosine (warmup=5) | FreezeViT: True | HeadDrop: None
+===========================================================================
+
+--- Fold 0/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=23.51M | Trainable=23.51M
+Epoch 01/50 (lr=2.00e-04, 12.2s) | Train Acc: 94.88% | Val Loss: 0.0394 Acc: 98.50%
+Epoch 02/50 (lr=4.00e-04, 12.0s) | Train Acc: 96.78% | Val Loss: 0.0324 Acc: 98.67%
+Epoch 03/50 (lr=6.00e-04, 12.2s) | Train Acc: 96.92% | Val Loss: 0.0683 Acc: 97.71%
+Epoch 04/50 (lr=8.00e-04, 12.5s) | Train Acc: 96.88% | Val Loss: 0.0868 Acc: 96.67%
+Epoch 05/50 (lr=1.00e-03, 12.1s) | Train Acc: 96.69% | Val Loss: 0.0833 Acc: 97.38%
+Epoch 06/50 (lr=9.99e-04, 12.2s) | Train Acc: 97.45% | Val Loss: 0.0716 Acc: 97.54%
+Epoch 07/50 (lr=9.95e-04, 12.2s) | Train Acc: 97.03% | Val Loss: 0.0797 Acc: 97.38%
+[Early Stop] Triggered at epoch 7 (Best: epoch 2, val_loss: 0.0324)
+
+--- Fold 1/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=23.51M | Trainable=23.51M
+Epoch 01/50 (lr=2.00e-04, 12.3s) | Train Acc: 94.59% | Val Loss: 0.2630 Acc: 90.46%
+Epoch 02/50 (lr=4.00e-04, 12.3s) | Train Acc: 96.98% | Val Loss: 0.1181 Acc: 94.75%
+Epoch 03/50 (lr=6.00e-04, 12.4s) | Train Acc: 97.09% | Val Loss: 0.1557 Acc: 94.75%
+Epoch 04/50 (lr=8.00e-04, 12.2s) | Train Acc: 97.17% | Val Loss: 0.1102 Acc: 95.33%
+Epoch 05/50 (lr=1.00e-03, 12.3s) | Train Acc: 96.47% | Val Loss: 0.1077 Acc: 96.33%
+Epoch 06/50 (lr=9.99e-04, 12.2s) | Train Acc: 96.76% | Val Loss: 0.0501 Acc: 98.08%
+Epoch 07/50 (lr=9.95e-04, 12.1s) | Train Acc: 98.14% | Val Loss: 0.2048 Acc: 93.08%
+Epoch 08/50 (lr=9.89e-04, 12.1s) | Train Acc: 97.31% | Val Loss: 0.1560 Acc: 94.08%
+Epoch 09/50 (lr=9.81e-04, 12.5s) | Train Acc: 97.66% | Val Loss: 0.0322 Acc: 98.83%
+Epoch 10/50 (lr=9.70e-04, 12.4s) | Train Acc: 97.47% | Val Loss: 0.4206 Acc: 84.54%
+Epoch 11/50 (lr=9.57e-04, 12.3s) | Train Acc: 97.53% | Val Loss: 0.0275 Acc: 99.17%
+Epoch 12/50 (lr=9.41e-04, 12.0s) | Train Acc: 97.88% | Val Loss: 0.1944 Acc: 94.25%
+Epoch 13/50 (lr=9.24e-04, 12.1s) | Train Acc: 98.05% | Val Loss: 0.1021 Acc: 96.08%
+Epoch 14/50 (lr=9.05e-04, 12.0s) | Train Acc: 97.80% | Val Loss: 0.0362 Acc: 98.38%
+Epoch 15/50 (lr=8.83e-04, 12.2s) | Train Acc: 98.43% | Val Loss: 0.0873 Acc: 97.17%
+Epoch 16/50 (lr=8.60e-04, 12.4s) | Train Acc: 98.10% | Val Loss: 0.0594 Acc: 97.83%
+[Early Stop] Triggered at epoch 16 (Best: epoch 11, val_loss: 0.0275)
+
+--- Fold 2/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=23.51M | Trainable=23.51M
+Epoch 01/50 (lr=2.00e-04, 12.2s) | Train Acc: 94.88% | Val Loss: 0.0609 Acc: 97.21%
+Epoch 02/50 (lr=4.00e-04, 11.9s) | Train Acc: 96.86% | Val Loss: 0.0469 Acc: 98.04%
+Epoch 03/50 (lr=6.00e-04, 12.0s) | Train Acc: 97.11% | Val Loss: 0.0244 Acc: 99.38%
+Epoch 04/50 (lr=8.00e-04, 12.2s) | Train Acc: 97.19% | Val Loss: 0.0536 Acc: 97.92%
+Epoch 05/50 (lr=1.00e-03, 12.3s) | Train Acc: 96.24% | Val Loss: 0.0335 Acc: 98.58%
+Epoch 06/50 (lr=9.99e-04, 12.3s) | Train Acc: 98.06% | Val Loss: 0.0618 Acc: 97.71%
+Epoch 07/50 (lr=9.95e-04, 12.1s) | Train Acc: 96.85% | Val Loss: 0.0334 Acc: 98.58%
+Epoch 08/50 (lr=9.89e-04, 11.9s) | Train Acc: 97.51% | Val Loss: 0.1098 Acc: 95.46%
+[Early Stop] Triggered at epoch 8 (Best: epoch 3, val_loss: 0.0244)
+
+--- Fold 3/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=23.51M | Trainable=23.51M
+Epoch 01/50 (lr=2.00e-04, 12.2s) | Train Acc: 94.50% | Val Loss: 0.0483 Acc: 98.38%
+Epoch 02/50 (lr=4.00e-04, 12.3s) | Train Acc: 96.40% | Val Loss: 0.0451 Acc: 98.88%
+Epoch 03/50 (lr=6.00e-04, 12.2s) | Train Acc: 97.15% | Val Loss: 0.1526 Acc: 94.79%
+Epoch 04/50 (lr=8.00e-04, 12.4s) | Train Acc: 96.54% | Val Loss: 0.0443 Acc: 98.42%
+Epoch 05/50 (lr=1.00e-03, 12.2s) | Train Acc: 96.78% | Val Loss: 0.0424 Acc: 98.42%
+Epoch 06/50 (lr=9.99e-04, 12.0s) | Train Acc: 97.56% | Val Loss: 0.0917 Acc: 96.79%
+Epoch 07/50 (lr=9.95e-04, 12.0s) | Train Acc: 97.18% | Val Loss: 0.0256 Acc: 99.17%
+Epoch 08/50 (lr=9.89e-04, 12.3s) | Train Acc: 97.73% | Val Loss: 0.0451 Acc: 98.33%
+Epoch 09/50 (lr=9.81e-04, 12.2s) | Train Acc: 97.46% | Val Loss: 0.1350 Acc: 95.42%
+Epoch 10/50 (lr=9.70e-04, 12.3s) | Train Acc: 97.57% | Val Loss: 0.0262 Acc: 99.04%
+Epoch 11/50 (lr=9.57e-04, 12.0s) | Train Acc: 97.85% | Val Loss: 0.0376 Acc: 98.58%
+Epoch 12/50 (lr=9.41e-04, 12.2s) | Train Acc: 98.02% | Val Loss: 0.1011 Acc: 96.50%
+[Early Stop] Triggered at epoch 12 (Best: epoch 7, val_loss: 0.0256)
+
+--- Fold 4/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=23.51M | Trainable=23.51M
+Epoch 01/50 (lr=2.00e-04, 12.1s) | Train Acc: 94.98% | Val Loss: 0.0285 Acc: 99.25%
+Epoch 02/50 (lr=4.00e-04, 12.2s) | Train Acc: 97.21% | Val Loss: 0.0507 Acc: 98.58%
+Epoch 03/50 (lr=6.00e-04, 12.2s) | Train Acc: 97.31% | Val Loss: 0.0878 Acc: 96.71%
+Epoch 04/50 (lr=8.00e-04, 12.1s) | Train Acc: 96.39% | Val Loss: 0.0853 Acc: 97.04%
+Epoch 05/50 (lr=1.00e-03, 12.1s) | Train Acc: 97.18% | Val Loss: 0.1144 Acc: 95.04%
+Epoch 06/50 (lr=9.99e-04, 12.1s) | Train Acc: 97.11% | Val Loss: 0.0451 Acc: 98.58%
+[Early Stop] Triggered at epoch 6 (Best: epoch 1, val_loss: 0.0285)
+
+[Evaluating on 3,000 Independent Test Images]...
+
+[COMPLETED SCENARIO 3: resnet50_lr_1e3]
+  CV Val Acc (5x 2,400 val imgs) : 99.13 +/- 0.24%
+  Ensemble Test Acc (3,000 imgs) : 99.67% [95% CI: 99.39-99.82%]
+  Macro F1: 0.9967 | Macro ROC-AUC: 0.999969
+
+===========================================================================
+SCENARIO 6: VIT_S_MAIN (seed=42) | Model: ViT-S/16 | Opt: AdamW | LR: 0.0001 | WD: 0.0001 | Mom: 0.0 | Sched: cosine (warmup=5) | FreezeViT: True | HeadDrop: None
+===========================================================================
+
+--- Fold 0/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=21.67M | Trainable=18.12M
+Epoch 01/50 (lr=2.00e-05, 12.3s) | Train Acc: 95.20% | Val Loss: 0.0359 Acc: 98.75%
+Epoch 02/50 (lr=4.00e-05, 12.1s) | Train Acc: 98.17% | Val Loss: 0.0084 Acc: 99.75%
+Epoch 03/50 (lr=6.00e-05, 12.0s) | Train Acc: 98.29% | Val Loss: 0.0335 Acc: 98.88%
+Epoch 04/50 (lr=8.00e-05, 11.9s) | Train Acc: 99.16% | Val Loss: 0.0259 Acc: 98.88%
+Epoch 05/50 (lr=1.00e-04, 11.8s) | Train Acc: 98.70% | Val Loss: 0.0087 Acc: 99.67%
+Epoch 06/50 (lr=9.99e-05, 12.3s) | Train Acc: 99.12% | Val Loss: 0.0073 Acc: 99.67%
+Epoch 07/50 (lr=9.95e-05, 12.2s) | Train Acc: 99.57% | Val Loss: 0.0046 Acc: 99.71%
+Epoch 08/50 (lr=9.89e-05, 12.3s) | Train Acc: 99.29% | Val Loss: 0.0184 Acc: 99.33%
+Epoch 09/50 (lr=9.81e-05, 11.9s) | Train Acc: 99.48% | Val Loss: 0.0013 Acc: 99.92%
+Epoch 10/50 (lr=9.70e-05, 11.8s) | Train Acc: 99.81% | Val Loss: 0.0044 Acc: 99.79%
+Epoch 11/50 (lr=9.57e-05, 12.1s) | Train Acc: 99.61% | Val Loss: 0.0165 Acc: 99.33%
+Epoch 12/50 (lr=9.41e-05, 12.0s) | Train Acc: 99.48% | Val Loss: 0.0141 Acc: 99.54%
+Epoch 13/50 (lr=9.24e-05, 12.0s) | Train Acc: 99.50% | Val Loss: 0.0029 Acc: 99.92%
+Epoch 14/50 (lr=9.05e-05, 11.9s) | Train Acc: 99.96% | Val Loss: 0.0000 Acc: 100.00%
+Epoch 15/50 (lr=8.83e-05, 12.2s) | Train Acc: 99.62% | Val Loss: 0.0009 Acc: 99.96%
+Epoch 16/50 (lr=8.60e-05, 11.8s) | Train Acc: 99.59% | Val Loss: 0.0005 Acc: 100.00%
+Epoch 17/50 (lr=8.35e-05, 11.9s) | Train Acc: 99.89% | Val Loss: 0.0015 Acc: 99.88%
+Epoch 18/50 (lr=8.08e-05, 12.2s) | Train Acc: 99.38% | Val Loss: 0.0112 Acc: 99.62%
+Epoch 19/50 (lr=7.80e-05, 11.9s) | Train Acc: 99.92% | Val Loss: 0.0001 Acc: 100.00%
+[Early Stop] Triggered at epoch 19 (Best: epoch 14, val_loss: 0.0000)
+
+--- Fold 1/4: Training (Train: 9,600, Val: 2,400) ---
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+  Params: Total=21.67M | Trainable=18.12M
+Epoch 01/50 (lr=2.00e-05, 11.8s) | Train Acc: 95.34% | Val Loss: 0.0556 Acc: 97.88%
+Epoch 02/50 (lr=4.00e-05, 11.8s) | Train Acc: 97.76% | Val Loss: 0.0532 Acc: 98.33%
+Epoch 03/50 (lr=6.00e-05, 11.9s) | Train Acc: 98.70% | Val Loss: 0.0050 Acc: 99.92%
+Epoch 04/50 (lr=8.00e-05, 11.8s) | Train Acc: 98.66% | Val Loss: 0.0230 Acc: 99.29%
+Epoch 05/50 (lr=1.00e-04, 12.0s) | Train Acc: 98.96% | Val Loss: 0.0107 Acc: 99.58%
+Epoch 06/50 (lr=9.99e-05, 12.0s) | Train Acc: 99.52% | Val Loss: 0.0093 Acc: 99.50%
+Epoch 07/50 (lr=9.95e-05, 12.2s) | Train Acc: 99.23% | Val Loss: 0.0300 Acc: 99.25%
+Epoch 08/50 (lr=9.89e-05, 12.0s) | Train Acc: 99.31% | Val Loss: 0.0070 Acc: 99.67%
+[Early Stop] Triggered at epoch 8 (Best: epoch 3, val_loss: 0.0050)
+
+--- Fold 2/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=21.67M | Trainable=18.12M
+Epoch 01/50 (lr=2.00e-05, 12.1s) | Train Acc: 94.40% | Val Loss: 0.0497 Acc: 98.12%
+Epoch 02/50 (lr=4.00e-05, 12.4s) | Train Acc: 98.15% | Val Loss: 0.0484 Acc: 98.17%
+Epoch 03/50 (lr=6.00e-05, 12.5s) | Train Acc: 98.72% | Val Loss: 0.0747 Acc: 97.17%
+Epoch 04/50 (lr=8.00e-05, 12.3s) | Train Acc: 98.79% | Val Loss: 0.0117 Acc: 99.50%
+Epoch 05/50 (lr=1.00e-04, 11.8s) | Train Acc: 98.83% | Val Loss: 0.0069 Acc: 99.71%
+Epoch 06/50 (lr=9.99e-05, 11.9s) | Train Acc: 99.23% | Val Loss: 0.0043 Acc: 99.83%
+Epoch 07/50 (lr=9.95e-05, 12.2s) | Train Acc: 99.48% | Val Loss: 0.0100 Acc: 99.58%
+Epoch 08/50 (lr=9.89e-05, 12.0s) | Train Acc: 99.57% | Val Loss: 0.0016 Acc: 99.96%
+Epoch 09/50 (lr=9.81e-05, 11.8s) | Train Acc: 99.62% | Val Loss: 0.0034 Acc: 99.92%
+Epoch 10/50 (lr=9.70e-05, 11.9s) | Train Acc: 99.65% | Val Loss: 0.0028 Acc: 99.88%
+Epoch 11/50 (lr=9.57e-05, 12.2s) | Train Acc: 99.39% | Val Loss: 0.0126 Acc: 99.54%
+Epoch 12/50 (lr=9.41e-05, 12.3s) | Train Acc: 99.72% | Val Loss: 0.0018 Acc: 99.96%
+Epoch 13/50 (lr=9.24e-05, 12.6s) | Train Acc: 99.66% | Val Loss: 0.1268 Acc: 96.50%
+[Early Stop] Triggered at epoch 13 (Best: epoch 8, val_loss: 0.0016)
+
+--- Fold 3/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=21.67M | Trainable=18.12M
+Epoch 01/50 (lr=2.00e-05, 12.4s) | Train Acc: 95.31% | Val Loss: 0.0516 Acc: 98.08%
+Epoch 02/50 (lr=4.00e-05, 12.2s) | Train Acc: 98.12% | Val Loss: 0.0189 Acc: 99.21%
+Epoch 03/50 (lr=6.00e-05, 12.0s) | Train Acc: 98.62% | Val Loss: 0.0086 Acc: 99.75%
+Epoch 04/50 (lr=8.00e-05, 12.2s) | Train Acc: 98.77% | Val Loss: 0.0573 Acc: 98.29%
+Epoch 05/50 (lr=1.00e-04, 12.2s) | Train Acc: 98.73% | Val Loss: 0.0073 Acc: 99.79%
+Epoch 06/50 (lr=9.99e-05, 12.5s) | Train Acc: 99.41% | Val Loss: 0.0068 Acc: 100.00%
+Epoch 07/50 (lr=9.95e-05, 12.2s) | Train Acc: 99.50% | Val Loss: 0.0013 Acc: 100.00%
+Epoch 08/50 (lr=9.89e-05, 11.8s) | Train Acc: 99.56% | Val Loss: 0.0089 Acc: 99.75%
+Epoch 09/50 (lr=9.81e-05, 12.1s) | Train Acc: 99.35% | Val Loss: 0.0282 Acc: 99.17%
+Epoch 10/50 (lr=9.70e-05, 12.1s) | Train Acc: 99.56% | Val Loss: 0.0007 Acc: 99.96%
+Epoch 11/50 (lr=9.57e-05, 12.6s) | Train Acc: 99.69% | Val Loss: 0.0091 Acc: 99.62%
+Epoch 12/50 (lr=9.41e-05, 12.5s) | Train Acc: 99.53% | Val Loss: 0.0031 Acc: 99.88%
+Epoch 13/50 (lr=9.24e-05, 12.2s) | Train Acc: 99.57% | Val Loss: 0.0070 Acc: 99.83%
+Epoch 14/50 (lr=9.05e-05, 12.1s) | Train Acc: 99.79% | Val Loss: 0.0012 Acc: 100.00%
+Epoch 15/50 (lr=8.83e-05, 11.9s) | Train Acc: 99.74% | Val Loss: 0.0006 Acc: 100.00%
+Epoch 16/50 (lr=8.60e-05, 11.8s) | Train Acc: 99.46% | Val Loss: 0.0098 Acc: 99.54%
+Epoch 17/50 (lr=8.35e-05, 12.0s) | Train Acc: 99.82% | Val Loss: 0.0014 Acc: 99.96%
+Epoch 18/50 (lr=8.08e-05, 12.4s) | Train Acc: 99.67% | Val Loss: 0.0062 Acc: 99.75%
+Epoch 19/50 (lr=7.80e-05, 12.2s) | Train Acc: 99.74% | Val Loss: 0.0081 Acc: 99.62%
+Epoch 20/50 (lr=7.50e-05, 12.2s) | Train Acc: 99.77% | Val Loss: 0.0001 Acc: 100.00%
+Epoch 21/50 (lr=7.19e-05, 11.8s) | Train Acc: 99.95% | Val Loss: 0.0012 Acc: 99.96%
+Epoch 22/50 (lr=6.87e-05, 12.1s) | Train Acc: 99.76% | Val Loss: 0.0002 Acc: 100.00%
+Epoch 23/50 (lr=6.55e-05, 12.0s) | Train Acc: 99.98% | Val Loss: 0.0000 Acc: 100.00%
+Epoch 24/50 (lr=6.21e-05, 12.4s) | Train Acc: 99.72% | Val Loss: 0.0001 Acc: 100.00%
+Epoch 25/50 (lr=5.87e-05, 12.1s) | Train Acc: 100.00% | Val Loss: 0.0000 Acc: 100.00%
+Epoch 26/50 (lr=5.52e-05, 12.0s) | Train Acc: 100.00% | Val Loss: 0.0000 Acc: 100.00%
+Epoch 27/50 (lr=5.17e-05, 12.1s) | Train Acc: 100.00% | Val Loss: 0.0000 Acc: 100.00%
+Epoch 28/50 (lr=4.83e-05, 12.7s) | Train Acc: 100.00% | Val Loss: 0.0000 Acc: 100.00%
+Epoch 29/50 (lr=4.48e-05, 12.1s) | Train Acc: 100.00% | Val Loss: 0.0000 Acc: 100.00%
+Epoch 30/50 (lr=4.13e-05, 12.1s) | Train Acc: 100.00% | Val Loss: 0.0000 Acc: 100.00%
+Epoch 31/50 (lr=3.79e-05, 12.0s) | Train Acc: 100.00% | Val Loss: 0.0000 Acc: 100.00%
+Epoch 32/50 (lr=3.45e-05, 12.2s) | Train Acc: 100.00% | Val Loss: 0.0000 Acc: 100.00%
+Epoch 33/50 (lr=3.13e-05, 12.4s) | Train Acc: 99.97% | Val Loss: 0.0017 Acc: 99.92%
+Epoch 34/50 (lr=2.81e-05, 12.5s) | Train Acc: 99.91% | Val Loss: 0.0001 Acc: 100.00%
+Epoch 35/50 (lr=2.50e-05, 12.2s) | Train Acc: 99.95% | Val Loss: 0.0011 Acc: 99.96%
+Epoch 36/50 (lr=2.20e-05, 12.0s) | Train Acc: 99.95% | Val Loss: 0.0003 Acc: 100.00%
+[Early Stop] Triggered at epoch 36 (Best: epoch 31, val_loss: 0.0000)
+
+--- Fold 4/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=21.67M | Trainable=18.12M
+Epoch 01/50 (lr=2.00e-05, 12.0s) | Train Acc: 94.86% | Val Loss: 0.0529 Acc: 98.21%
+Epoch 02/50 (lr=4.00e-05, 12.3s) | Train Acc: 97.72% | Val Loss: 0.0249 Acc: 99.12%
+Epoch 03/50 (lr=6.00e-05, 12.4s) | Train Acc: 98.82% | Val Loss: 0.0086 Acc: 99.62%
+Epoch 04/50 (lr=8.00e-05, 12.1s) | Train Acc: 98.89% | Val Loss: 0.0073 Acc: 99.71%
+Epoch 05/50 (lr=1.00e-04, 12.2s) | Train Acc: 98.96% | Val Loss: 0.0114 Acc: 99.62%
+Epoch 06/50 (lr=9.99e-05, 12.1s) | Train Acc: 99.35% | Val Loss: 0.0075 Acc: 99.88%
+Epoch 07/50 (lr=9.95e-05, 12.1s) | Train Acc: 99.38% | Val Loss: 0.0040 Acc: 99.88%
+Epoch 08/50 (lr=9.89e-05, 11.9s) | Train Acc: 99.44% | Val Loss: 0.0087 Acc: 99.79%
+Epoch 09/50 (lr=9.81e-05, 12.0s) | Train Acc: 99.61% | Val Loss: 0.0038 Acc: 99.88%
+Epoch 10/50 (lr=9.70e-05, 12.2s) | Train Acc: 99.53% | Val Loss: 0.0121 Acc: 99.50%
+Epoch 11/50 (lr=9.57e-05, 11.9s) | Train Acc: 99.61% | Val Loss: 0.0011 Acc: 100.00%
+Epoch 12/50 (lr=9.41e-05, 11.8s) | Train Acc: 99.66% | Val Loss: 0.0422 Acc: 98.33%
+Epoch 13/50 (lr=9.24e-05, 12.4s) | Train Acc: 99.48% | Val Loss: 0.0050 Acc: 99.83%
+Epoch 14/50 (lr=9.05e-05, 12.0s) | Train Acc: 99.96% | Val Loss: 0.0005 Acc: 99.96%
+Epoch 15/50 (lr=8.83e-05, 11.9s) | Train Acc: 99.86% | Val Loss: 0.0159 Acc: 99.50%
+Epoch 16/50 (lr=8.60e-05, 11.7s) | Train Acc: 99.36% | Val Loss: 0.0032 Acc: 99.96%
+Epoch 17/50 (lr=8.35e-05, 11.8s) | Train Acc: 99.32% | Val Loss: 0.0036 Acc: 99.96%
+Epoch 18/50 (lr=8.08e-05, 11.7s) | Train Acc: 99.95% | Val Loss: 0.0022 Acc: 99.96%
+Epoch 19/50 (lr=7.80e-05, 12.2s) | Train Acc: 99.62% | Val Loss: 0.0019 Acc: 99.96%
+[Early Stop] Triggered at epoch 19 (Best: epoch 14, val_loss: 0.0005)
+
+[Evaluating on 3,000 Independent Test Images]...
+
+[COMPLETED SCENARIO 6: vit_s_main]
+  CV Val Acc (5x 2,400 val imgs) : 99.97 +/- 0.03%
+  Ensemble Test Acc (3,000 imgs) : 100.00% [95% CI: 99.87-100.00%]
+  Macro F1: 1.0000 | Macro ROC-AUC: 1.000000
+
+===========================================================================
+SCENARIO 8: VIT_S_LR_1E3 (seed=42) | Model: ViT-S/16 | Opt: AdamW | LR: 0.001 | WD: 0.0001 | Mom: 0.0 | Sched: cosine (warmup=5) | FreezeViT: True | HeadDrop: None
+===========================================================================
+
+--- Fold 0/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=21.67M | Trainable=18.12M
+Epoch 01/50 (lr=2.00e-04, 11.9s) | Train Acc: 93.27% | Val Loss: 0.0359 Acc: 98.50%
+Epoch 02/50 (lr=4.00e-04, 11.8s) | Train Acc: 94.91% | Val Loss: 0.0734 Acc: 97.08%
+Epoch 03/50 (lr=6.00e-04, 11.8s) | Train Acc: 92.47% | Val Loss: 0.1689 Acc: 93.96%
+Epoch 04/50 (lr=8.00e-04, 12.0s) | Train Acc: 93.40% | Val Loss: 0.1802 Acc: 92.12%
+Epoch 05/50 (lr=1.00e-03, 11.8s) | Train Acc: 93.78% | Val Loss: 0.1860 Acc: 90.83%
+Epoch 06/50 (lr=9.99e-04, 11.7s) | Train Acc: 94.60% | Val Loss: 0.2029 Acc: 91.96%
+[Early Stop] Triggered at epoch 6 (Best: epoch 1, val_loss: 0.0359)
+
+--- Fold 1/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=21.67M | Trainable=18.12M
+Epoch 01/50 (lr=2.00e-04, 12.0s) | Train Acc: 92.69% | Val Loss: 0.1616 Acc: 94.08%
+Epoch 02/50 (lr=4.00e-04, 11.7s) | Train Acc: 94.04% | Val Loss: 0.0850 Acc: 96.50%
+Epoch 03/50 (lr=6.00e-04, 11.7s) | Train Acc: 94.73% | Val Loss: 0.0761 Acc: 96.83%
+Epoch 04/50 (lr=8.00e-04, 11.7s) | Train Acc: 95.06% | Val Loss: 0.1025 Acc: 96.25%
+Epoch 05/50 (lr=1.00e-03, 11.8s) | Train Acc: 94.40% | Val Loss: 0.0775 Acc: 97.04%
+Epoch 06/50 (lr=9.99e-04, 12.1s) | Train Acc: 93.93% | Val Loss: 0.1346 Acc: 94.67%
+Epoch 07/50 (lr=9.95e-04, 11.8s) | Train Acc: 94.49% | Val Loss: 0.1428 Acc: 94.62%
+Epoch 08/50 (lr=9.89e-04, 11.9s) | Train Acc: 95.31% | Val Loss: 0.2851 Acc: 89.62%
+[Early Stop] Triggered at epoch 8 (Best: epoch 3, val_loss: 0.0761)
+
+--- Fold 2/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=21.67M | Trainable=18.12M
+Epoch 01/50 (lr=2.00e-04, 12.0s) | Train Acc: 91.31% | Val Loss: 0.0852 Acc: 97.21%
+Epoch 02/50 (lr=4.00e-04, 12.0s) | Train Acc: 93.89% | Val Loss: 0.0952 Acc: 95.25%
+Epoch 03/50 (lr=6.00e-04, 12.0s) | Train Acc: 93.88% | Val Loss: 0.2124 Acc: 91.25%
+Epoch 04/50 (lr=8.00e-04, 11.8s) | Train Acc: 94.10% | Val Loss: 0.0821 Acc: 96.42%
+Epoch 05/50 (lr=1.00e-03, 12.2s) | Train Acc: 93.23% | Val Loss: 0.1462 Acc: 94.17%
+Epoch 06/50 (lr=9.99e-04, 12.1s) | Train Acc: 92.91% | Val Loss: 0.1770 Acc: 92.12%
+Epoch 07/50 (lr=9.95e-04, 12.1s) | Train Acc: 94.95% | Val Loss: 0.1664 Acc: 93.33%
+Epoch 08/50 (lr=9.89e-04, 12.0s) | Train Acc: 94.67% | Val Loss: 0.1366 Acc: 94.71%
+Epoch 09/50 (lr=9.81e-04, 11.8s) | Train Acc: 94.25% | Val Loss: 0.1166 Acc: 94.96%
+[Early Stop] Triggered at epoch 9 (Best: epoch 4, val_loss: 0.0821)
+
+--- Fold 3/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=21.67M | Trainable=18.12M
+Epoch 01/50 (lr=2.00e-04, 12.6s) | Train Acc: 93.57% | Val Loss: 0.0508 Acc: 98.00%
+Epoch 02/50 (lr=4.00e-04, 11.9s) | Train Acc: 95.17% | Val Loss: 0.0831 Acc: 97.42%
+Epoch 03/50 (lr=6.00e-04, 12.0s) | Train Acc: 94.66% | Val Loss: 0.1268 Acc: 94.88%
+Epoch 04/50 (lr=8.00e-04, 12.4s) | Train Acc: 93.93% | Val Loss: 0.1020 Acc: 95.96%
+Epoch 05/50 (lr=1.00e-03, 12.1s) | Train Acc: 94.44% | Val Loss: 0.1225 Acc: 95.75%
+Epoch 06/50 (lr=9.99e-04, 12.5s) | Train Acc: 94.02% | Val Loss: 0.1158 Acc: 95.79%
+[Early Stop] Triggered at epoch 6 (Best: epoch 1, val_loss: 0.0508)
+
+--- Fold 4/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=21.67M | Trainable=18.12M
+Epoch 01/50 (lr=2.00e-04, 12.7s) | Train Acc: 92.79% | Val Loss: 0.0317 Acc: 98.67%
+Epoch 02/50 (lr=4.00e-04, 12.6s) | Train Acc: 94.31% | Val Loss: 0.0760 Acc: 97.25%
+Epoch 03/50 (lr=6.00e-04, 12.3s) | Train Acc: 94.51% | Val Loss: 0.0978 Acc: 96.00%
+Epoch 04/50 (lr=8.00e-04, 12.3s) | Train Acc: 93.65% | Val Loss: 0.1204 Acc: 94.96%
+Epoch 05/50 (lr=1.00e-03, 12.3s) | Train Acc: 94.05% | Val Loss: 0.1038 Acc: 96.29%
+Epoch 06/50 (lr=9.99e-04, 12.2s) | Train Acc: 94.75% | Val Loss: 0.1812 Acc: 92.25%
+[Early Stop] Triggered at epoch 6 (Best: epoch 1, val_loss: 0.0317)
+
+[Evaluating on 3,000 Independent Test Images]...
+
+[COMPLETED SCENARIO 8: vit_s_lr_1e3]
+  CV Val Acc (5x 2,400 val imgs) : 97.68 +/- 0.90%
+  Ensemble Test Acc (3,000 imgs) : 98.90% [95% CI: 98.46-99.22%]
+  Macro F1: 0.9890 | Macro ROC-AUC: 0.999687
+
+[OK] All scenario training routines completed!
+[Dataset] Resolved LC25000 root directory: 'data/cache_lc25000_256/'
+[Assertions PASSED] Dev: 12,000 (4k/class) | Test: 3,000 (1k/class) | Leakage: 0.0%
+[Execution] Queued 4 scenarios (20 runs): ['resnet50_main', 'resnet50_lr_1e3', 'vit_s_main', 'vit_s_lr_1e3']
+
+===========================================================================
+SCENARIO 1: RESNET50_MAIN (seed=1) | Model: ResNet50 | Opt: Adam | LR: 0.0001 | WD: 0.0001 | Mom: 0.0 | Sched: cosine (warmup=5) | FreezeViT: True | HeadDrop: None
+===========================================================================
+
+--- Fold 0/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=23.51M | Trainable=23.51M
+Epoch 01/50 (lr=2.00e-05, 13.1s) | Train Acc: 86.45% | Val Loss: 0.1106 Acc: 96.33%
+Epoch 02/50 (lr=4.00e-05, 12.7s) | Train Acc: 96.50% | Val Loss: 0.0453 Acc: 98.79%
+Epoch 03/50 (lr=6.00e-05, 12.8s) | Train Acc: 98.33% | Val Loss: 0.0207 Acc: 99.50%
+Epoch 04/50 (lr=8.00e-05, 12.5s) | Train Acc: 98.95% | Val Loss: 0.0169 Acc: 99.50%
+Epoch 05/50 (lr=1.00e-04, 12.0s) | Train Acc: 99.21% | Val Loss: 0.0101 Acc: 99.71%
+Epoch 06/50 (lr=9.99e-05, 12.3s) | Train Acc: 99.49% | Val Loss: 0.0222 Acc: 99.33%
+Epoch 07/50 (lr=9.95e-05, 12.2s) | Train Acc: 99.40% | Val Loss: 0.0039 Acc: 99.92%
+Epoch 08/50 (lr=9.89e-05, 12.6s) | Train Acc: 99.59% | Val Loss: 0.0013 Acc: 99.96%
+Epoch 09/50 (lr=9.81e-05, 12.5s) | Train Acc: 99.77% | Val Loss: 0.0023 Acc: 99.92%
+Epoch 10/50 (lr=9.70e-05, 12.6s) | Train Acc: 99.73% | Val Loss: 0.0029 Acc: 99.88%
+Epoch 11/50 (lr=9.57e-05, 12.5s) | Train Acc: 99.35% | Val Loss: 0.0035 Acc: 99.92%
+Epoch 12/50 (lr=9.41e-05, 12.4s) | Train Acc: 99.61% | Val Loss: 0.0038 Acc: 99.92%
+Epoch 13/50 (lr=9.24e-05, 12.2s) | Train Acc: 99.88% | Val Loss: 0.0044 Acc: 99.79%
+[Early Stop] Triggered at epoch 13 (Best: epoch 8, val_loss: 0.0013)
+
+--- Fold 1/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=23.51M | Trainable=23.51M
+Epoch 01/50 (lr=2.00e-05, 12.4s) | Train Acc: 86.80% | Val Loss: 0.1265 Acc: 96.04%
+Epoch 02/50 (lr=4.00e-05, 12.4s) | Train Acc: 96.36% | Val Loss: 0.0734 Acc: 97.12%
+Epoch 03/50 (lr=6.00e-05, 11.7s) | Train Acc: 98.35% | Val Loss: 0.0172 Acc: 99.58%
+Epoch 04/50 (lr=8.00e-05, 12.0s) | Train Acc: 98.88% | Val Loss: 0.0112 Acc: 99.75%
+Epoch 05/50 (lr=1.00e-04, 12.1s) | Train Acc: 99.09% | Val Loss: 0.0044 Acc: 99.92%
+Epoch 06/50 (lr=9.99e-05, 12.1s) | Train Acc: 99.30% | Val Loss: 0.0042 Acc: 100.00%
+Epoch 07/50 (lr=9.95e-05, 12.1s) | Train Acc: 99.60% | Val Loss: 0.0014 Acc: 100.00%
+Epoch 08/50 (lr=9.89e-05, 12.1s) | Train Acc: 99.46% | Val Loss: 0.0029 Acc: 99.96%
+Epoch 09/50 (lr=9.81e-05, 11.6s) | Train Acc: 99.78% | Val Loss: 0.0058 Acc: 99.92%
+Epoch 10/50 (lr=9.70e-05, 12.1s) | Train Acc: 99.74% | Val Loss: 0.0017 Acc: 100.00%
+Epoch 11/50 (lr=9.57e-05, 11.9s) | Train Acc: 99.69% | Val Loss: 0.0013 Acc: 100.00%
+Epoch 12/50 (lr=9.41e-05, 12.0s) | Train Acc: 99.61% | Val Loss: 0.0130 Acc: 99.71%
+Epoch 13/50 (lr=9.24e-05, 11.8s) | Train Acc: 99.64% | Val Loss: 0.0009 Acc: 100.00%
+Epoch 14/50 (lr=9.05e-05, 11.9s) | Train Acc: 99.78% | Val Loss: 0.0011 Acc: 99.96%
+Epoch 15/50 (lr=8.83e-05, 11.8s) | Train Acc: 99.66% | Val Loss: 0.0021 Acc: 99.96%
+Epoch 16/50 (lr=8.60e-05, 11.9s) | Train Acc: 99.90% | Val Loss: 0.0008 Acc: 99.96%
+Epoch 17/50 (lr=8.35e-05, 12.1s) | Train Acc: 99.85% | Val Loss: 0.0007 Acc: 99.96%
+Epoch 18/50 (lr=8.08e-05, 12.2s) | Train Acc: 99.93% | Val Loss: 0.0003 Acc: 100.00%
+Epoch 19/50 (lr=7.80e-05, 12.0s) | Train Acc: 99.72% | Val Loss: 0.0010 Acc: 99.96%
+Epoch 20/50 (lr=7.50e-05, 12.2s) | Train Acc: 99.82% | Val Loss: 0.0018 Acc: 99.96%
+Epoch 21/50 (lr=7.19e-05, 11.7s) | Train Acc: 99.70% | Val Loss: 0.0012 Acc: 100.00%
+Epoch 22/50 (lr=6.87e-05, 11.9s) | Train Acc: 99.94% | Val Loss: 0.0004 Acc: 100.00%
+Epoch 23/50 (lr=6.55e-05, 12.4s) | Train Acc: 99.89% | Val Loss: 0.0071 Acc: 99.83%
+[Early Stop] Triggered at epoch 23 (Best: epoch 18, val_loss: 0.0003)
+
+--- Fold 2/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=23.51M | Trainable=23.51M
+Epoch 01/50 (lr=2.00e-05, 12.0s) | Train Acc: 86.22% | Val Loss: 0.1198 Acc: 96.21%
+Epoch 02/50 (lr=4.00e-05, 12.3s) | Train Acc: 96.16% | Val Loss: 0.0460 Acc: 98.50%
+Epoch 03/50 (lr=6.00e-05, 12.0s) | Train Acc: 98.00% | Val Loss: 0.0447 Acc: 98.46%
+Epoch 04/50 (lr=8.00e-05, 11.9s) | Train Acc: 99.09% | Val Loss: 0.0091 Acc: 99.75%
+Epoch 05/50 (lr=1.00e-04, 12.3s) | Train Acc: 99.00% | Val Loss: 0.0084 Acc: 99.71%
+Epoch 06/50 (lr=9.99e-05, 11.9s) | Train Acc: 99.31% | Val Loss: 0.0121 Acc: 99.54%
+Epoch 07/50 (lr=9.95e-05, 12.0s) | Train Acc: 99.46% | Val Loss: 0.0034 Acc: 99.96%
+Epoch 08/50 (lr=9.89e-05, 12.0s) | Train Acc: 99.77% | Val Loss: 0.0010 Acc: 100.00%
+Epoch 09/50 (lr=9.81e-05, 12.1s) | Train Acc: 99.80% | Val Loss: 0.0025 Acc: 100.00%
+Epoch 10/50 (lr=9.70e-05, 11.7s) | Train Acc: 99.68% | Val Loss: 0.0094 Acc: 99.79%
+Epoch 11/50 (lr=9.57e-05, 11.8s) | Train Acc: 99.76% | Val Loss: 0.0133 Acc: 99.46%
+Epoch 12/50 (lr=9.41e-05, 12.3s) | Train Acc: 99.77% | Val Loss: 0.0011 Acc: 99.96%
+Epoch 13/50 (lr=9.24e-05, 11.8s) | Train Acc: 99.67% | Val Loss: 0.0140 Acc: 99.33%
+[Early Stop] Triggered at epoch 13 (Best: epoch 8, val_loss: 0.0010)
+
+--- Fold 3/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=23.51M | Trainable=23.51M
+Epoch 01/50 (lr=2.00e-05, 12.2s) | Train Acc: 86.53% | Val Loss: 0.1076 Acc: 97.17%
+Epoch 02/50 (lr=4.00e-05, 12.1s) | Train Acc: 96.69% | Val Loss: 0.0413 Acc: 98.67%
+Epoch 03/50 (lr=6.00e-05, 12.1s) | Train Acc: 98.08% | Val Loss: 0.0388 Acc: 98.25%
+Epoch 04/50 (lr=8.00e-05, 12.1s) | Train Acc: 98.96% | Val Loss: 0.0145 Acc: 99.67%
+Epoch 05/50 (lr=1.00e-04, 12.1s) | Train Acc: 99.21% | Val Loss: 0.0139 Acc: 99.46%
+Epoch 06/50 (lr=9.99e-05, 12.2s) | Train Acc: 99.38% | Val Loss: 0.0066 Acc: 99.88%
+Epoch 07/50 (lr=9.95e-05, 12.3s) | Train Acc: 99.43% | Val Loss: 0.0042 Acc: 99.96%
+Epoch 08/50 (lr=9.89e-05, 11.9s) | Train Acc: 99.80% | Val Loss: 0.0022 Acc: 99.88%
+Epoch 09/50 (lr=9.81e-05, 11.9s) | Train Acc: 99.50% | Val Loss: 0.0060 Acc: 99.83%
+Epoch 10/50 (lr=9.70e-05, 11.9s) | Train Acc: 99.65% | Val Loss: 0.0024 Acc: 99.92%
+Epoch 11/50 (lr=9.57e-05, 11.9s) | Train Acc: 99.59% | Val Loss: 0.0048 Acc: 99.96%
+Epoch 12/50 (lr=9.41e-05, 11.8s) | Train Acc: 99.84% | Val Loss: 0.0025 Acc: 99.83%
+Epoch 13/50 (lr=9.24e-05, 11.8s) | Train Acc: 99.64% | Val Loss: 0.0227 Acc: 99.00%
+[Early Stop] Triggered at epoch 13 (Best: epoch 8, val_loss: 0.0022)
+
+--- Fold 4/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=23.51M | Trainable=23.51M
+Epoch 01/50 (lr=2.00e-05, 12.1s) | Train Acc: 87.29% | Val Loss: 0.1057 Acc: 97.08%
+Epoch 02/50 (lr=4.00e-05, 12.4s) | Train Acc: 96.42% | Val Loss: 0.0329 Acc: 99.00%
+Epoch 03/50 (lr=6.00e-05, 12.1s) | Train Acc: 97.98% | Val Loss: 0.0135 Acc: 99.62%
+Epoch 04/50 (lr=8.00e-05, 12.0s) | Train Acc: 98.92% | Val Loss: 0.0148 Acc: 99.71%
+Epoch 05/50 (lr=1.00e-04, 12.1s) | Train Acc: 99.16% | Val Loss: 0.0094 Acc: 99.75%
+Epoch 06/50 (lr=9.99e-05, 12.1s) | Train Acc: 99.48% | Val Loss: 0.0097 Acc: 99.67%
+Epoch 07/50 (lr=9.95e-05, 12.0s) | Train Acc: 99.52% | Val Loss: 0.0046 Acc: 99.88%
+Epoch 08/50 (lr=9.89e-05, 11.9s) | Train Acc: 99.75% | Val Loss: 0.0199 Acc: 99.29%
+Epoch 09/50 (lr=9.81e-05, 11.9s) | Train Acc: 99.51% | Val Loss: 0.0064 Acc: 99.75%
+Epoch 10/50 (lr=9.70e-05, 11.9s) | Train Acc: 99.69% | Val Loss: 0.0014 Acc: 99.96%
+Epoch 11/50 (lr=9.57e-05, 12.0s) | Train Acc: 99.72% | Val Loss: 0.0143 Acc: 99.58%
+Epoch 12/50 (lr=9.41e-05, 11.9s) | Train Acc: 99.83% | Val Loss: 0.0214 Acc: 99.21%
+Epoch 13/50 (lr=9.24e-05, 11.8s) | Train Acc: 99.75% | Val Loss: 0.0066 Acc: 99.75%
+Epoch 14/50 (lr=9.05e-05, 11.9s) | Train Acc: 99.62% | Val Loss: 0.0025 Acc: 99.92%
+Epoch 15/50 (lr=8.83e-05, 12.0s) | Train Acc: 99.66% | Val Loss: 0.0074 Acc: 99.83%
+[Early Stop] Triggered at epoch 15 (Best: epoch 10, val_loss: 0.0014)
+
+[Evaluating on 3,000 Independent Test Images]...
+
+[COMPLETED SCENARIO 1: resnet50_main]
+  CV Val Acc (5x 2,400 val imgs) : 99.96 +/- 0.05%
+  Ensemble Test Acc (3,000 imgs) : 100.00% [95% CI: 99.87-100.00%]
+  Macro F1: 1.0000 | Macro ROC-AUC: 1.000000
+
+===========================================================================
+SCENARIO 3: RESNET50_LR_1E3 (seed=1) | Model: ResNet50 | Opt: Adam | LR: 0.001 | WD: 0.0001 | Mom: 0.0 | Sched: cosine (warmup=5) | FreezeViT: True | HeadDrop: None
+===========================================================================
+
+--- Fold 0/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=23.51M | Trainable=23.51M
+Epoch 01/50 (lr=2.00e-04, 11.7s) | Train Acc: 94.68% | Val Loss: 0.0706 Acc: 97.54%
+Epoch 02/50 (lr=4.00e-04, 11.6s) | Train Acc: 97.27% | Val Loss: 0.0323 Acc: 98.79%
+Epoch 03/50 (lr=6.00e-04, 11.7s) | Train Acc: 97.41% | Val Loss: 0.0318 Acc: 98.88%
+Epoch 04/50 (lr=8.00e-04, 11.9s) | Train Acc: 96.89% | Val Loss: 0.0665 Acc: 97.75%
+Epoch 05/50 (lr=1.00e-03, 12.1s) | Train Acc: 97.24% | Val Loss: 0.1105 Acc: 95.88%
+Epoch 06/50 (lr=9.99e-04, 11.8s) | Train Acc: 97.04% | Val Loss: 0.0355 Acc: 98.79%
+Epoch 07/50 (lr=9.95e-04, 12.0s) | Train Acc: 96.96% | Val Loss: 0.0378 Acc: 98.75%
+Epoch 08/50 (lr=9.89e-04, 11.9s) | Train Acc: 97.67% | Val Loss: 0.0360 Acc: 98.79%
+[Early Stop] Triggered at epoch 8 (Best: epoch 3, val_loss: 0.0318)
+
+--- Fold 1/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=23.51M | Trainable=23.51M
+Epoch 01/50 (lr=2.00e-04, 12.0s) | Train Acc: 94.44% | Val Loss: 0.0605 Acc: 97.25%
+Epoch 02/50 (lr=4.00e-04, 12.0s) | Train Acc: 97.19% | Val Loss: 0.0655 Acc: 97.88%
+Epoch 03/50 (lr=6.00e-04, 12.0s) | Train Acc: 96.75% | Val Loss: 0.0399 Acc: 98.54%
+Epoch 04/50 (lr=8.00e-04, 11.9s) | Train Acc: 96.88% | Val Loss: 0.0453 Acc: 98.46%
+Epoch 05/50 (lr=1.00e-03, 12.0s) | Train Acc: 96.36% | Val Loss: 0.1635 Acc: 95.71%
+Epoch 06/50 (lr=9.99e-04, 11.9s) | Train Acc: 96.65% | Val Loss: 0.0478 Acc: 98.21%
+Epoch 07/50 (lr=9.95e-04, 11.9s) | Train Acc: 97.77% | Val Loss: 0.0360 Acc: 98.58%
+Epoch 08/50 (lr=9.89e-04, 11.8s) | Train Acc: 97.46% | Val Loss: 0.0952 Acc: 97.25%
+Epoch 09/50 (lr=9.81e-04, 11.9s) | Train Acc: 97.23% | Val Loss: 0.0842 Acc: 96.21%
+Epoch 10/50 (lr=9.70e-04, 12.2s) | Train Acc: 98.04% | Val Loss: 0.0694 Acc: 97.92%
+Epoch 11/50 (lr=9.57e-04, 12.2s) | Train Acc: 97.51% | Val Loss: 0.0308 Acc: 98.92%
+Epoch 12/50 (lr=9.41e-04, 12.0s) | Train Acc: 97.79% | Val Loss: 0.0292 Acc: 98.96%
+Epoch 13/50 (lr=9.24e-04, 11.9s) | Train Acc: 97.75% | Val Loss: 0.2613 Acc: 90.33%
+Epoch 14/50 (lr=9.05e-04, 12.0s) | Train Acc: 97.68% | Val Loss: 0.0534 Acc: 98.08%
+Epoch 15/50 (lr=8.83e-04, 11.8s) | Train Acc: 98.46% | Val Loss: 0.0341 Acc: 98.67%
+Epoch 16/50 (lr=8.60e-04, 12.1s) | Train Acc: 98.11% | Val Loss: 0.0191 Acc: 99.38%
+Epoch 17/50 (lr=8.35e-04, 12.0s) | Train Acc: 97.92% | Val Loss: 0.0293 Acc: 98.83%
+Epoch 18/50 (lr=8.08e-04, 12.1s) | Train Acc: 98.58% | Val Loss: 0.0550 Acc: 97.58%
+Epoch 19/50 (lr=7.80e-04, 11.7s) | Train Acc: 98.72% | Val Loss: 0.0639 Acc: 98.00%
+Epoch 20/50 (lr=7.50e-04, 11.9s) | Train Acc: 98.56% | Val Loss: 0.0325 Acc: 98.83%
+Epoch 21/50 (lr=7.19e-04, 11.8s) | Train Acc: 98.70% | Val Loss: 0.0232 Acc: 99.04%
+[Early Stop] Triggered at epoch 21 (Best: epoch 16, val_loss: 0.0191)
+
+--- Fold 2/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=23.51M | Trainable=23.51M
+Epoch 01/50 (lr=2.00e-04, 11.7s) | Train Acc: 94.24% | Val Loss: 0.0290 Acc: 99.25%
+Epoch 02/50 (lr=4.00e-04, 12.0s) | Train Acc: 96.93% | Val Loss: 0.0779 Acc: 97.29%
+Epoch 03/50 (lr=6.00e-04, 12.1s) | Train Acc: 97.31% | Val Loss: 0.0251 Acc: 99.25%
+Epoch 04/50 (lr=8.00e-04, 12.0s) | Train Acc: 97.40% | Val Loss: 0.1303 Acc: 95.00%
+Epoch 05/50 (lr=1.00e-03, 12.4s) | Train Acc: 96.80% | Val Loss: 0.0850 Acc: 96.83%
+Epoch 06/50 (lr=9.99e-04, 11.9s) | Train Acc: 97.38% | Val Loss: 0.1439 Acc: 93.88%
+Epoch 07/50 (lr=9.95e-04, 11.9s) | Train Acc: 97.26% | Val Loss: 0.0418 Acc: 98.38%
+Epoch 08/50 (lr=9.89e-04, 12.0s) | Train Acc: 97.56% | Val Loss: 0.0530 Acc: 97.88%
+[Early Stop] Triggered at epoch 8 (Best: epoch 3, val_loss: 0.0251)
+
+--- Fold 3/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=23.51M | Trainable=23.51M
+Epoch 01/50 (lr=2.00e-04, 12.1s) | Train Acc: 94.49% | Val Loss: 0.0327 Acc: 98.83%
+Epoch 02/50 (lr=4.00e-04, 12.0s) | Train Acc: 97.50% | Val Loss: 0.0541 Acc: 97.71%
+Epoch 03/50 (lr=6.00e-04, 12.1s) | Train Acc: 96.94% | Val Loss: 0.0360 Acc: 98.75%
+Epoch 04/50 (lr=8.00e-04, 12.4s) | Train Acc: 97.07% | Val Loss: 0.0475 Acc: 98.21%
+Epoch 05/50 (lr=1.00e-03, 12.1s) | Train Acc: 96.91% | Val Loss: 0.0854 Acc: 96.92%
+Epoch 06/50 (lr=9.99e-04, 12.1s) | Train Acc: 97.49% | Val Loss: 0.0302 Acc: 98.79%
+Epoch 07/50 (lr=9.95e-04, 12.3s) | Train Acc: 97.28% | Val Loss: 0.0566 Acc: 97.67%
+Epoch 08/50 (lr=9.89e-04, 12.4s) | Train Acc: 97.58% | Val Loss: 0.0522 Acc: 98.04%
+Epoch 09/50 (lr=9.81e-04, 12.0s) | Train Acc: 97.23% | Val Loss: 0.1048 Acc: 96.46%
+Epoch 10/50 (lr=9.70e-04, 12.3s) | Train Acc: 97.91% | Val Loss: 0.0318 Acc: 98.88%
+Epoch 11/50 (lr=9.57e-04, 11.8s) | Train Acc: 97.70% | Val Loss: 0.0689 Acc: 97.58%
+[Early Stop] Triggered at epoch 11 (Best: epoch 6, val_loss: 0.0302)
+
+--- Fold 4/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=23.51M | Trainable=23.51M
+Epoch 01/50 (lr=2.00e-04, 11.9s) | Train Acc: 94.58% | Val Loss: 0.0579 Acc: 97.83%
+Epoch 02/50 (lr=4.00e-04, 11.9s) | Train Acc: 96.91% | Val Loss: 0.0579 Acc: 98.42%
+Epoch 03/50 (lr=6.00e-04, 11.9s) | Train Acc: 96.79% | Val Loss: 0.0441 Acc: 98.38%
+Epoch 04/50 (lr=8.00e-04, 11.9s) | Train Acc: 96.53% | Val Loss: 0.0378 Acc: 98.71%
+Epoch 05/50 (lr=1.00e-03, 11.8s) | Train Acc: 96.89% | Val Loss: 0.2257 Acc: 93.67%
+Epoch 06/50 (lr=9.99e-04, 11.8s) | Train Acc: 97.41% | Val Loss: 0.0596 Acc: 98.29%
+Epoch 07/50 (lr=9.95e-04, 12.0s) | Train Acc: 97.21% | Val Loss: 0.1681 Acc: 94.92%
+Epoch 08/50 (lr=9.89e-04, 12.0s) | Train Acc: 97.54% | Val Loss: 0.0589 Acc: 98.25%
+Epoch 09/50 (lr=9.81e-04, 12.0s) | Train Acc: 97.59% | Val Loss: 0.0253 Acc: 99.00%
+Epoch 10/50 (lr=9.70e-04, 12.1s) | Train Acc: 97.89% | Val Loss: 0.0780 Acc: 96.88%
+Epoch 11/50 (lr=9.57e-04, 12.0s) | Train Acc: 97.82% | Val Loss: 0.0539 Acc: 97.67%
+Epoch 12/50 (lr=9.41e-04, 12.2s) | Train Acc: 97.60% | Val Loss: 0.1069 Acc: 95.96%
+Epoch 13/50 (lr=9.24e-04, 12.1s) | Train Acc: 98.26% | Val Loss: 0.0691 Acc: 97.50%
+Epoch 14/50 (lr=9.05e-04, 11.8s) | Train Acc: 97.90% | Val Loss: 0.0381 Acc: 98.79%
+[Early Stop] Triggered at epoch 14 (Best: epoch 9, val_loss: 0.0253)
+
+[Evaluating on 3,000 Independent Test Images]...
+
+[COMPLETED SCENARIO 3: resnet50_lr_1e3]
+  CV Val Acc (5x 2,400 val imgs) : 99.06 +/- 0.22%
+  Ensemble Test Acc (3,000 imgs) : 99.87% [95% CI: 99.66-99.95%]
+  Macro F1: 0.9987 | Macro ROC-AUC: 0.999997
+
+===========================================================================
+SCENARIO 6: VIT_S_MAIN (seed=1) | Model: ViT-S/16 | Opt: AdamW | LR: 0.0001 | WD: 0.0001 | Mom: 0.0 | Sched: cosine (warmup=5) | FreezeViT: True | HeadDrop: None
+===========================================================================
+
+--- Fold 0/4: Training (Train: 9,600, Val: 2,400) ---
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+  Params: Total=21.67M | Trainable=18.12M
+Epoch 01/50 (lr=2.00e-05, 12.1s) | Train Acc: 94.53% | Val Loss: 0.0502 Acc: 98.25%
+Epoch 02/50 (lr=4.00e-05, 11.9s) | Train Acc: 97.83% | Val Loss: 0.0221 Acc: 99.21%
+Epoch 03/50 (lr=6.00e-05, 11.6s) | Train Acc: 98.51% | Val Loss: 0.0118 Acc: 99.58%
+Epoch 04/50 (lr=8.00e-05, 11.9s) | Train Acc: 99.06% | Val Loss: 0.0041 Acc: 99.88%
+Epoch 05/50 (lr=1.00e-04, 12.0s) | Train Acc: 98.68% | Val Loss: 0.0384 Acc: 98.79%
+Epoch 06/50 (lr=9.99e-05, 11.9s) | Train Acc: 99.22% | Val Loss: 0.0160 Acc: 99.42%
+Epoch 07/50 (lr=9.95e-05, 11.8s) | Train Acc: 99.39% | Val Loss: 0.0103 Acc: 99.62%
+Epoch 08/50 (lr=9.89e-05, 11.7s) | Train Acc: 99.43% | Val Loss: 0.0032 Acc: 99.92%
+Epoch 09/50 (lr=9.81e-05, 11.9s) | Train Acc: 99.36% | Val Loss: 0.0096 Acc: 99.54%
+Epoch 10/50 (lr=9.70e-05, 11.7s) | Train Acc: 99.72% | Val Loss: 0.0003 Acc: 100.00%
+Epoch 11/50 (lr=9.57e-05, 11.8s) | Train Acc: 99.97% | Val Loss: 0.0017 Acc: 99.92%
+Epoch 12/50 (lr=9.41e-05, 11.9s) | Train Acc: 99.78% | Val Loss: 0.0042 Acc: 99.83%
+Epoch 13/50 (lr=9.24e-05, 11.9s) | Train Acc: 99.32% | Val Loss: 0.0210 Acc: 99.17%
+Epoch 14/50 (lr=9.05e-05, 11.8s) | Train Acc: 99.56% | Val Loss: 0.0062 Acc: 99.75%
+Epoch 15/50 (lr=8.83e-05, 11.7s) | Train Acc: 99.65% | Val Loss: 0.0047 Acc: 99.79%
+[Early Stop] Triggered at epoch 15 (Best: epoch 10, val_loss: 0.0003)
+
+--- Fold 1/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=21.67M | Trainable=18.12M
+Epoch 01/50 (lr=2.00e-05, 12.1s) | Train Acc: 94.76% | Val Loss: 0.0414 Acc: 98.67%
+Epoch 02/50 (lr=4.00e-05, 12.0s) | Train Acc: 98.01% | Val Loss: 0.0119 Acc: 99.71%
+Epoch 03/50 (lr=6.00e-05, 12.0s) | Train Acc: 98.52% | Val Loss: 0.0097 Acc: 99.79%
+Epoch 04/50 (lr=8.00e-05, 11.8s) | Train Acc: 98.89% | Val Loss: 0.0036 Acc: 99.96%
+Epoch 05/50 (lr=1.00e-04, 12.2s) | Train Acc: 98.18% | Val Loss: 0.0178 Acc: 99.58%
+Epoch 06/50 (lr=9.99e-05, 12.1s) | Train Acc: 99.07% | Val Loss: 0.0056 Acc: 99.83%
+Epoch 07/50 (lr=9.95e-05, 12.1s) | Train Acc: 99.72% | Val Loss: 0.0027 Acc: 99.92%
+Epoch 08/50 (lr=9.89e-05, 11.7s) | Train Acc: 99.52% | Val Loss: 0.0054 Acc: 99.83%
+Epoch 09/50 (lr=9.81e-05, 11.9s) | Train Acc: 99.53% | Val Loss: 0.0065 Acc: 99.75%
+Epoch 10/50 (lr=9.70e-05, 11.9s) | Train Acc: 99.77% | Val Loss: 0.0019 Acc: 99.92%
+Epoch 11/50 (lr=9.57e-05, 11.9s) | Train Acc: 99.50% | Val Loss: 0.0046 Acc: 99.75%
+Epoch 12/50 (lr=9.41e-05, 12.2s) | Train Acc: 99.77% | Val Loss: 0.0002 Acc: 100.00%
+Epoch 13/50 (lr=9.24e-05, 11.9s) | Train Acc: 99.68% | Val Loss: 0.0045 Acc: 99.79%
+Epoch 14/50 (lr=9.05e-05, 12.1s) | Train Acc: 99.67% | Val Loss: 0.0077 Acc: 99.75%
+Epoch 15/50 (lr=8.83e-05, 11.9s) | Train Acc: 99.44% | Val Loss: 0.0058 Acc: 99.83%
+Epoch 16/50 (lr=8.60e-05, 11.9s) | Train Acc: 99.67% | Val Loss: 0.0020 Acc: 99.88%
+Epoch 17/50 (lr=8.35e-05, 11.9s) | Train Acc: 99.74% | Val Loss: 0.0019 Acc: 99.96%
+[Early Stop] Triggered at epoch 17 (Best: epoch 12, val_loss: 0.0002)
+
+--- Fold 2/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=21.67M | Trainable=18.12M
+Epoch 01/50 (lr=2.00e-05, 11.8s) | Train Acc: 93.78% | Val Loss: 0.0496 Acc: 98.42%
+Epoch 02/50 (lr=4.00e-05, 11.9s) | Train Acc: 98.04% | Val Loss: 0.0215 Acc: 99.42%
+Epoch 03/50 (lr=6.00e-05, 12.0s) | Train Acc: 98.65% | Val Loss: 0.0216 Acc: 99.29%
+Epoch 04/50 (lr=8.00e-05, 12.1s) | Train Acc: 98.59% | Val Loss: 0.0116 Acc: 99.71%
+Epoch 05/50 (lr=1.00e-04, 11.7s) | Train Acc: 98.64% | Val Loss: 0.0030 Acc: 99.92%
+Epoch 06/50 (lr=9.99e-05, 11.7s) | Train Acc: 99.53% | Val Loss: 0.0071 Acc: 99.75%
+Epoch 07/50 (lr=9.95e-05, 11.7s) | Train Acc: 99.41% | Val Loss: 0.0056 Acc: 99.83%
+Epoch 08/50 (lr=9.89e-05, 11.9s) | Train Acc: 99.68% | Val Loss: 0.0156 Acc: 99.54%
+Epoch 09/50 (lr=9.81e-05, 12.0s) | Train Acc: 99.21% | Val Loss: 0.0004 Acc: 100.00%
+Epoch 10/50 (lr=9.70e-05, 12.1s) | Train Acc: 99.65% | Val Loss: 0.0034 Acc: 99.88%
+Epoch 11/50 (lr=9.57e-05, 12.0s) | Train Acc: 99.41% | Val Loss: 0.0270 Acc: 98.71%
+Epoch 12/50 (lr=9.41e-05, 12.0s) | Train Acc: 99.80% | Val Loss: 0.0198 Acc: 99.46%
+Epoch 13/50 (lr=9.24e-05, 11.9s) | Train Acc: 99.76% | Val Loss: 0.0153 Acc: 99.71%
+Epoch 14/50 (lr=9.05e-05, 12.0s) | Train Acc: 99.43% | Val Loss: 0.0098 Acc: 99.71%
+[Early Stop] Triggered at epoch 14 (Best: epoch 9, val_loss: 0.0004)
+
+--- Fold 3/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=21.67M | Trainable=18.12M
+Epoch 01/50 (lr=2.00e-05, 12.0s) | Train Acc: 94.28% | Val Loss: 0.0451 Acc: 98.83%
+Epoch 02/50 (lr=4.00e-05, 12.1s) | Train Acc: 98.04% | Val Loss: 0.0121 Acc: 99.58%
+Epoch 03/50 (lr=6.00e-05, 11.5s) | Train Acc: 98.33% | Val Loss: 0.0191 Acc: 99.04%
+Epoch 04/50 (lr=8.00e-05, 12.1s) | Train Acc: 99.05% | Val Loss: 0.0063 Acc: 99.71%
+Epoch 05/50 (lr=1.00e-04, 12.1s) | Train Acc: 98.69% | Val Loss: 0.0058 Acc: 99.88%
+Epoch 06/50 (lr=9.99e-05, 12.0s) | Train Acc: 99.62% | Val Loss: 0.0009 Acc: 99.96%
+Epoch 07/50 (lr=9.95e-05, 11.6s) | Train Acc: 99.46% | Val Loss: 0.0363 Acc: 98.83%
+Epoch 08/50 (lr=9.89e-05, 11.7s) | Train Acc: 98.97% | Val Loss: 0.0184 Acc: 99.38%
+Epoch 09/50 (lr=9.81e-05, 12.0s) | Train Acc: 99.62% | Val Loss: 0.0005 Acc: 100.00%
+Epoch 10/50 (lr=9.70e-05, 12.1s) | Train Acc: 99.41% | Val Loss: 0.0053 Acc: 99.92%
+Epoch 11/50 (lr=9.57e-05, 12.3s) | Train Acc: 99.78% | Val Loss: 0.0003 Acc: 100.00%
+Epoch 12/50 (lr=9.41e-05, 11.9s) | Train Acc: 99.70% | Val Loss: 0.0030 Acc: 99.92%
+Epoch 13/50 (lr=9.24e-05, 12.0s) | Train Acc: 99.67% | Val Loss: 0.0004 Acc: 100.00%
+Epoch 14/50 (lr=9.05e-05, 11.8s) | Train Acc: 99.93% | Val Loss: 0.0222 Acc: 99.54%
+Epoch 15/50 (lr=8.83e-05, 12.0s) | Train Acc: 99.55% | Val Loss: 0.0021 Acc: 99.88%
+Epoch 16/50 (lr=8.60e-05, 11.9s) | Train Acc: 99.43% | Val Loss: 0.0046 Acc: 99.83%
+[Early Stop] Triggered at epoch 16 (Best: epoch 11, val_loss: 0.0003)
+
+--- Fold 4/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=21.67M | Trainable=18.12M
+Epoch 01/50 (lr=2.00e-05, 12.1s) | Train Acc: 93.95% | Val Loss: 0.0567 Acc: 98.04%
+Epoch 02/50 (lr=4.00e-05, 12.0s) | Train Acc: 97.81% | Val Loss: 0.0168 Acc: 99.54%
+Epoch 03/50 (lr=6.00e-05, 11.8s) | Train Acc: 98.41% | Val Loss: 0.0107 Acc: 99.67%
+Epoch 04/50 (lr=8.00e-05, 11.7s) | Train Acc: 98.83% | Val Loss: 0.0055 Acc: 99.79%
+Epoch 05/50 (lr=1.00e-04, 12.0s) | Train Acc: 99.21% | Val Loss: 0.0071 Acc: 99.75%
+Epoch 06/50 (lr=9.99e-05, 11.9s) | Train Acc: 99.23% | Val Loss: 0.0017 Acc: 100.00%
+Epoch 07/50 (lr=9.95e-05, 11.8s) | Train Acc: 99.26% | Val Loss: 0.0160 Acc: 99.38%
+Epoch 08/50 (lr=9.89e-05, 11.9s) | Train Acc: 99.32% | Val Loss: 0.0214 Acc: 99.21%
+Epoch 09/50 (lr=9.81e-05, 11.9s) | Train Acc: 99.47% | Val Loss: 0.0679 Acc: 97.29%
+Epoch 10/50 (lr=9.70e-05, 11.8s) | Train Acc: 99.47% | Val Loss: 0.0026 Acc: 99.88%
+Epoch 11/50 (lr=9.57e-05, 11.6s) | Train Acc: 99.79% | Val Loss: 0.0006 Acc: 99.96%
+Epoch 12/50 (lr=9.41e-05, 11.7s) | Train Acc: 99.72% | Val Loss: 0.0010 Acc: 100.00%
+Epoch 13/50 (lr=9.24e-05, 12.1s) | Train Acc: 99.58% | Val Loss: 0.0007 Acc: 100.00%
+Epoch 14/50 (lr=9.05e-05, 12.0s) | Train Acc: 99.81% | Val Loss: 0.0017 Acc: 99.96%
+Epoch 15/50 (lr=8.83e-05, 11.9s) | Train Acc: 99.70% | Val Loss: 0.0150 Acc: 99.50%
+Epoch 16/50 (lr=8.60e-05, 11.9s) | Train Acc: 99.73% | Val Loss: 0.0001 Acc: 100.00%
+Epoch 17/50 (lr=8.35e-05, 12.0s) | Train Acc: 99.86% | Val Loss: 0.0001 Acc: 100.00%
+Epoch 18/50 (lr=8.08e-05, 11.9s) | Train Acc: 99.74% | Val Loss: 0.0072 Acc: 99.79%
+Epoch 19/50 (lr=7.80e-05, 12.1s) | Train Acc: 99.53% | Val Loss: 0.0019 Acc: 99.96%
+Epoch 20/50 (lr=7.50e-05, 11.9s) | Train Acc: 99.88% | Val Loss: 0.0007 Acc: 99.96%
+Epoch 21/50 (lr=7.19e-05, 11.9s) | Train Acc: 99.67% | Val Loss: 0.0185 Acc: 99.46%
+Epoch 22/50 (lr=6.87e-05, 11.8s) | Train Acc: 99.83% | Val Loss: 0.0000 Acc: 100.00%
+Epoch 23/50 (lr=6.55e-05, 12.1s) | Train Acc: 99.73% | Val Loss: 0.0049 Acc: 99.83%
+Epoch 24/50 (lr=6.21e-05, 11.9s) | Train Acc: 99.79% | Val Loss: 0.0002 Acc: 100.00%
+Epoch 25/50 (lr=5.87e-05, 11.7s) | Train Acc: 99.81% | Val Loss: 0.0003 Acc: 100.00%
+Epoch 26/50 (lr=5.52e-05, 12.0s) | Train Acc: 100.00% | Val Loss: 0.0000 Acc: 100.00%
+Epoch 27/50 (lr=5.17e-05, 12.1s) | Train Acc: 100.00% | Val Loss: 0.0000 Acc: 100.00%
+Epoch 28/50 (lr=4.83e-05, 12.1s) | Train Acc: 100.00% | Val Loss: 0.0000 Acc: 100.00%
+Epoch 29/50 (lr=4.48e-05, 12.2s) | Train Acc: 100.00% | Val Loss: 0.0000 Acc: 100.00%
+Epoch 30/50 (lr=4.13e-05, 11.7s) | Train Acc: 100.00% | Val Loss: 0.0000 Acc: 100.00%
+Epoch 31/50 (lr=3.79e-05, 12.1s) | Train Acc: 99.84% | Val Loss: 0.0001 Acc: 100.00%
+Epoch 32/50 (lr=3.45e-05, 11.9s) | Train Acc: 100.00% | Val Loss: 0.0000 Acc: 100.00%
+Epoch 33/50 (lr=3.13e-05, 11.9s) | Train Acc: 99.95% | Val Loss: 0.0001 Acc: 100.00%
+Epoch 34/50 (lr=2.81e-05, 12.0s) | Train Acc: 99.99% | Val Loss: 0.0000 Acc: 100.00%
+Epoch 35/50 (lr=2.50e-05, 11.9s) | Train Acc: 100.00% | Val Loss: 0.0000 Acc: 100.00%
+[Early Stop] Triggered at epoch 35 (Best: epoch 30, val_loss: 0.0000)
+
+[Evaluating on 3,000 Independent Test Images]...
+
+[COMPLETED SCENARIO 6: vit_s_main]
+  CV Val Acc (5x 2,400 val imgs) : 100.00 +/- 0.00%
+  Ensemble Test Acc (3,000 imgs) : 100.00% [95% CI: 99.87-100.00%]
+  Macro F1: 1.0000 | Macro ROC-AUC: 1.000000
+
+===========================================================================
+SCENARIO 8: VIT_S_LR_1E3 (seed=1) | Model: ViT-S/16 | Opt: AdamW | LR: 0.001 | WD: 0.0001 | Mom: 0.0 | Sched: cosine (warmup=5) | FreezeViT: True | HeadDrop: None
+===========================================================================
+
+--- Fold 0/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=21.67M | Trainable=18.12M
+Epoch 01/50 (lr=2.00e-04, 11.9s) | Train Acc: 91.29% | Val Loss: 0.0628 Acc: 97.88%
+Epoch 02/50 (lr=4.00e-04, 11.9s) | Train Acc: 93.27% | Val Loss: 0.0664 Acc: 97.75%
+Epoch 03/50 (lr=6.00e-04, 12.1s) | Train Acc: 94.80% | Val Loss: 0.0974 Acc: 96.25%
+Epoch 04/50 (lr=8.00e-04, 12.0s) | Train Acc: 92.50% | Val Loss: 0.1003 Acc: 96.04%
+Epoch 05/50 (lr=1.00e-03, 12.0s) | Train Acc: 94.48% | Val Loss: 0.0916 Acc: 96.29%
+Epoch 06/50 (lr=9.99e-04, 12.2s) | Train Acc: 94.20% | Val Loss: 0.1037 Acc: 95.67%
+[Early Stop] Triggered at epoch 6 (Best: epoch 1, val_loss: 0.0628)
+
+--- Fold 1/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=21.67M | Trainable=18.12M
+Epoch 01/50 (lr=2.00e-04, 12.1s) | Train Acc: 89.80% | Val Loss: 0.1111 Acc: 95.67%
+Epoch 02/50 (lr=4.00e-04, 12.0s) | Train Acc: 93.96% | Val Loss: 0.1283 Acc: 95.33%
+Epoch 03/50 (lr=6.00e-04, 11.9s) | Train Acc: 94.17% | Val Loss: 0.0967 Acc: 96.04%
+Epoch 04/50 (lr=8.00e-04, 12.0s) | Train Acc: 94.01% | Val Loss: 0.2444 Acc: 91.00%
+Epoch 05/50 (lr=1.00e-03, 11.9s) | Train Acc: 94.02% | Val Loss: 0.1387 Acc: 94.12%
+Epoch 06/50 (lr=9.99e-04, 12.1s) | Train Acc: 94.16% | Val Loss: 0.1841 Acc: 92.12%
+Epoch 07/50 (lr=9.95e-04, 12.2s) | Train Acc: 94.32% | Val Loss: 0.1501 Acc: 94.00%
+Epoch 08/50 (lr=9.89e-04, 12.2s) | Train Acc: 94.61% | Val Loss: 0.1106 Acc: 95.75%
+[Early Stop] Triggered at epoch 8 (Best: epoch 3, val_loss: 0.0967)
+
+--- Fold 2/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=21.67M | Trainable=18.12M
+Epoch 01/50 (lr=2.00e-04, 12.1s) | Train Acc: 89.71% | Val Loss: 0.1447 Acc: 93.58%
+Epoch 02/50 (lr=4.00e-04, 12.5s) | Train Acc: 93.38% | Val Loss: 0.1159 Acc: 95.50%
+Epoch 03/50 (lr=6.00e-04, 11.9s) | Train Acc: 94.50% | Val Loss: 0.0880 Acc: 96.29%
+Epoch 04/50 (lr=8.00e-04, 11.8s) | Train Acc: 94.10% | Val Loss: 0.2204 Acc: 89.50%
+Epoch 05/50 (lr=1.00e-03, 12.1s) | Train Acc: 94.11% | Val Loss: 0.2776 Acc: 89.00%
+Epoch 06/50 (lr=9.99e-04, 12.2s) | Train Acc: 94.09% | Val Loss: 0.1632 Acc: 92.92%
+Epoch 07/50 (lr=9.95e-04, 12.2s) | Train Acc: 94.69% | Val Loss: 0.1959 Acc: 92.92%
+Epoch 08/50 (lr=9.89e-04, 12.3s) | Train Acc: 94.35% | Val Loss: 0.1003 Acc: 95.79%
+[Early Stop] Triggered at epoch 8 (Best: epoch 3, val_loss: 0.0880)
+
+--- Fold 3/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=21.67M | Trainable=18.12M
+Epoch 01/50 (lr=2.00e-04, 11.9s) | Train Acc: 91.85% | Val Loss: 0.0557 Acc: 98.04%
+Epoch 02/50 (lr=4.00e-04, 11.8s) | Train Acc: 94.27% | Val Loss: 0.1707 Acc: 92.33%
+Epoch 03/50 (lr=6.00e-04, 11.8s) | Train Acc: 93.41% | Val Loss: 0.2373 Acc: 88.71%
+Epoch 04/50 (lr=8.00e-04, 12.0s) | Train Acc: 93.96% | Val Loss: 0.0712 Acc: 97.79%
+Epoch 05/50 (lr=1.00e-03, 12.0s) | Train Acc: 93.86% | Val Loss: 0.1414 Acc: 94.25%
+Epoch 06/50 (lr=9.99e-04, 11.9s) | Train Acc: 93.19% | Val Loss: 0.0955 Acc: 96.67%
+[Early Stop] Triggered at epoch 6 (Best: epoch 1, val_loss: 0.0557)
+
+--- Fold 4/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=21.67M | Trainable=18.12M
+Epoch 01/50 (lr=2.00e-04, 12.2s) | Train Acc: 91.95% | Val Loss: 0.0592 Acc: 98.33%
+Epoch 02/50 (lr=4.00e-04, 12.5s) | Train Acc: 93.90% | Val Loss: 0.0590 Acc: 97.67%
+Epoch 03/50 (lr=6.00e-04, 12.5s) | Train Acc: 94.97% | Val Loss: 0.2086 Acc: 93.71%
+Epoch 04/50 (lr=8.00e-04, 12.0s) | Train Acc: 94.07% | Val Loss: 0.1403 Acc: 93.42%
+Epoch 05/50 (lr=1.00e-03, 12.1s) | Train Acc: 94.71% | Val Loss: 0.0965 Acc: 95.83%
+Epoch 06/50 (lr=9.99e-04, 12.4s) | Train Acc: 94.75% | Val Loss: 0.0720 Acc: 97.29%
+Epoch 07/50 (lr=9.95e-04, 11.8s) | Train Acc: 95.00% | Val Loss: 0.1138 Acc: 95.21%
+[Early Stop] Triggered at epoch 7 (Best: epoch 2, val_loss: 0.0590)
+
+[Evaluating on 3,000 Independent Test Images]...
+
+[COMPLETED SCENARIO 8: vit_s_lr_1e3]
+  CV Val Acc (5x 2,400 val imgs) : 97.18 +/- 0.84%
+  Ensemble Test Acc (3,000 imgs) : 98.60% [95% CI: 98.11-98.96%]
+  Macro F1: 0.9860 | Macro ROC-AUC: 0.999432
+
+[OK] All scenario training routines completed!
+[Dataset] Resolved LC25000 root directory: 'data/cache_lc25000_256/'
+[Assertions PASSED] Dev: 12,000 (4k/class) | Test: 3,000 (1k/class) | Leakage: 0.0%
+[Execution] Queued 4 scenarios (20 runs): ['resnet50_main', 'resnet50_lr_1e3', 'vit_s_main', 'vit_s_lr_1e3']
+
+===========================================================================
+SCENARIO 1: RESNET50_MAIN (seed=2) | Model: ResNet50 | Opt: Adam | LR: 0.0001 | WD: 0.0001 | Mom: 0.0 | Sched: cosine (warmup=5) | FreezeViT: True | HeadDrop: None
+===========================================================================
+
+--- Fold 0/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=23.51M | Trainable=23.51M
+Epoch 01/50 (lr=2.00e-05, 13.2s) | Train Acc: 89.28% | Val Loss: 0.1009 Acc: 96.67%
+Epoch 02/50 (lr=4.00e-05, 12.5s) | Train Acc: 96.46% | Val Loss: 0.0809 Acc: 97.12%
+Epoch 03/50 (lr=6.00e-05, 12.7s) | Train Acc: 98.01% | Val Loss: 0.0222 Acc: 99.21%
+Epoch 04/50 (lr=8.00e-05, 12.4s) | Train Acc: 98.67% | Val Loss: 0.0163 Acc: 99.58%
+Epoch 05/50 (lr=1.00e-04, 12.6s) | Train Acc: 99.03% | Val Loss: 0.0110 Acc: 99.75%
+Epoch 06/50 (lr=9.99e-05, 12.1s) | Train Acc: 99.44% | Val Loss: 0.0084 Acc: 99.67%
+Epoch 07/50 (lr=9.95e-05, 12.7s) | Train Acc: 99.46% | Val Loss: 0.0135 Acc: 99.42%
+Epoch 08/50 (lr=9.89e-05, 12.6s) | Train Acc: 99.61% | Val Loss: 0.0026 Acc: 99.96%
+Epoch 09/50 (lr=9.81e-05, 12.9s) | Train Acc: 99.73% | Val Loss: 0.0032 Acc: 99.96%
+Epoch 10/50 (lr=9.70e-05, 12.8s) | Train Acc: 99.76% | Val Loss: 0.0208 Acc: 99.21%
+Epoch 11/50 (lr=9.57e-05, 12.4s) | Train Acc: 99.60% | Val Loss: 0.0025 Acc: 99.96%
+Epoch 12/50 (lr=9.41e-05, 12.5s) | Train Acc: 99.83% | Val Loss: 0.0006 Acc: 100.00%
+Epoch 13/50 (lr=9.24e-05, 12.5s) | Train Acc: 99.80% | Val Loss: 0.0023 Acc: 99.96%
+Epoch 14/50 (lr=9.05e-05, 12.8s) | Train Acc: 99.56% | Val Loss: 0.0025 Acc: 99.92%
+Epoch 15/50 (lr=8.83e-05, 11.6s) | Train Acc: 99.83% | Val Loss: 0.0025 Acc: 99.92%
+Epoch 16/50 (lr=8.60e-05, 12.5s) | Train Acc: 99.85% | Val Loss: 0.0199 Acc: 99.21%
+Epoch 17/50 (lr=8.35e-05, 12.5s) | Train Acc: 99.69% | Val Loss: 0.0011 Acc: 99.96%
+[Early Stop] Triggered at epoch 17 (Best: epoch 12, val_loss: 0.0006)
+
+--- Fold 1/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=23.51M | Trainable=23.51M
+Epoch 01/50 (lr=2.00e-05, 11.8s) | Train Acc: 89.22% | Val Loss: 0.1102 Acc: 97.00%
+Epoch 02/50 (lr=4.00e-05, 11.7s) | Train Acc: 96.70% | Val Loss: 0.0342 Acc: 98.79%
+Epoch 03/50 (lr=6.00e-05, 11.7s) | Train Acc: 98.10% | Val Loss: 0.0160 Acc: 99.50%
+Epoch 04/50 (lr=8.00e-05, 11.8s) | Train Acc: 98.81% | Val Loss: 0.0136 Acc: 99.54%
+Epoch 05/50 (lr=1.00e-04, 11.7s) | Train Acc: 98.85% | Val Loss: 0.0093 Acc: 99.75%
+Epoch 06/50 (lr=9.99e-05, 11.7s) | Train Acc: 99.40% | Val Loss: 0.0050 Acc: 99.83%
+Epoch 07/50 (lr=9.95e-05, 11.6s) | Train Acc: 99.36% | Val Loss: 0.0141 Acc: 99.58%
+Epoch 08/50 (lr=9.89e-05, 11.7s) | Train Acc: 99.55% | Val Loss: 0.0114 Acc: 99.79%
+Epoch 09/50 (lr=9.81e-05, 11.9s) | Train Acc: 99.72% | Val Loss: 0.0052 Acc: 99.88%
+Epoch 10/50 (lr=9.70e-05, 11.8s) | Train Acc: 99.72% | Val Loss: 0.0071 Acc: 99.79%
+Epoch 11/50 (lr=9.57e-05, 11.9s) | Train Acc: 99.81% | Val Loss: 0.0038 Acc: 99.83%
+Epoch 12/50 (lr=9.41e-05, 12.0s) | Train Acc: 99.67% | Val Loss: 0.0056 Acc: 99.88%
+Epoch 13/50 (lr=9.24e-05, 11.7s) | Train Acc: 99.65% | Val Loss: 0.0026 Acc: 99.92%
+Epoch 14/50 (lr=9.05e-05, 12.1s) | Train Acc: 99.68% | Val Loss: 0.0062 Acc: 99.79%
+Epoch 15/50 (lr=8.83e-05, 12.1s) | Train Acc: 99.88% | Val Loss: 0.0275 Acc: 98.96%
+Epoch 16/50 (lr=8.60e-05, 12.0s) | Train Acc: 99.78% | Val Loss: 0.0007 Acc: 100.00%
+Epoch 17/50 (lr=8.35e-05, 12.0s) | Train Acc: 99.88% | Val Loss: 0.0031 Acc: 99.92%
+Epoch 18/50 (lr=8.08e-05, 11.9s) | Train Acc: 99.81% | Val Loss: 0.0012 Acc: 99.96%
+Epoch 19/50 (lr=7.80e-05, 12.1s) | Train Acc: 99.93% | Val Loss: 0.0009 Acc: 99.92%
+Epoch 20/50 (lr=7.50e-05, 12.0s) | Train Acc: 99.77% | Val Loss: 0.0037 Acc: 99.92%
+Epoch 21/50 (lr=7.19e-05, 12.0s) | Train Acc: 99.85% | Val Loss: 0.0024 Acc: 99.88%
+[Early Stop] Triggered at epoch 21 (Best: epoch 16, val_loss: 0.0007)
+
+--- Fold 2/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=23.51M | Trainable=23.51M
+Epoch 01/50 (lr=2.00e-05, 12.1s) | Train Acc: 89.10% | Val Loss: 0.1238 Acc: 95.88%
+Epoch 02/50 (lr=4.00e-05, 11.9s) | Train Acc: 96.28% | Val Loss: 0.0342 Acc: 99.08%
+Epoch 03/50 (lr=6.00e-05, 12.2s) | Train Acc: 98.15% | Val Loss: 0.0143 Acc: 99.75%
+Epoch 04/50 (lr=8.00e-05, 12.1s) | Train Acc: 98.89% | Val Loss: 0.0126 Acc: 99.62%
+Epoch 05/50 (lr=1.00e-04, 12.1s) | Train Acc: 98.84% | Val Loss: 0.0081 Acc: 99.88%
+Epoch 06/50 (lr=9.99e-05, 11.9s) | Train Acc: 99.54% | Val Loss: 0.0115 Acc: 99.67%
+Epoch 07/50 (lr=9.95e-05, 12.0s) | Train Acc: 99.59% | Val Loss: 0.0139 Acc: 99.46%
+Epoch 08/50 (lr=9.89e-05, 11.8s) | Train Acc: 99.55% | Val Loss: 0.0096 Acc: 99.79%
+Epoch 09/50 (lr=9.81e-05, 11.9s) | Train Acc: 99.61% | Val Loss: 0.0023 Acc: 99.92%
+Epoch 10/50 (lr=9.70e-05, 12.0s) | Train Acc: 99.77% | Val Loss: 0.0023 Acc: 99.92%
+Epoch 11/50 (lr=9.57e-05, 11.8s) | Train Acc: 99.52% | Val Loss: 0.0068 Acc: 99.79%
+Epoch 12/50 (lr=9.41e-05, 12.0s) | Train Acc: 99.73% | Val Loss: 0.0020 Acc: 100.00%
+Epoch 13/50 (lr=9.24e-05, 12.2s) | Train Acc: 99.82% | Val Loss: 0.0009 Acc: 100.00%
+Epoch 14/50 (lr=9.05e-05, 12.1s) | Train Acc: 99.88% | Val Loss: 0.0007 Acc: 100.00%
+Epoch 15/50 (lr=8.83e-05, 12.4s) | Train Acc: 99.73% | Val Loss: 0.0035 Acc: 99.83%
+Epoch 16/50 (lr=8.60e-05, 12.2s) | Train Acc: 99.89% | Val Loss: 0.0010 Acc: 100.00%
+Epoch 17/50 (lr=8.35e-05, 12.3s) | Train Acc: 99.90% | Val Loss: 0.0003 Acc: 100.00%
+Epoch 18/50 (lr=8.08e-05, 12.3s) | Train Acc: 99.85% | Val Loss: 0.0212 Acc: 99.54%
+Epoch 19/50 (lr=7.80e-05, 12.3s) | Train Acc: 99.68% | Val Loss: 0.0026 Acc: 99.92%
+Epoch 20/50 (lr=7.50e-05, 12.1s) | Train Acc: 99.84% | Val Loss: 0.0004 Acc: 100.00%
+Epoch 21/50 (lr=7.19e-05, 12.0s) | Train Acc: 99.90% | Val Loss: 0.0003 Acc: 100.00%
+Epoch 22/50 (lr=6.87e-05, 12.1s) | Train Acc: 99.93% | Val Loss: 0.0004 Acc: 100.00%
+[Early Stop] Triggered at epoch 22 (Best: epoch 17, val_loss: 0.0003)
+
+--- Fold 3/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=23.51M | Trainable=23.51M
+Epoch 01/50 (lr=2.00e-05, 12.3s) | Train Acc: 89.32% | Val Loss: 0.1108 Acc: 97.08%
+Epoch 02/50 (lr=4.00e-05, 12.0s) | Train Acc: 96.34% | Val Loss: 0.0599 Acc: 97.62%
+Epoch 03/50 (lr=6.00e-05, 12.0s) | Train Acc: 98.31% | Val Loss: 0.0293 Acc: 98.83%
+Epoch 04/50 (lr=8.00e-05, 12.0s) | Train Acc: 98.90% | Val Loss: 0.0315 Acc: 98.92%
+Epoch 05/50 (lr=1.00e-04, 12.1s) | Train Acc: 99.09% | Val Loss: 0.0141 Acc: 99.67%
+Epoch 06/50 (lr=9.99e-05, 12.1s) | Train Acc: 99.28% | Val Loss: 0.0073 Acc: 99.83%
+Epoch 07/50 (lr=9.95e-05, 12.1s) | Train Acc: 99.52% | Val Loss: 0.0158 Acc: 99.50%
+Epoch 08/50 (lr=9.89e-05, 12.2s) | Train Acc: 99.74% | Val Loss: 0.0109 Acc: 99.75%
+Epoch 09/50 (lr=9.81e-05, 11.9s) | Train Acc: 99.57% | Val Loss: 0.0031 Acc: 99.96%
+Epoch 10/50 (lr=9.70e-05, 12.4s) | Train Acc: 99.75% | Val Loss: 0.0122 Acc: 99.50%
+Epoch 11/50 (lr=9.57e-05, 12.3s) | Train Acc: 99.77% | Val Loss: 0.0148 Acc: 99.67%
+Epoch 12/50 (lr=9.41e-05, 12.2s) | Train Acc: 99.69% | Val Loss: 0.0065 Acc: 99.79%
+Epoch 13/50 (lr=9.24e-05, 12.3s) | Train Acc: 99.90% | Val Loss: 0.0014 Acc: 99.96%
+Epoch 14/50 (lr=9.05e-05, 12.0s) | Train Acc: 99.78% | Val Loss: 0.0026 Acc: 99.92%
+Epoch 15/50 (lr=8.83e-05, 12.1s) | Train Acc: 99.88% | Val Loss: 0.0045 Acc: 100.00%
+Epoch 16/50 (lr=8.60e-05, 12.0s) | Train Acc: 99.52% | Val Loss: 0.0026 Acc: 99.92%
+Epoch 17/50 (lr=8.35e-05, 12.1s) | Train Acc: 99.75% | Val Loss: 0.0023 Acc: 99.92%
+Epoch 18/50 (lr=8.08e-05, 12.1s) | Train Acc: 99.85% | Val Loss: 0.0016 Acc: 100.00%
+[Early Stop] Triggered at epoch 18 (Best: epoch 13, val_loss: 0.0014)
+
+--- Fold 4/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=23.51M | Trainable=23.51M
+Epoch 01/50 (lr=2.00e-05, 12.2s) | Train Acc: 89.07% | Val Loss: 0.1089 Acc: 97.17%
+Epoch 02/50 (lr=4.00e-05, 12.4s) | Train Acc: 96.24% | Val Loss: 0.0312 Acc: 99.21%
+Epoch 03/50 (lr=6.00e-05, 12.3s) | Train Acc: 98.19% | Val Loss: 0.0172 Acc: 99.58%
+Epoch 04/50 (lr=8.00e-05, 12.2s) | Train Acc: 98.79% | Val Loss: 0.0165 Acc: 99.38%
+Epoch 05/50 (lr=1.00e-04, 12.3s) | Train Acc: 99.00% | Val Loss: 0.0208 Acc: 99.33%
+Epoch 06/50 (lr=9.99e-05, 12.3s) | Train Acc: 99.43% | Val Loss: 0.0779 Acc: 98.46%
+Epoch 07/50 (lr=9.95e-05, 12.3s) | Train Acc: 99.55% | Val Loss: 0.0072 Acc: 99.83%
+Epoch 08/50 (lr=9.89e-05, 12.3s) | Train Acc: 99.68% | Val Loss: 0.0249 Acc: 99.25%
+Epoch 09/50 (lr=9.81e-05, 12.3s) | Train Acc: 99.69% | Val Loss: 0.0114 Acc: 99.42%
+Epoch 10/50 (lr=9.70e-05, 12.4s) | Train Acc: 99.56% | Val Loss: 0.0090 Acc: 99.67%
+Epoch 11/50 (lr=9.57e-05, 12.4s) | Train Acc: 99.81% | Val Loss: 0.0011 Acc: 100.00%
+Epoch 12/50 (lr=9.41e-05, 12.2s) | Train Acc: 99.85% | Val Loss: 0.0044 Acc: 99.75%
+Epoch 13/50 (lr=9.24e-05, 12.3s) | Train Acc: 99.71% | Val Loss: 0.0065 Acc: 99.75%
+Epoch 14/50 (lr=9.05e-05, 12.4s) | Train Acc: 99.79% | Val Loss: 0.0091 Acc: 99.62%
+Epoch 15/50 (lr=8.83e-05, 12.2s) | Train Acc: 99.68% | Val Loss: 0.0099 Acc: 99.83%
+Epoch 16/50 (lr=8.60e-05, 12.2s) | Train Acc: 99.81% | Val Loss: 0.0029 Acc: 99.88%
+[Early Stop] Triggered at epoch 16 (Best: epoch 11, val_loss: 0.0011)
+
+[Evaluating on 3,000 Independent Test Images]...
+
+[COMPLETED SCENARIO 1: resnet50_main]
+  CV Val Acc (5x 2,400 val imgs) : 99.99 +/- 0.02%
+  Ensemble Test Acc (3,000 imgs) : 100.00% [95% CI: 99.87-100.00%]
+  Macro F1: 1.0000 | Macro ROC-AUC: 1.000000
+
+===========================================================================
+SCENARIO 3: RESNET50_LR_1E3 (seed=2) | Model: ResNet50 | Opt: Adam | LR: 0.001 | WD: 0.0001 | Mom: 0.0 | Sched: cosine (warmup=5) | FreezeViT: True | HeadDrop: None
+===========================================================================
+
+--- Fold 0/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=23.51M | Trainable=23.51M
+Epoch 01/50 (lr=2.00e-04, 11.8s) | Train Acc: 94.96% | Val Loss: 0.0596 Acc: 97.96%
+Epoch 02/50 (lr=4.00e-04, 11.9s) | Train Acc: 97.31% | Val Loss: 0.0683 Acc: 97.96%
+Epoch 03/50 (lr=6.00e-04, 12.2s) | Train Acc: 96.96% | Val Loss: 0.0337 Acc: 98.92%
+Epoch 04/50 (lr=8.00e-04, 12.2s) | Train Acc: 96.78% | Val Loss: 0.0457 Acc: 98.00%
+Epoch 05/50 (lr=1.00e-03, 12.1s) | Train Acc: 96.78% | Val Loss: 0.2241 Acc: 91.54%
+Epoch 06/50 (lr=9.99e-04, 12.1s) | Train Acc: 97.22% | Val Loss: 0.0481 Acc: 98.21%
+Epoch 07/50 (lr=9.95e-04, 11.9s) | Train Acc: 97.47% | Val Loss: 0.7429 Acc: 84.62%
+Epoch 08/50 (lr=9.89e-04, 12.1s) | Train Acc: 97.55% | Val Loss: 0.0183 Acc: 99.33%
+Epoch 09/50 (lr=9.81e-04, 11.8s) | Train Acc: 97.33% | Val Loss: 0.0402 Acc: 98.62%
+Epoch 10/50 (lr=9.70e-04, 12.0s) | Train Acc: 97.75% | Val Loss: 0.0686 Acc: 97.62%
+Epoch 11/50 (lr=9.57e-04, 11.8s) | Train Acc: 97.75% | Val Loss: 0.0733 Acc: 97.92%
+Epoch 12/50 (lr=9.41e-04, 11.9s) | Train Acc: 97.49% | Val Loss: 0.0410 Acc: 98.33%
+Epoch 13/50 (lr=9.24e-04, 12.0s) | Train Acc: 98.01% | Val Loss: 0.0480 Acc: 98.25%
+[Early Stop] Triggered at epoch 13 (Best: epoch 8, val_loss: 0.0183)
+
+--- Fold 1/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=23.51M | Trainable=23.51M
+Epoch 01/50 (lr=2.00e-04, 12.0s) | Train Acc: 95.01% | Val Loss: 0.0275 Acc: 99.29%
+Epoch 02/50 (lr=4.00e-04, 11.8s) | Train Acc: 96.76% | Val Loss: 0.0511 Acc: 98.58%
+Epoch 03/50 (lr=6.00e-04, 11.9s) | Train Acc: 97.02% | Val Loss: 0.0744 Acc: 97.04%
+Epoch 04/50 (lr=8.00e-04, 11.7s) | Train Acc: 97.00% | Val Loss: 0.0448 Acc: 98.33%
+Epoch 05/50 (lr=1.00e-03, 12.0s) | Train Acc: 96.54% | Val Loss: 0.0418 Acc: 98.88%
+Epoch 06/50 (lr=9.99e-04, 11.9s) | Train Acc: 97.38% | Val Loss: 0.0287 Acc: 98.92%
+[Early Stop] Triggered at epoch 6 (Best: epoch 1, val_loss: 0.0275)
+
+--- Fold 2/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=23.51M | Trainable=23.51M
+Epoch 01/50 (lr=2.00e-04, 11.8s) | Train Acc: 95.22% | Val Loss: 0.0528 Acc: 97.79%
+Epoch 02/50 (lr=4.00e-04, 11.8s) | Train Acc: 97.14% | Val Loss: 0.0888 Acc: 96.04%
+Epoch 03/50 (lr=6.00e-04, 11.8s) | Train Acc: 97.22% | Val Loss: 0.0542 Acc: 98.25%
+Epoch 04/50 (lr=8.00e-04, 11.8s) | Train Acc: 97.07% | Val Loss: 0.0365 Acc: 98.58%
+Epoch 05/50 (lr=1.00e-03, 11.8s) | Train Acc: 96.76% | Val Loss: 0.0381 Acc: 98.83%
+Epoch 06/50 (lr=9.99e-04, 12.0s) | Train Acc: 97.04% | Val Loss: 0.0461 Acc: 98.42%
+Epoch 07/50 (lr=9.95e-04, 12.1s) | Train Acc: 97.03% | Val Loss: 0.1163 Acc: 95.83%
+Epoch 08/50 (lr=9.89e-04, 12.1s) | Train Acc: 97.08% | Val Loss: 0.1211 Acc: 95.00%
+Epoch 09/50 (lr=9.81e-04, 11.9s) | Train Acc: 97.62% | Val Loss: 0.0767 Acc: 97.12%
+[Early Stop] Triggered at epoch 9 (Best: epoch 4, val_loss: 0.0365)
+
+--- Fold 3/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=23.51M | Trainable=23.51M
+Epoch 01/50 (lr=2.00e-04, 11.8s) | Train Acc: 94.94% | Val Loss: 0.0257 Acc: 99.33%
+Epoch 02/50 (lr=4.00e-04, 12.0s) | Train Acc: 96.92% | Val Loss: 0.0251 Acc: 99.00%
+Epoch 03/50 (lr=6.00e-04, 12.1s) | Train Acc: 97.18% | Val Loss: 0.0902 Acc: 96.17%
+Epoch 04/50 (lr=8.00e-04, 12.0s) | Train Acc: 97.33% | Val Loss: 0.2385 Acc: 92.12%
+Epoch 05/50 (lr=1.00e-03, 11.9s) | Train Acc: 96.42% | Val Loss: 0.1390 Acc: 94.75%
+Epoch 06/50 (lr=9.99e-04, 11.9s) | Train Acc: 97.24% | Val Loss: 0.1214 Acc: 95.67%
+Epoch 07/50 (lr=9.95e-04, 11.9s) | Train Acc: 97.22% | Val Loss: 0.0390 Acc: 98.50%
+[Early Stop] Triggered at epoch 7 (Best: epoch 2, val_loss: 0.0251)
+
+--- Fold 4/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=23.51M | Trainable=23.51M
+Epoch 01/50 (lr=2.00e-04, 12.0s) | Train Acc: 94.90% | Val Loss: 0.0397 Acc: 98.62%
+Epoch 02/50 (lr=4.00e-04, 12.0s) | Train Acc: 96.64% | Val Loss: 0.0733 Acc: 97.08%
+Epoch 03/50 (lr=6.00e-04, 12.1s) | Train Acc: 97.52% | Val Loss: 0.0457 Acc: 98.54%
+Epoch 04/50 (lr=8.00e-04, 12.0s) | Train Acc: 97.11% | Val Loss: 0.1550 Acc: 95.00%
+Epoch 05/50 (lr=1.00e-03, 11.9s) | Train Acc: 96.24% | Val Loss: 0.0440 Acc: 98.46%
+Epoch 06/50 (lr=9.99e-04, 12.0s) | Train Acc: 97.64% | Val Loss: 0.0633 Acc: 97.88%
+[Early Stop] Triggered at epoch 6 (Best: epoch 1, val_loss: 0.0397)
+
+[Evaluating on 3,000 Independent Test Images]...
+
+[COMPLETED SCENARIO 3: resnet50_lr_1e3]
+  CV Val Acc (5x 2,400 val imgs) : 98.97 +/- 0.32%
+  Ensemble Test Acc (3,000 imgs) : 99.60% [95% CI: 99.30-99.77%]
+  Macro F1: 0.9960 | Macro ROC-AUC: 0.999977
+
+===========================================================================
+SCENARIO 6: VIT_S_MAIN (seed=2) | Model: ViT-S/16 | Opt: AdamW | LR: 0.0001 | WD: 0.0001 | Mom: 0.0 | Sched: cosine (warmup=5) | FreezeViT: True | HeadDrop: None
+===========================================================================
+
+--- Fold 0/4: Training (Train: 9,600, Val: 2,400) ---
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+  Params: Total=21.67M | Trainable=18.12M
+Epoch 01/50 (lr=2.00e-05, 12.2s) | Train Acc: 95.27% | Val Loss: 0.0854 Acc: 97.04%
+Epoch 02/50 (lr=4.00e-05, 12.1s) | Train Acc: 98.07% | Val Loss: 0.0610 Acc: 97.58%
+Epoch 03/50 (lr=6.00e-05, 11.9s) | Train Acc: 98.62% | Val Loss: 0.0442 Acc: 98.54%
+Epoch 04/50 (lr=8.00e-05, 12.2s) | Train Acc: 98.64% | Val Loss: 0.0103 Acc: 99.71%
+Epoch 05/50 (lr=1.00e-04, 12.1s) | Train Acc: 98.75% | Val Loss: 0.0232 Acc: 99.08%
+Epoch 06/50 (lr=9.99e-05, 12.0s) | Train Acc: 99.20% | Val Loss: 0.0278 Acc: 99.17%
+Epoch 07/50 (lr=9.95e-05, 11.8s) | Train Acc: 99.34% | Val Loss: 0.0039 Acc: 99.88%
+Epoch 08/50 (lr=9.89e-05, 12.0s) | Train Acc: 99.62% | Val Loss: 0.0094 Acc: 99.71%
+Epoch 09/50 (lr=9.81e-05, 12.0s) | Train Acc: 99.43% | Val Loss: 0.0047 Acc: 99.83%
+Epoch 10/50 (lr=9.70e-05, 12.2s) | Train Acc: 99.73% | Val Loss: 0.0012 Acc: 99.96%
+Epoch 11/50 (lr=9.57e-05, 12.1s) | Train Acc: 99.71% | Val Loss: 0.0049 Acc: 99.83%
+Epoch 12/50 (lr=9.41e-05, 12.1s) | Train Acc: 99.47% | Val Loss: 0.0247 Acc: 99.04%
+Epoch 13/50 (lr=9.24e-05, 12.3s) | Train Acc: 99.47% | Val Loss: 0.0206 Acc: 99.33%
+Epoch 14/50 (lr=9.05e-05, 12.5s) | Train Acc: 99.74% | Val Loss: 0.0036 Acc: 99.79%
+Epoch 15/50 (lr=8.83e-05, 12.2s) | Train Acc: 99.67% | Val Loss: 0.0761 Acc: 97.33%
+[Early Stop] Triggered at epoch 15 (Best: epoch 10, val_loss: 0.0012)
+
+--- Fold 1/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=21.67M | Trainable=18.12M
+Epoch 01/50 (lr=2.00e-05, 12.4s) | Train Acc: 95.03% | Val Loss: 0.0406 Acc: 98.67%
+Epoch 02/50 (lr=4.00e-05, 12.2s) | Train Acc: 98.53% | Val Loss: 0.0212 Acc: 99.12%
+Epoch 03/50 (lr=6.00e-05, 12.0s) | Train Acc: 98.35% | Val Loss: 0.0282 Acc: 98.83%
+Epoch 04/50 (lr=8.00e-05, 12.0s) | Train Acc: 98.98% | Val Loss: 0.0199 Acc: 99.21%
+Epoch 05/50 (lr=1.00e-04, 11.9s) | Train Acc: 98.91% | Val Loss: 0.0052 Acc: 99.92%
+Epoch 06/50 (lr=9.99e-05, 11.9s) | Train Acc: 99.68% | Val Loss: 0.0028 Acc: 99.92%
+Epoch 07/50 (lr=9.95e-05, 12.2s) | Train Acc: 98.93% | Val Loss: 0.0136 Acc: 99.62%
+Epoch 08/50 (lr=9.89e-05, 12.2s) | Train Acc: 99.61% | Val Loss: 0.1069 Acc: 96.54%
+Epoch 09/50 (lr=9.81e-05, 12.1s) | Train Acc: 99.56% | Val Loss: 0.0039 Acc: 99.92%
+Epoch 10/50 (lr=9.70e-05, 12.0s) | Train Acc: 99.74% | Val Loss: 0.0017 Acc: 99.92%
+Epoch 11/50 (lr=9.57e-05, 12.2s) | Train Acc: 99.66% | Val Loss: 0.0045 Acc: 99.83%
+Epoch 12/50 (lr=9.41e-05, 12.1s) | Train Acc: 99.89% | Val Loss: 0.0138 Acc: 99.38%
+Epoch 13/50 (lr=9.24e-05, 12.4s) | Train Acc: 98.95% | Val Loss: 0.0086 Acc: 99.75%
+Epoch 14/50 (lr=9.05e-05, 12.2s) | Train Acc: 99.78% | Val Loss: 0.0043 Acc: 99.88%
+Epoch 15/50 (lr=8.83e-05, 12.4s) | Train Acc: 99.91% | Val Loss: 0.0252 Acc: 99.17%
+[Early Stop] Triggered at epoch 15 (Best: epoch 10, val_loss: 0.0017)
+
+--- Fold 2/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=21.67M | Trainable=18.12M
+Epoch 01/50 (lr=2.00e-05, 12.1s) | Train Acc: 95.15% | Val Loss: 0.0533 Acc: 98.08%
+Epoch 02/50 (lr=4.00e-05, 12.1s) | Train Acc: 98.10% | Val Loss: 0.0229 Acc: 99.00%
+Epoch 03/50 (lr=6.00e-05, 11.9s) | Train Acc: 98.35% | Val Loss: 0.0109 Acc: 99.79%
+Epoch 04/50 (lr=8.00e-05, 12.1s) | Train Acc: 98.74% | Val Loss: 0.0055 Acc: 99.83%
+Epoch 05/50 (lr=1.00e-04, 11.9s) | Train Acc: 99.11% | Val Loss: 0.0033 Acc: 99.92%
+Epoch 06/50 (lr=9.99e-05, 12.1s) | Train Acc: 99.34% | Val Loss: 0.0168 Acc: 99.33%
+Epoch 07/50 (lr=9.95e-05, 12.1s) | Train Acc: 99.17% | Val Loss: 0.0070 Acc: 99.79%
+Epoch 08/50 (lr=9.89e-05, 12.1s) | Train Acc: 99.54% | Val Loss: 0.0089 Acc: 99.71%
+Epoch 09/50 (lr=9.81e-05, 12.2s) | Train Acc: 99.72% | Val Loss: 0.0002 Acc: 100.00%
+Epoch 10/50 (lr=9.70e-05, 12.1s) | Train Acc: 99.86% | Val Loss: 0.0032 Acc: 99.92%
+Epoch 11/50 (lr=9.57e-05, 12.2s) | Train Acc: 99.34% | Val Loss: 0.0185 Acc: 99.54%
+Epoch 12/50 (lr=9.41e-05, 12.1s) | Train Acc: 99.76% | Val Loss: 0.0000 Acc: 100.00%
+Epoch 13/50 (lr=9.24e-05, 12.1s) | Train Acc: 99.35% | Val Loss: 0.0031 Acc: 99.92%
+Epoch 14/50 (lr=9.05e-05, 11.8s) | Train Acc: 99.73% | Val Loss: 0.0146 Acc: 99.33%
+Epoch 15/50 (lr=8.83e-05, 12.0s) | Train Acc: 99.90% | Val Loss: 0.0001 Acc: 100.00%
+Epoch 16/50 (lr=8.60e-05, 11.9s) | Train Acc: 99.74% | Val Loss: 0.0016 Acc: 99.96%
+Epoch 17/50 (lr=8.35e-05, 11.9s) | Train Acc: 99.84% | Val Loss: 0.0022 Acc: 99.96%
+[Early Stop] Triggered at epoch 17 (Best: epoch 12, val_loss: 0.0000)
+
+--- Fold 3/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=21.67M | Trainable=18.12M
+Epoch 01/50 (lr=2.00e-05, 11.9s) | Train Acc: 95.21% | Val Loss: 0.0501 Acc: 98.46%
+Epoch 02/50 (lr=4.00e-05, 12.0s) | Train Acc: 98.03% | Val Loss: 0.0304 Acc: 98.67%
+Epoch 03/50 (lr=6.00e-05, 11.7s) | Train Acc: 98.59% | Val Loss: 0.0153 Acc: 99.58%
+Epoch 04/50 (lr=8.00e-05, 11.8s) | Train Acc: 98.77% | Val Loss: 0.0035 Acc: 99.88%
+Epoch 05/50 (lr=1.00e-04, 12.3s) | Train Acc: 98.90% | Val Loss: 0.0079 Acc: 99.75%
+Epoch 06/50 (lr=9.99e-05, 12.2s) | Train Acc: 99.18% | Val Loss: 0.0094 Acc: 99.58%
+Epoch 07/50 (lr=9.95e-05, 11.9s) | Train Acc: 99.28% | Val Loss: 0.0038 Acc: 99.92%
+Epoch 08/50 (lr=9.89e-05, 11.9s) | Train Acc: 99.69% | Val Loss: 0.0032 Acc: 99.88%
+Epoch 09/50 (lr=9.81e-05, 12.0s) | Train Acc: 99.56% | Val Loss: 0.1075 Acc: 96.04%
+Epoch 10/50 (lr=9.70e-05, 12.3s) | Train Acc: 99.61% | Val Loss: 0.0074 Acc: 99.67%
+Epoch 11/50 (lr=9.57e-05, 12.2s) | Train Acc: 99.75% | Val Loss: 0.0221 Acc: 99.46%
+Epoch 12/50 (lr=9.41e-05, 11.9s) | Train Acc: 99.57% | Val Loss: 0.0047 Acc: 99.88%
+Epoch 13/50 (lr=9.24e-05, 12.0s) | Train Acc: 99.39% | Val Loss: 0.0407 Acc: 98.42%
+[Early Stop] Triggered at epoch 13 (Best: epoch 8, val_loss: 0.0032)
+
+--- Fold 4/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=21.67M | Trainable=18.12M
+Epoch 01/50 (lr=2.00e-05, 12.1s) | Train Acc: 95.67% | Val Loss: 0.0420 Acc: 98.54%
+Epoch 02/50 (lr=4.00e-05, 12.1s) | Train Acc: 98.16% | Val Loss: 0.0234 Acc: 99.29%
+Epoch 03/50 (lr=6.00e-05, 12.0s) | Train Acc: 98.75% | Val Loss: 0.0092 Acc: 99.75%
+Epoch 04/50 (lr=8.00e-05, 12.0s) | Train Acc: 98.72% | Val Loss: 0.1593 Acc: 94.58%
+Epoch 05/50 (lr=1.00e-04, 11.9s) | Train Acc: 99.01% | Val Loss: 0.0104 Acc: 99.71%
+Epoch 06/50 (lr=9.99e-05, 12.3s) | Train Acc: 99.30% | Val Loss: 0.0138 Acc: 99.46%
+Epoch 07/50 (lr=9.95e-05, 12.4s) | Train Acc: 99.42% | Val Loss: 0.0011 Acc: 99.96%
+Epoch 08/50 (lr=9.89e-05, 12.4s) | Train Acc: 99.53% | Val Loss: 0.0042 Acc: 99.96%
+Epoch 09/50 (lr=9.81e-05, 12.3s) | Train Acc: 99.74% | Val Loss: 0.0030 Acc: 99.88%
+Epoch 10/50 (lr=9.70e-05, 12.1s) | Train Acc: 99.41% | Val Loss: 0.0054 Acc: 99.88%
+Epoch 11/50 (lr=9.57e-05, 12.1s) | Train Acc: 99.67% | Val Loss: 0.0531 Acc: 98.04%
+Epoch 12/50 (lr=9.41e-05, 12.0s) | Train Acc: 99.95% | Val Loss: 0.0002 Acc: 100.00%
+Epoch 13/50 (lr=9.24e-05, 12.3s) | Train Acc: 99.68% | Val Loss: 0.0035 Acc: 99.88%
+Epoch 14/50 (lr=9.05e-05, 12.3s) | Train Acc: 99.51% | Val Loss: 0.0026 Acc: 100.00%
+Epoch 15/50 (lr=8.83e-05, 11.8s) | Train Acc: 99.73% | Val Loss: 0.0158 Acc: 99.71%
+Epoch 16/50 (lr=8.60e-05, 12.0s) | Train Acc: 99.52% | Val Loss: 0.0010 Acc: 100.00%
+Epoch 17/50 (lr=8.35e-05, 12.1s) | Train Acc: 99.97% | Val Loss: 0.0001 Acc: 100.00%
+Epoch 18/50 (lr=8.08e-05, 11.9s) | Train Acc: 99.68% | Val Loss: 0.0058 Acc: 99.83%
+Epoch 19/50 (lr=7.80e-05, 12.0s) | Train Acc: 99.74% | Val Loss: 0.0044 Acc: 99.88%
+Epoch 20/50 (lr=7.50e-05, 12.1s) | Train Acc: 99.67% | Val Loss: 0.0022 Acc: 99.96%
+Epoch 21/50 (lr=7.19e-05, 12.2s) | Train Acc: 99.78% | Val Loss: 0.0026 Acc: 99.92%
+Epoch 22/50 (lr=6.87e-05, 12.3s) | Train Acc: 99.98% | Val Loss: 0.0006 Acc: 99.96%
+[Early Stop] Triggered at epoch 22 (Best: epoch 17, val_loss: 0.0001)
+
+[Evaluating on 3,000 Independent Test Images]...
+
+[COMPLETED SCENARIO 6: vit_s_main]
+  CV Val Acc (5x 2,400 val imgs) : 99.95 +/- 0.05%
+  Ensemble Test Acc (3,000 imgs) : 100.00% [95% CI: 99.87-100.00%]
+  Macro F1: 1.0000 | Macro ROC-AUC: 1.000000
+
+===========================================================================
+SCENARIO 8: VIT_S_LR_1E3 (seed=2) | Model: ViT-S/16 | Opt: AdamW | LR: 0.001 | WD: 0.0001 | Mom: 0.0 | Sched: cosine (warmup=5) | FreezeViT: True | HeadDrop: None
+===========================================================================
+
+--- Fold 0/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=21.67M | Trainable=18.12M
+Epoch 01/50 (lr=2.00e-04, 11.7s) | Train Acc: 92.25% | Val Loss: 0.1887 Acc: 92.29%
+Epoch 02/50 (lr=4.00e-04, 11.9s) | Train Acc: 93.23% | Val Loss: 0.1118 Acc: 95.08%
+Epoch 03/50 (lr=6.00e-04, 11.8s) | Train Acc: 95.05% | Val Loss: 0.1034 Acc: 96.17%
+Epoch 04/50 (lr=8.00e-04, 12.1s) | Train Acc: 94.39% | Val Loss: 0.0968 Acc: 96.46%
+Epoch 05/50 (lr=1.00e-03, 11.8s) | Train Acc: 93.71% | Val Loss: 0.0990 Acc: 96.17%
+Epoch 06/50 (lr=9.99e-04, 11.9s) | Train Acc: 94.90% | Val Loss: 0.1424 Acc: 93.42%
+Epoch 07/50 (lr=9.95e-04, 12.2s) | Train Acc: 94.89% | Val Loss: 0.2455 Acc: 89.38%
+Epoch 08/50 (lr=9.89e-04, 11.9s) | Train Acc: 94.85% | Val Loss: 0.2080 Acc: 90.38%
+Epoch 09/50 (lr=9.81e-04, 11.9s) | Train Acc: 94.73% | Val Loss: 0.1190 Acc: 94.62%
+[Early Stop] Triggered at epoch 9 (Best: epoch 4, val_loss: 0.0968)
+
+--- Fold 1/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=21.67M | Trainable=18.12M
+Epoch 01/50 (lr=2.00e-04, 11.9s) | Train Acc: 91.72% | Val Loss: 0.0618 Acc: 98.08%
+Epoch 02/50 (lr=4.00e-04, 12.1s) | Train Acc: 94.60% | Val Loss: 0.0383 Acc: 98.54%
+Epoch 03/50 (lr=6.00e-04, 12.2s) | Train Acc: 93.86% | Val Loss: 0.1285 Acc: 95.46%
+Epoch 04/50 (lr=8.00e-04, 12.0s) | Train Acc: 94.51% | Val Loss: 0.2835 Acc: 90.04%
+Epoch 05/50 (lr=1.00e-03, 12.2s) | Train Acc: 93.94% | Val Loss: 0.0875 Acc: 97.12%
+Epoch 06/50 (lr=9.99e-04, 12.1s) | Train Acc: 94.71% | Val Loss: 0.1606 Acc: 92.71%
+Epoch 07/50 (lr=9.95e-04, 12.1s) | Train Acc: 94.84% | Val Loss: 0.0680 Acc: 97.46%
+[Early Stop] Triggered at epoch 7 (Best: epoch 2, val_loss: 0.0383)
+
+--- Fold 2/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=21.67M | Trainable=18.12M
+Epoch 01/50 (lr=2.00e-04, 12.0s) | Train Acc: 92.15% | Val Loss: 0.0647 Acc: 97.88%
+Epoch 02/50 (lr=4.00e-04, 12.3s) | Train Acc: 94.31% | Val Loss: 0.0890 Acc: 96.96%
+Epoch 03/50 (lr=6.00e-04, 12.3s) | Train Acc: 94.16% | Val Loss: 0.0808 Acc: 97.33%
+Epoch 04/50 (lr=8.00e-04, 12.1s) | Train Acc: 94.45% | Val Loss: 0.1363 Acc: 94.71%
+Epoch 05/50 (lr=1.00e-03, 12.2s) | Train Acc: 93.31% | Val Loss: 0.1527 Acc: 94.54%
+Epoch 06/50 (lr=9.99e-04, 12.4s) | Train Acc: 93.78% | Val Loss: 0.2184 Acc: 91.54%
+[Early Stop] Triggered at epoch 6 (Best: epoch 1, val_loss: 0.0647)
+
+--- Fold 3/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=21.67M | Trainable=18.12M
+Epoch 01/50 (lr=2.00e-04, 12.1s) | Train Acc: 92.22% | Val Loss: 0.0657 Acc: 97.75%
+Epoch 02/50 (lr=4.00e-04, 12.5s) | Train Acc: 94.86% | Val Loss: 0.0491 Acc: 98.17%
+Epoch 03/50 (lr=6.00e-04, 12.2s) | Train Acc: 95.48% | Val Loss: 0.0568 Acc: 98.00%
+Epoch 04/50 (lr=8.00e-04, 12.6s) | Train Acc: 93.51% | Val Loss: 0.3704 Acc: 86.12%
+Epoch 05/50 (lr=1.00e-03, 12.0s) | Train Acc: 93.38% | Val Loss: 0.1107 Acc: 95.71%
+Epoch 06/50 (lr=9.99e-04, 12.3s) | Train Acc: 94.70% | Val Loss: 0.1139 Acc: 95.08%
+Epoch 07/50 (lr=9.95e-04, 12.1s) | Train Acc: 95.38% | Val Loss: 0.0953 Acc: 96.42%
+[Early Stop] Triggered at epoch 7 (Best: epoch 2, val_loss: 0.0491)
+
+--- Fold 4/4: Training (Train: 9,600, Val: 2,400) ---
+  Params: Total=21.67M | Trainable=18.12M
+Epoch 01/50 (lr=2.00e-04, 12.1s) | Train Acc: 90.88% | Val Loss: 0.1186 Acc: 95.29%
+Epoch 02/50 (lr=4.00e-04, 12.0s) | Train Acc: 93.78% | Val Loss: 0.1081 Acc: 95.88%
+Epoch 03/50 (lr=6.00e-04, 12.1s) | Train Acc: 94.45% | Val Loss: 0.1746 Acc: 92.08%
+Epoch 04/50 (lr=8.00e-04, 12.4s) | Train Acc: 93.22% | Val Loss: 0.1863 Acc: 93.04%
+Epoch 05/50 (lr=1.00e-03, 12.1s) | Train Acc: 93.58% | Val Loss: 0.1434 Acc: 94.38%
+Epoch 06/50 (lr=9.99e-04, 12.5s) | Train Acc: 93.61% | Val Loss: 0.1243 Acc: 94.83%
+Epoch 07/50 (lr=9.95e-04, 12.6s) | Train Acc: 95.32% | Val Loss: 0.1247 Acc: 94.50%
+[Early Stop] Triggered at epoch 7 (Best: epoch 2, val_loss: 0.1081)
+
+[Evaluating on 3,000 Independent Test Images]...
+
+[COMPLETED SCENARIO 8: vit_s_lr_1e3]
+  CV Val Acc (5x 2,400 val imgs) : 97.38 +/- 1.03%
+  Ensemble Test Acc (3,000 imgs) : 98.37% [95% CI: 97.85-98.76%]
+  Macro F1: 0.9837 | Macro ROC-AUC: 0.999321
+
+[OK] All scenario training routines completed!

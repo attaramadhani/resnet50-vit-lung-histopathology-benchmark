@@ -1,0 +1,250 @@
+
+==========================================================================
+  LUNGHIST700 FINE-TUNING: results_rev1/WP06/wp06b/e7_r50_hed
+  Arch: resnet50 | Split: patient | Magnification: All (20x + 40x)
+  Init: ImageNet-1K
+  Root: data/LungHist700/data/images/
+==========================================================================
+Reusing existing fold file: data_splits/folds_patient.csv
+Fold 0: stopped at epoch 12 (best: 4), test acc 66.90% (n=142)
+Fold 1: stopped at epoch 13 (best: 5), test acc 65.69% (n=137)
+Fold 2: stopped at epoch 15 (best: 7), test acc 69.12% (n=136)
+Fold 3: stopped at epoch 13 (best: 5), test acc 71.53% (n=137)
+Fold 4: stopped at epoch 17 (best: 9), test acc 79.14% (n=139)
+
+[OK] Results saved for results_rev1/WP06/wp06b/e7_r50_hed:
+{
+  "n": 691,
+  "correct": 487,
+  "acc": 70.47756874095514,
+  "bal_acc": 71.589828493802,
+  "macro_f1": 0.7161591638943907,
+  "macro_auc": 0.8632356545903285,
+  "acc_ci": [
+    66.97085215239889,
+    73.75786320889138
+  ],
+  "f1_per_class": [
+    0.6824,
+    0.7829,
+    0.6832
+  ],
+  "confusion": [
+    [
+      203,
+      26,
+      51
+    ],
+    [
+      25,
+      119,
+      7
+    ],
+    [
+      87,
+      8,
+      165
+    ]
+  ],
+  "acc_cluster_ci": [
+    64.20862490754963,
+    76.62528772590632
+  ],
+  "recall_per_class": [
+    72.5,
+    78.80794701986756,
+    63.46153846153846
+  ],
+  "acc_by_mag": {
+    "40x": 72.89,
+    "20x": 68.25
+  },
+  "config": {
+    "csv": "data_splits/lunghist700.csv",
+    "root": "data/LungHist700/data/images/",
+    "data_root": "",
+    "arch": "resnet50",
+    "init": null,
+    "split": "patient",
+    "folds": "data_splits/folds_patient.csv",
+    "folds_out": null,
+    "magnification": null,
+    "size": 224,
+    "epochs": 50,
+    "patience": 8,
+    "lr": 0.0001,
+    "bs": 32,
+    "seed": 42,
+    "hed_jitter": 0.05,
+    "freeze_vit": 1,
+    "out": "results_rev1/WP06/wp06b/e7_r50_hed",
+    "no_pretrained": false
+  }
+}
+
+==========================================================================
+  LUNGHIST700 FINE-TUNING: results_rev1/WP06/wp06b/e7_r50_lcinit_hed
+  Arch: resnet50 | Split: patient | Magnification: All (20x + 40x)
+  Init: old_ckpts/runs/resnet50_main/fold0.pt
+  Root: data/LungHist700/data/images/
+==========================================================================
+Reusing existing fold file: data_splits/folds_patient.csv
+Fold 0: stopped at epoch 12 (best: 4), test acc 79.58% (n=142)
+Fold 1: stopped at epoch 13 (best: 5), test acc 67.15% (n=137)
+Fold 2: stopped at epoch 10 (best: 2), test acc 63.97% (n=136)
+Fold 3: stopped at epoch 16 (best: 8), test acc 70.07% (n=137)
+Fold 4: stopped at epoch 17 (best: 9), test acc 71.94% (n=139)
+
+[OK] Results saved for results_rev1/WP06/wp06b/e7_r50_lcinit_hed:
+{
+  "n": 691,
+  "correct": 488,
+  "acc": 70.62228654124458,
+  "bal_acc": 71.30928122649976,
+  "macro_f1": 0.7184349879450731,
+  "macro_auc": 0.878680034349877,
+  "acc_ci": [
+    67.11959151828422,
+    73.89695928725547
+  ],
+  "f1_per_class": [
+    0.6679,
+    0.782,
+    0.7054
+  ],
+  "confusion": [
+    [
+      187,
+      17,
+      76
+    ],
+    [
+      29,
+      113,
+      9
+    ],
+    [
+      64,
+      8,
+      188
+    ]
+  ],
+  "acc_cluster_ci": [
+    63.569704231938275,
+    76.63888438617401
+  ],
+  "recall_per_class": [
+    66.78571428571428,
+    74.83443708609272,
+    72.3076923076923
+  ],
+  "acc_by_mag": {
+    "40x": 73.8,
+    "20x": 67.69
+  },
+  "config": {
+    "csv": "data_splits/lunghist700.csv",
+    "root": "data/LungHist700/data/images/",
+    "data_root": "",
+    "arch": "resnet50",
+    "init": "old_ckpts/runs/resnet50_main/fold0.pt",
+    "split": "patient",
+    "folds": "data_splits/folds_patient.csv",
+    "folds_out": null,
+    "magnification": null,
+    "size": 224,
+    "epochs": 50,
+    "patience": 8,
+    "lr": 0.0001,
+    "bs": 32,
+    "seed": 42,
+    "hed_jitter": 0.05,
+    "freeze_vit": 1,
+    "out": "results_rev1/WP06/wp06b/e7_r50_lcinit_hed",
+    "no_pretrained": false
+  }
+}
+
+==========================================================================
+  LUNGHIST700 FINE-TUNING: results_rev1/WP06/wp06b/e7_vit_hed
+  Arch: vit_s16 | Split: patient | Magnification: All (20x + 40x)
+  Init: ImageNet-1K
+  Root: data/LungHist700/data/images/
+==========================================================================
+Reusing existing fold file: data_splits/folds_patient.csv
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fold 0: stopped at epoch 23 (best: 15), test acc 69.72% (n=142)
+Fold 1: stopped at epoch 19 (best: 11), test acc 70.07% (n=137)
+Fold 2: stopped at epoch 21 (best: 13), test acc 69.85% (n=136)
+Fold 3: stopped at epoch 19 (best: 11), test acc 71.53% (n=137)
+Fold 4: stopped at epoch 14 (best: 6), test acc 72.66% (n=139)
+
+[OK] Results saved for results_rev1/WP06/wp06b/e7_vit_hed:
+{
+  "n": 691,
+  "correct": 489,
+  "acc": 70.76700434153402,
+  "bal_acc": 72.41885597845862,
+  "macro_f1": 0.7223673130213758,
+  "macro_auc": 0.8631420341122954,
+  "acc_ci": [
+    67.26837178255785,
+    74.03601446723124
+  ],
+  "f1_per_class": [
+    0.6702,
+    0.8078,
+    0.6891
+  ],
+  "confusion": [
+    [
+      191,
+      25,
+      64
+    ],
+    [
+      20,
+      124,
+      7
+    ],
+    [
+      79,
+      7,
+      174
+    ]
+  ],
+  "acc_cluster_ci": [
+    64.02620405462145,
+    76.83124041891718
+  ],
+  "recall_per_class": [
+    68.21428571428572,
+    82.11920529801324,
+    66.92307692307692
+  ],
+  "acc_by_mag": {
+    "40x": 73.49,
+    "20x": 68.25
+  },
+  "config": {
+    "csv": "data_splits/lunghist700.csv",
+    "root": "data/LungHist700/data/images/",
+    "data_root": "",
+    "arch": "vit_s16",
+    "init": null,
+    "split": "patient",
+    "folds": "data_splits/folds_patient.csv",
+    "folds_out": null,
+    "magnification": null,
+    "size": 224,
+    "epochs": 50,
+    "patience": 8,
+    "lr": 0.0001,
+    "bs": 32,
+    "seed": 42,
+    "hed_jitter": 0.05,
+    "freeze_vit": 1,
+    "out": "results_rev1/WP06/wp06b/e7_vit_hed",
+    "no_pretrained": false
+  }
+}

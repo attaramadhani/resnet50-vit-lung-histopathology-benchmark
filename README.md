@@ -29,8 +29,14 @@ Official **v2.0.0** open-science replication package for manuscript **CMPBUP-D-2
 | `src/verify_vit_checkpoint.py` | Pretrained weight equivalence (`timm` vs `WinKawaks/vit-small-patch16-224`) | **Section 3.3** |
 | `scripts/generate_manuscript_figures.py` | Reproduces 300 DPI plots from `logs_and_metrics/` | **Figs. 2, 3, 4, 5, 7, 8, Fig. S1** |
 | `scripts/generate_xai_visual_gallery_v2.py` | 6 test-image XAI gallery (first 2/class from `exp2_images.csv`) | **Fig. 6** |
-| `scripts/wp01_shortcut_lc25000.py` | LC25000 shallow-feature shortcut test (6 feature sets × 2 classifiers) | **Revision WP01** |
-| `scripts/wp02_audit_validation.py` | Synthetic sibling validation & sensitivity grid for Exp 4 audit | **Revision WP02** |
+| `scripts/wp01_shortcut_lc25000.py` | LC25000 shallow-feature shortcut test (6 feature sets × 2 classifiers) | **Revision WP01 (`results_rev1/WP01/`)** |
+| `scripts/wp02_audit_validation.py` | Synthetic sibling validation & sensitivity grid for Exp 4 audit | **Revision WP02 (`results_rev1/WP02/`)** |
+| `runpod_rev1/02_run_wp03_wp05.sh` | Matched-recipe (`AdamW`, `wd=0.05`, `warmup=5+cosine`, `freeze=0`) & G1/G2 OOF export | **Revision WP03 & WP05 (`results_rev1/WP03/`, `WP05/`)** |
+| `runpod_rev1/03_run_wp04a_multiseed.sh` | Multi-seed replication (`seeds 1, 2`) across S1–S14 & G1–G2 | **Revision WP04a (`results_rev1/WP04a/`)** |
+| `runpod_rev1/04_run_wp04b_c_sweep.sh` | 7-point LR sweep (`seed 42`, SGDM `m=0.9`) & Warmup+Cosine ablation | **Revision WP04b & WP04c (`results_rev1/WP04b/`, `WP04c/`)** |
+| `scripts/wp06a_stain_norm_zeroshot.py`, `scripts/wp06d_foundation_linear_probe.py`, `scripts/wp06e_stronger_protocol.py`, `scripts/wp06f_domain_shift.py` | LungHist700 stain norm zero-shot, HED jitter, LC25000-init ViT, Phikon/CTransPath linear probe, tiling 512 + orig 80/10/10, & domain shift | **Revision WP06 (`results_rev1/WP06/`)** |
+| `scripts/wp07_xai_lightweight.py` | Adebayo cascading randomization (`WP07-c`), spatially-matched Gaussian random baseline (`WP07-a`), per-class median/IQR (`WP07-d`) | **Revision WP07 (`results_rev1/WP07/`)** |
+| `scripts/wp05_wp06_bootstrap_stats.py` | Wilson 95% CI, 2,000× cluster-bootstrap CI, ECE (15-bin), Brier, per-class sens/spec | **`results_rev1/Statistik_CI_Kalibrasi_SensSpec.csv`** |
 
 ---
 
@@ -77,7 +83,21 @@ resnet50-vit-lung-histopathology-benchmark/
 │   ├── generate_xai_visual_gallery_v2.py
 │   ├── wp01_shortcut_lc25000.py
 │   └── wp02_audit_validation.py
-├── figures/                        # Reproduced figures matching manuscript Figs 2–8 & S1
+├── figures/                        # Original v2.0.0/v2.0.1 manuscript figures (Figs 2–8 & S1, preserved untouched)
+├── figures_rev1/                   # Revision R1 updated figures (Fig. 2, 6, 7, 8 fixes + WP04b LR sweep & WP06 plots)
+├── results_rev1/                   # Complete Revision R1 logs, configs, metrics, & per-image CSV predictions (WP01–WP07, COMPUTE)
+│   ├── WP01/                       # Shallow color/thumbnail shortcut tests
+│   ├── WP02/                       # Near-duplicate audit grid (64 configs, 150 synthetic families)
+│   ├── WP03/                       # Matched-recipe 3-seed comparison (image-level vs group-aware, 72 pred CSVs)
+│   ├── WP04a/ WP04b/ WP04c/        # Multi-seed S1–S14/G1–G2, 7-point LR sweep (SGDM m=0.9), Warmup+Cosine
+│   ├── WP05/                       # Clean baseline G1/G2 5-fold + ensemble predictions (exp4_grouped_split.csv)
+│   ├── WP06/                       # LungHist700: wp06a–wp06f (Phikon, CTransPath, tiling, 80/10/10, FID/MMD)
+│   ├── WP07/                       # Lightweight XAI: Adebayo randomization, spatial-matched random, median/IQR
+│   ├── COMPUTE/                    # Single-session GPU compute profiling (ResNet50, ViT frozen, ViT unfrozen)
+│   ├── FIG6/                       # Updated Fig. 6 ('ViT-S/16 rollout map')
+│   ├── logs/                       # Complete terminal execution logs
+│   └── Statistik_CI_Kalibrasi_SensSpec.csv  # Cluster-bootstrap CIs, ECE, Brier, per-class sens/spec
+├── runpod_rev1/                    # Reproducible Revision R1 orchestration & verification scripts
 ├── logs_and_metrics/               # Raw experimental logs & compiled tables
 │   ├── tables_for_manuscript.md    # Auto-compiled Tables 2–6 with file provenance
 │   ├── environment.txt             # Software versions, NVIDIA RTX 4090 info, and SHA-256 checksums

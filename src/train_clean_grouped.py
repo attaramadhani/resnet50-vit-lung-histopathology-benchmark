@@ -16,9 +16,10 @@ Implements Section 8 of implementation_plan2.md:
       - runs/clean_{arch}/history.csv
 """
 import argparse
-import copy
 import json
+import math
 import os
+import random
 import time
 import numpy as np
 import pandas as pd
@@ -28,6 +29,8 @@ from torch.utils.data import DataLoader
 
 from common import (build_model, train_transform, eval_transform, get_lc25000_root,
                     ImageList, label_to_int, metrics, count_parameters)
+from train_scenarios import (set_seed, build_optimizer, compute_epoch_lr,
+                             set_optimizer_lr, resolve_split_csv)
 
 
 def main():
@@ -40,20 +43,31 @@ def main():
     ap.add_argument("--bs", type=int, default=32)
     ap.add_argument("--lr", type=float, default=1e-4)
     ap.add_argument("--wd", type=float, default=1e-4)
+    ap.add_argument("--mom", type=float, default=0.0)
+    ap.add_argument("--opt", default=None, choices=[None, "Adam", "AdamW", "RMSprop", "SGD"],
+                    help="Override optimizer (default: Adam for ResNet50, AdamW for ViT-S/16)")
+    ap.add_argument("--warmup_epochs", type=int, default=0)
+    ap.add_argument("--sched", default="none", choices=["none", "cosine"])
+    ap.add_argument("--freeze_vit", type=int, default=1, choices=[0, 1])
+    ap.add_argument("--head_dropout", type=float, default=None)
     ap.add_argument("--seed", type=int, default=42)
+    ap.add_argument("--out_root", default="runs")
+    ap.add_argument("--run_prefix", default="clean")
+    ap.add_argument("--arches", default="resnet50,vit_s16")
+    ap.add_argument("--force", action="store_true")
     args = ap.parse_args()
 
     dev = "cuda" if torch.cuda.is_available() else "cpu"
-    torch.manual_seed(args.seed)
-    np.random.seed(args.seed)
+    set_seed(args.seed)
 
     root_dir = get_lc25000_root(args.data_root or args.root)
+    csv_path = resolve_split_csv(args.csv)
 
-    if not os.path.exists(args.csv):
-        print(f"[Skip] {args.csv} does not exist yet. Run exp4_duplicate_audit.py first.")
+    if not os.path.exists(csv_path):
+        print(f"[Skip] {csv_path} does not exist yet. Run exp4_duplicate_audit.py first.")
         return
 
-    df = pd.read_csv(args.csv)
+    df = pd.read_csv(csv_path)
     df["label_id"] = df["label"].map(label_to_int)
 
     dev_df = df[df["partition"] == "dev"].reset_index(drop=True)
@@ -73,19 +87,61 @@ def main():
     assert leakage == 0, f"Error: Group leakage detected: {leakage} overlapping groups!"
     print(f"[Verification] Confirmed 0% group leakage between Dev and Test ({len(dev_groups)} dev grps, {len(test_groups)} test grps)")
 
-    clean_results = {}
-    per_fold_val_rows = []
+    is_legacy_root = (os.path.normpath(args.out_root) == "runs")
+    os.makedirs(args.out_root, exist_ok=True)
+    freeze_vit_flag = bool(args.freeze_vit)
+    arches = [x.strip() for x in args.arches.split(",") if x.strip()]
 
-    for arch in ["resnet50", "vit_s16"]:
-        print(f"\n{'-'*60}\nTraining {arch.upper()} on 5-Fold Grouped Split\n{'-'*60}")
-        out_dir = os.path.join("runs", f"clean_{arch}")
+    val_csv_out = "exp4_per_fold_val.csv" if is_legacy_root else os.path.join(args.out_root, "exp4_per_fold_val.csv")
+    test_csv_out = "exp4_per_fold_test.csv" if is_legacy_root else os.path.join(args.out_root, "exp4_per_fold_test.csv")
+    json_out = "exp4_clean_benchmark.json" if is_legacy_root else os.path.join(args.out_root, "exp4_clean_benchmark.json")
+
+    clean_results = {}
+    if os.path.exists(json_out) and not args.force:
+        try:
+            with open(json_out, "r", encoding="utf-8") as fp:
+                clean_results = json.load(fp)
+        except Exception:
+            clean_results = {}
+
+    val_map = {}
+    if os.path.exists(val_csv_out):
+        try:
+            for r in pd.read_csv(val_csv_out).to_dict(orient="records"):
+                val_map[f"{r['scenario']}_s{r.get('seed', 42)}_{r['fold']}"] = r
+        except Exception:
+            pass
+    test_map = {}
+    if os.path.exists(test_csv_out):
+        try:
+            for r in pd.read_csv(test_csv_out).to_dict(orient="records"):
+                test_map[f"{r['scenario']}_s{r.get('seed', 42)}_{r['fold']}"] = r
+        except Exception:
+            pass
+
+    for arch in arches:
+        opt_name = args.opt if args.opt is not None else ("Adam" if arch == "resnet50" else "AdamW")
+        run_tag = f"{args.run_prefix}_{arch}" if is_legacy_root else os.path.join(f"seed_{args.seed}", f"{args.run_prefix}_{arch}")
+        out_dir = os.path.join(args.out_root, run_tag)
         os.makedirs(out_dir, exist_ok=True)
+        sc_label = f"{args.run_prefix}_{arch}"
+        res_key = arch if is_legacy_root else f"{arch}_seed{args.seed}"
+
+        print(f"\n{'-'*60}\nTraining {arch.upper()} on 5-Fold Grouped Split (seed={args.seed}, opt={opt_name}, lr={args.lr}, wd={args.wd}, sched={args.sched}, warmup={args.warmup_epochs}, freeze_vit={freeze_vit_flag}, drop={args.head_dropout})\n{'-'*60}")
+        with open(os.path.join(out_dir, "config.yaml"), "w", encoding="utf-8") as f:
+            f.write(
+                f"arch: {arch}\nopt: {opt_name}\nlr: {args.lr}\nwd: {args.wd}\nmom: {args.mom}\n"
+                f"epochs: {args.epochs}\npatience: {args.patience}\nbs: {args.bs}\nseed: {args.seed}\n"
+                f"sched: {args.sched}\nwarmup_epochs: {args.warmup_epochs}\nfreeze_vit: {int(freeze_vit_flag)}\n"
+                f"head_dropout: {args.head_dropout}\nsplit: group_aware\n"
+            )
 
         fold_val_accs = []
         fold_models = []
         fold_epochs_run = []
 
         for fold in range(5):
+            set_seed(args.seed)
             fold_dir = os.path.join(out_dir, f"fold_{fold}")
             os.makedirs(fold_dir, exist_ok=True)
             ckpt_path = os.path.join(out_dir, f"fold{fold}.pt")
@@ -97,22 +153,16 @@ def main():
             val_sub_df = dev_df[val_mask].reset_index(drop=True)
 
             # Check if fold already trained
-            if os.path.exists(ckpt_path) and os.path.exists(hist_csv_path):
+            if os.path.exists(ckpt_path) and os.path.exists(hist_csv_path) and not args.force:
                 print(f"--- Fold {fold}/4: Checkpoint exists ({ckpt_path}). Loading ---")
-                m = build_model(arch, num_classes=3, pretrained=False, freeze_vit_blocks=True).to(dev)
+                m = build_model(arch, num_classes=3, pretrained=False, freeze_vit_blocks=freeze_vit_flag, head_dropout=args.head_dropout).to(dev)
                 m.load_state_dict(torch.load(ckpt_path, map_location=dev))
                 df_hist = pd.read_csv(hist_csv_path)
                 fold_epochs_run.append(len(df_hist))
             else:
                 print(f"--- Fold {fold}/4: Training (Train: {len(train_sub_df)}, Val: {len(val_sub_df)}) ---")
-                m = build_model(arch, num_classes=3, pretrained=True, freeze_vit_blocks=True).to(dev)
-                trainable_params = [p for p in m.parameters() if p.requires_grad]
-
-                if arch == "resnet50":
-                    opt = torch.optim.Adam(trainable_params, lr=args.lr, weight_decay=args.wd)
-                else:
-                    opt = torch.optim.AdamW(trainable_params, lr=args.lr, weight_decay=args.wd)
-
+                m = build_model(arch, num_classes=3, pretrained=True, freeze_vit_blocks=freeze_vit_flag, head_dropout=args.head_dropout).to(dev)
+                opt = build_optimizer(m, opt_name, args.lr, args.wd, args.mom)
                 crit = nn.CrossEntropyLoss()
                 scaler = torch.amp.GradScaler(enabled=(dev == "cuda"))
 
@@ -131,6 +181,8 @@ def main():
                 hist_rows = []
 
                 for ep in range(1, args.epochs + 1):
+                    ep_lr = compute_epoch_lr(args.lr, ep, args.epochs, args.sched, args.warmup_epochs)
+                    set_optimizer_lr(opt, ep_lr)
                     t0 = time.time()
                     m.train()
                     tr_loss, tr_corr, tr_tot = 0.0, 0, 0
@@ -169,6 +221,7 @@ def main():
 
                     hist_rows.append({
                         "epoch": ep,
+                        "lr": ep_lr,
                         "train_loss": round(tr_ep_loss, 4),
                         "train_acc": round(tr_ep_acc, 2),
                         "val_loss": round(va_ep_loss, 4),
@@ -176,9 +229,11 @@ def main():
                         "time_s": round(ep_time, 2)
                     })
 
-                    print(f"Epoch {ep:02d}/{args.epochs:02d} | Train Acc: {tr_ep_acc:.2f}% | Val Loss: {va_ep_loss:.4f} Acc: {va_ep_acc:.2f}% ({ep_time:.1f}s)")
+                    print(f"Epoch {ep:02d}/{args.epochs:02d} (lr={ep_lr:.2e}) | Train Acc: {tr_ep_acc:.2f}% | Val Loss: {va_ep_loss:.4f} Acc: {va_ep_acc:.2f}% ({ep_time:.1f}s)")
 
-                    if va_ep_loss < best_val_loss:
+                    if not os.path.exists(ckpt_path):
+                        torch.save(m.state_dict(), ckpt_path)
+                    if math.isfinite(va_ep_loss) and va_ep_loss < best_val_loss:
                         best_val_loss = va_ep_loss
                         best_epoch = ep
                         patience_counter = 0
@@ -214,15 +269,18 @@ def main():
             fold_val_accs.append(f_val_acc)
             fold_models.append(m)
 
-            per_fold_val_rows.append({
-                "scenario": f"clean_{arch}",
+            v_entry = {
+                "scenario": sc_label,
+                "seed": args.seed,
                 "fold": fold,
                 "n_val": v_tot,
                 "correct": v_corr,
-                "val_acc": round(f_val_acc, 2),
-                "val_loss": round(v_loss / v_tot, 4),
+                "val_acc": round(f_val_acc, 4),
+                "val_loss": round(v_loss / v_tot, 6),
                 "epochs_run": fold_epochs_run[-1]
-            })
+            }
+            val_map[f"{sc_label}_s{args.seed}_{fold}"] = v_entry
+            pd.DataFrame(list(val_map.values())).to_csv(val_csv_out, index=False)
             print(f"[Fold {fold} Grouped] Val Acc: {f_val_acc:.2f}% (n_val={v_tot})")
 
         # Soft-voting ensemble evaluated ONCE on the test partition after all 5 folds complete
@@ -231,6 +289,8 @@ def main():
         test_loader = DataLoader(test_ds, batch_size=args.bs, shuffle=False, num_workers=4, pin_memory=(dev == "cuda"))
 
         fold_probs = []
+        y_test = test_df["label_id"].to_numpy()
+        fold_test_accs = []
         for fold, m_fold in enumerate(fold_models):
             m_fold.eval()
             p_list = []
@@ -239,33 +299,71 @@ def main():
                     x = x.to(dev)
                     out = m_fold(x)
                     p_list.append(torch.softmax(out.float(), dim=1).cpu().numpy())
-            fold_probs.append(np.concatenate(p_list, axis=0))
+            probs_f = np.concatenate(p_list, axis=0)
+            fold_probs.append(probs_f)
+            f_corr = int((probs_f.argmax(1) == y_test).sum())
+            f_t_acc = 100.0 * f_corr / len(y_test)
+            fold_test_accs.append(round(f_t_acc, 4))
+
+            f_pred_df = test_df[["path", "label", "label_id"]].copy()
+            if "group" in test_df.columns:
+                f_pred_df["group"] = test_df["group"].values
+            f_pred_df[["p_ACA", "p_N", "p_SCC"]] = probs_f
+            f_pred_df["pred"] = probs_f.argmax(1)
+            f_pred_df.to_csv(os.path.join(out_dir, f"fold_{fold}", "test_preds.csv"), index=False)
+
+            test_map[f"{sc_label}_s{args.seed}_{fold}"] = {
+                "scenario": sc_label,
+                "seed": args.seed,
+                "fold": fold,
+                "n_test": len(y_test),
+                "correct": f_corr,
+                "test_acc": round(f_t_acc, 4)
+            }
 
         ens_test_prob = np.mean(fold_probs, axis=0)
-        y_test = test_df["label_id"].to_numpy()
         ens_metrics = metrics(y_test, ens_test_prob)
 
-        clean_results[arch] = {
+        ens_pred_df = test_df[["path", "label", "label_id"]].copy()
+        if "group" in test_df.columns:
+            ens_pred_df["group"] = test_df["group"].values
+        ens_pred_df[["p_ACA", "p_N", "p_SCC"]] = ens_test_prob
+        ens_pred_df["pred"] = ens_test_prob.argmax(1)
+        ens_pred_df.to_csv(os.path.join(out_dir, "ensemble_test_preds.csv"), index=False)
+
+        clean_results[res_key] = {
+            "arch": arch,
+            "seed": args.seed,
+            "opt": opt_name,
+            "lr": args.lr,
+            "wd": args.wd,
+            "sched": args.sched,
+            "warmup_epochs": args.warmup_epochs,
+            "freeze_vit": int(freeze_vit_flag),
+            "head_dropout": args.head_dropout,
             "cv_val_accuracy": {
-                "per_fold": [round(x, 2) for x in fold_val_accs],
+                "per_fold": [round(x, 4) for x in fold_val_accs],
                 "mean": round(float(np.mean(fold_val_accs)), 2),
                 "std": round(float(np.std(fold_val_accs, ddof=1)), 2)
             },
+            "fold_test_accuracy": fold_test_accs,
             "ensemble_clean_test": ens_metrics,
             "epochs_completed": fold_epochs_run
         }
+        with open(os.path.join(out_dir, "metrics.json"), "w", encoding="utf-8") as f:
+            json.dump(clean_results[res_key], f, indent=2)
 
-        print(f"\n>>> [GROUP-AWARE BENCHMARK {arch.upper()}]")
-        print(f"    CV Val Acc (5-Fold Grouped) : {clean_results[arch]['cv_val_accuracy']['mean']:.2f} +/- {clean_results[arch]['cv_val_accuracy']['std']:.2f}%")
+        pd.DataFrame(list(val_map.values())).to_csv(val_csv_out, index=False)
+        pd.DataFrame(list(test_map.values())).to_csv(test_csv_out, index=False)
+        with open(json_out, "w", encoding="utf-8") as f:
+            json.dump(clean_results, f, indent=2)
+
+        print(f"\n>>> [GROUP-AWARE BENCHMARK {arch.upper()} seed={args.seed}]")
+        print(f"    CV Val Acc (5-Fold Grouped) : {clean_results[res_key]['cv_val_accuracy']['mean']:.2f} +/- {clean_results[res_key]['cv_val_accuracy']['std']:.2f}%")
         print(f"    Clean Test Acc (Ensemble)   : {ens_metrics['acc']:.2f}% [CI: {ens_metrics['acc_ci'][0]:.2f}-{ens_metrics['acc_ci'][1]:.2f}%]")
         print(f"    Macro F1: {ens_metrics['macro_f1']:.4f} | Macro ROC-AUC: {ens_metrics['macro_auc']:.6f}")
 
-    # Save summary files
-    pd.DataFrame(per_fold_val_rows).to_csv("exp4_per_fold_val.csv", index=False)
-    with open("exp4_clean_benchmark.json", "w", encoding="utf-8") as f:
-        json.dump(clean_results, f, indent=2)
-
-    print(f"\n[OK] Exp 4 results written to exp4_clean_benchmark.json and exp4_per_fold_val.csv")
+    print(f"\n[OK] Exp 4 grouped results written to {json_out}, {val_csv_out}, {test_csv_out}")
 
 
 if __name__ == "__main__":

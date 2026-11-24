@@ -1,0 +1,68 @@
+{
+  "n": 691,
+  "correct": 489,
+  "acc": 70.76700434153402,
+  "bal_acc": 72.41885597845862,
+  "macro_f1": 0.7223673130213758,
+  "macro_auc": 0.8631420341122954,
+  "acc_ci": [
+    67.26837178255785,
+    74.03601446723124
+  ],
+  "f1_per_class": [
+    0.6702,
+    0.8078,
+    0.6891
+  ],
+  "confusion": [
+    [
+      191,
+      25,
+      64
+    ],
+    [
+      20,
+      124,
+      7
+    ],
+    [
+      79,
+      7,
+      174
+    ]
+  ],
+  "acc_cluster_ci": [
+    64.02620405462145,
+    76.83124041891718
+  ],
+  "recall_per_class": [
+    68.21428571428572,
+    82.11920529801324,
+    66.92307692307692
+  ],
+  "acc_by_mag": {
+    "40x": 73.49,
+    "20x": 68.25
+  },
+  "config": {
+    "csv": "data_splits/lunghist700.csv",
+    "root": "data/LungHist700/data/images/",
+    "data_root": "",
+    "arch": "vit_s16",
+    "init": null,
+    "split": "patient",
+    "folds": "data_splits/folds_patient.csv",
+    "folds_out": null,
+    "magnification": null,
+    "size": 224,
+    "epochs": 50,
+    "patience": 8,
+    "lr": 0.0001,
+    "bs": 32,
+    "seed": 42,
+    "hed_jitter": 0.05,
+    "freeze_vit": 1,
+    "out": "results_rev1/WP06/wp06b/e7_vit_hed",
+    "no_pretrained": false
+  }
+}

@@ -32,6 +32,7 @@ import itertools
 import math
 import os
 import random
+import sys
 
 import cv2
 import numpy as np
@@ -161,9 +162,9 @@ def evaluate(df, pred_group):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--root", required=True)
+    ap.add_argument("--root", default="", help="Original 768x768 LC25000 root (auto-resolved if empty)")
     ap.add_argument("--splits", default="data_splits")
-    ap.add_argument("--out", default="results_wp02")
+    ap.add_argument("--out", default="results_rev1/WP02")
     ap.add_argument("--sources-per-class", type=int, default=50)
     ap.add_argument("--siblings", type=int, default=9, help="synthetic siblings per source (family size = this + 1)")
     ap.add_argument("--seed", type=int, default=42)
@@ -172,8 +173,19 @@ def main():
     os.makedirs(a.out, exist_ok=True)
     dev = "cuda" if torch.cuda.is_available() else "cpu"
 
-    groups = pd.read_csv(os.path.join(a.splits, "exp4_groups.csv"))
-    pool = make_pool(groups, a.root, a.sources_per_class, a.siblings, a.out, a.seed)
+    src_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "src")
+    if src_dir not in sys.path:
+        sys.path.insert(0, src_dir)
+    from common import get_lc25000_root, resolve_split_csv
+    raw_root = get_lc25000_root(a.root, require_raw=True)
+    if not raw_root or not os.path.isdir(os.path.join(raw_root, "lung_aca")):
+        raise FileNotFoundError(f"Original 768x768 LC25000 root not found: '{a.root}' / '{raw_root}'")
+    groups_csv = os.path.join(a.splits, "exp4_groups.csv")
+    if not os.path.exists(groups_csv):
+        groups_csv = resolve_split_csv("exp4_groups.csv")
+
+    groups = pd.read_csv(groups_csv)
+    pool = make_pool(groups, raw_root, a.sources_per_class, a.siblings, a.out, a.seed)
     pool.to_csv(os.path.join(a.out, "wp02_pool.csv"), index=False)
     print(f"Pool: {len(pool)} images, {pool.family.nunique()} families")
 

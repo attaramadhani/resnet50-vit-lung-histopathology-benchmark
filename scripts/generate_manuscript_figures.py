@@ -1,4 +1,5 @@
 """Reproduce publication figures (Figs 2-5, 7-8, and Fig S1) directly from logs_and_metrics/."""
+import argparse
 import json
 import os
 import numpy as np
@@ -7,7 +8,7 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import roc_curve, auc
 
 LOGS = "logs_and_metrics"
-FIGS = "figures"
+FIGS = "figures_rev1"
 os.makedirs(FIGS, exist_ok=True)
 
 plt.rcParams.update({
@@ -60,8 +61,9 @@ def fig2_scenarios():
         cv_s = d["cv_val_accuracy"]["std"]
         te_a = d["ensemble_test"]["acc"]
         y = y_pos[idx]
-        ax.errorbar(cv_m, y, xerr=cv_s, fmt="o", mfc="white", mec=col, ecolor=col, capsize=3, ms=6.5, lw=1.4, zorder=3)
-        ax.scatter(te_a, y, marker="D", color=col, s=42, zorder=4)
+        # Vertical micro-offset prevents CV circle and Test diamond from overlapping when means match
+        ax.errorbar(cv_m, y + 0.14, xerr=cv_s, fmt="o", mfc="white", mec=col, ecolor=col, capsize=3, ms=6.2, lw=1.4, zorder=3)
+        ax.scatter(te_a, y - 0.14, marker="D", color=col, s=40, zorder=4)
         ax.text(100.95, y, f"{te_a:.2f}%", va="center", ha="left", fontsize=9, color=col, fontweight="bold")
         labels.append(lbl)
 
@@ -210,11 +212,12 @@ def fig7_confusion():
         for i in range(3):
             for j in range(3):
                 col = "white" if cm_pct[i, j] > 55 else "#0F172A"
-                ax.text(j, i, f"{cm[i, j]}\n{cm_pct[i, j]:.1f}%", ha="center", va="center", color=col, fontsize=9)
+                ax.text(j, i - 0.13, f"{cm[i, j]}", ha="center", va="center", color=col, fontsize=10.5)
+                ax.text(j, i + 0.17, f"{cm_pct[i, j]:.1f}%", ha="center", va="center", color=col, fontsize=12.0, fontweight="bold")
         ax.set_xticks(range(3))
         ax.set_yticks(range(3))
-        ax.set_xticklabels(cls)
-        ax.set_yticklabels(cls)
+        ax.set_xticklabels(cls, fontsize=10.5)
+        ax.set_yticklabels(cls, fontsize=10.5)
         ax.set_xlabel("Predicted")
         ax.set_ylabel("True")
         ax.set_title(ttl, fontsize=9.8)
@@ -230,18 +233,25 @@ def fig8_roc():
         ("ViT-S/16 (ImageNet)", os.path.join(LOGS, "lunghist700", "e7_vit_oof.csv"), ORANGE, "-"),
     ]
     classes = [("(a) ACA vs rest", "ACA", "p_ACA"), ("(b) Normal vs rest", "N", "p_N"), ("(c) SCC vs rest", "SCC", "p_SCC")]
-    fig, axes = plt.subplots(1, 3, figsize=(12.0, 3.9), sharey=True)
-    for ax, (ttl, cname, pcol) in zip(axes, classes):
+    fig, axes = plt.subplots(1, 3, figsize=(12.2, 4.0), sharey=True)
+    for ax_idx, (ax, (ttl, cname, pcol)) in enumerate(zip(axes, classes)):
+        auc_entries = []
         for lbl, fpath, col, ls in models:
             df = pd.read_csv(fpath)
             y_bin = (df["label"] == cname).astype(int)
             fpr, tpr, _ = roc_curve(y_bin, df[pcol])
             roc_auc = auc(fpr, tpr)
-            ax.plot(fpr, tpr, color=col, ls=ls, lw=1.8, label=f"{lbl}, AUC = {roc_auc:.3f}")
+            ax.plot(fpr, tpr, color=col, ls=ls, lw=1.9, label=lbl if ax_idx == 0 else None)
+            auc_entries.append((lbl, roc_auc, col))
+        # Compact direct AUC badge near curve shoulder/endpoint without cluttering legend
+        for k_i, (lbl, roc_auc, col) in enumerate(auc_entries):
+            ax.text(0.97, 0.24 - k_i * 0.08, f"AUC = {roc_auc:.3f}", ha="right", va="center",
+                    fontsize=8.5, fontweight="bold", color=col,
+                    bbox=dict(boxstyle="round,pad=0.15", fc="white", ec="none", alpha=0.85))
         ax.plot([0, 1], [0, 1], ls=":", color=GREY, lw=1.2)
         ax.set_title(ttl, fontsize=10)
         ax.set_xlabel("False positive rate")
-        ax.legend(loc="lower right", frameon=False, fontsize=8)
+    axes[0].legend(loc="center right", bbox_to_anchor=(0.98, 0.45), frameon=True, fontsize=8.0, framealpha=0.9)
     axes[0].set_ylabel("True positive rate")
     plt.tight_layout()
     plt.savefig(os.path.join(FIGS, "fig8_lunghist700_roc_curves.png"), bbox_inches="tight")
@@ -269,6 +279,11 @@ def figS1_training_curves():
 
 
 if __name__ == "__main__":
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--out-dir", default="figures_rev1", help="Output folder (default: figures_rev1 so v2.0.0 figures/ are preserved)")
+    args = ap.parse_args()
+    FIGS = args.out_dir
+    os.makedirs(FIGS, exist_ok=True)
     fig2_scenarios()
     fig3_sensitivity()
     fig4_compute()
@@ -276,4 +291,4 @@ if __name__ == "__main__":
     fig7_confusion()
     fig8_roc()
     figS1_training_curves()
-    print("[OK] Generated Figs 2, 3, 4, 5, 7, 8, and Fig S1 cleanly in figures/!")
+    print(f"[OK] Generated Figs 2, 3, 4, 5, 7, 8, and Fig S1 cleanly in {FIGS}/!")

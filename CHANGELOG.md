@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.1.0-rev1] - 2026-11-24 (Additive Revision R1 Artifacts — Preserves `v2.0.0` / `v2.0.1` Baselines)
+
+All Revision R1 artifacts are added under `results_rev1/`, `figures_rev1/`, and `runpod_rev1/` **without overwriting** existing `v2.0.0`/`v2.0.1` `logs_and_metrics/` or `figures/`:
+- **WP01 (`results_rev1/WP01/`)**: LC25000 shallow-feature shortcut validation (`colour_hist` RF `97.83%` group-aware / `100.00%` image-level).
+- **WP02 (`results_rev1/WP02/`)**: 1,500-image synthetic near-duplicate audit validation (`48.62%` pair recall, `89.50%` precision at default `0.90/30/25`, 64-config grid).
+- **WP03 (`results_rev1/WP03/`)**: Matched-recipe (`AdamW`, `lr=1e-4`, `wd=0.05`, `warmup=5+cosine`, `freeze_vit=0`, `head_dropout=0.0`) 3-seed image-level vs group-aware comparison (`60` folds, `72` pred CSVs).
+- **WP04a–c (`results_rev1/WP04a..c/`)**: Multi-seed replication (seeds 1 & 2, 160 folds), 7-point LR sweep (seed 42, SGDM `mom=0.9`, `nesterov=False`, 140 folds), and Warmup+Cosine ablation (seeds 42/1/2, 60 folds).
+- **WP05 (`results_rev1/WP05/`)**: Per-image predictions for `G1_clean_resnet50` (`99.97%`) and `G2_clean_vit_s16` (`99.93%`) on `exp4_grouped_split.csv`.
+- **WP06 (`results_rev1/WP06/`)**: LungHist700 stain normalization zero-shot (`WP06a`), HED jitter & LC25000-init fine-tuning (`WP06b/c`), Phikon (`86.69%`) & CTransPath (`86.11%`) foundation linear probes (`WP06d`), 512×512 tiling & original 80/10/10 (`WP06e`), and domain shift (`FID=76.691`, `MMD^2=0.1633`, `WP06f`).
+- **WP07 Lightweight & Single-Session Compute (`results_rev1/WP07/`, `results_rev1/COMPUTE/`)**: Adebayo cascading randomization (`WP07-c`), spatially-matched Gaussian random baseline (`WP07-a`), per-class median/IQR (`WP07-d`), and identical-session GPU profiling (`ResNet50`, `ViT-S/16 frozen`, `ViT-S/16 unfrozen` on Tesla T4).
+- **Figures & Statistics (`figures_rev1/`, `results_rev1/Statistik_CI_Kalibrasi_SensSpec.csv`)**: Corrected Fig. 6 (`ViT-S/16 rollout map`), updated Fig. 2/7/8, Rev1 plots, and 2,000× cluster-bootstrap CIs, ECE, Brier, and per-class sensitivity/specificity via `scripts/wp05_wp06_bootstrap_stats.py`.
+
 ## [2.0.1] - 2026-11-22 (Hotfix & Revision R1 Tooling)
 
 ### Fixed & Added

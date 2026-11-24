@@ -1,0 +1,85 @@
+{
+  "scenario_number": 0,
+  "scenario": "wp03_img_vit_s16_seed2",
+  "seed": 2,
+  "config": {
+    "name": "wp03_img_vit_s16_seed2",
+    "model": "ViT-S/16",
+    "arch": "vit_s16",
+    "opt": "AdamW",
+    "lr": 0.0001,
+    "wd": 0.05,
+    "mom": 0.0,
+    "epochs": 50,
+    "patience": 5,
+    "sched": "cosine",
+    "warmup_epochs": 5,
+    "freeze_vit": 0,
+    "head_dropout": 0.0
+  },
+  "cv_val_accuracy": {
+    "n_val_per_fold": 2400,
+    "per_fold": [
+      100.0,
+      100.0,
+      100.0,
+      99.875,
+      99.875
+    ],
+    "mean": 99.95,
+    "std": 0.06
+  },
+  "fold_test_accuracy": {
+    "n_test": 3000,
+    "per_fold": [
+      99.9667,
+      100.0,
+      99.9667,
+      99.7667,
+      99.9
+    ],
+    "mean": 99.92,
+    "std": 0.08
+  },
+  "ensemble_test": {
+    "n": 3000,
+    "correct": 3000,
+    "acc": 100.0,
+    "bal_acc": 100.0,
+    "macro_f1": 1.0,
+    "macro_auc": 1.0,
+    "acc_ci": [
+      99.87211512545248,
+      99.99999999999997
+    ],
+    "f1_per_class": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "confusion": [
+      [
+        1000,
+        0,
+        0
+      ],
+      [
+        0,
+        1000,
+        0
+      ],
+      [
+        0,
+        0,
+        1000
+      ]
+    ]
+  },
+  "epochs_completed": [
+    19,
+    22,
+    23,
+    12,
+    13
+  ]
+}

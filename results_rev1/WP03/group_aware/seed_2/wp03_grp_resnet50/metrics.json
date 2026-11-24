@@ -1,0 +1,70 @@
+{
+  "arch": "resnet50",
+  "seed": 2,
+  "opt": "AdamW",
+  "lr": 0.0001,
+  "wd": 0.05,
+  "sched": "cosine",
+  "warmup_epochs": 5,
+  "freeze_vit": 0,
+  "head_dropout": 0.0,
+  "cv_val_accuracy": {
+    "per_fold": [
+      99.0417,
+      99.1667,
+      99.6667,
+      98.9583,
+      99.2083
+    ],
+    "mean": 99.21,
+    "std": 0.27
+  },
+  "fold_test_accuracy": [
+    99.8667,
+    99.3,
+    99.3667,
+    99.8333,
+    98.6
+  ],
+  "ensemble_clean_test": {
+    "n": 3000,
+    "correct": 3000,
+    "acc": 100.0,
+    "bal_acc": 100.0,
+    "macro_f1": 1.0,
+    "macro_auc": 1.0,
+    "acc_ci": [
+      99.87211512545248,
+      99.99999999999997
+    ],
+    "f1_per_class": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "confusion": [
+      [
+        1000,
+        0,
+        0
+      ],
+      [
+        0,
+        1000,
+        0
+      ],
+      [
+        0,
+        0,
+        1000
+      ]
+    ]
+  },
+  "epochs_completed": [
+    9,
+    15,
+    14,
+    14,
+    17
+  ]
+}

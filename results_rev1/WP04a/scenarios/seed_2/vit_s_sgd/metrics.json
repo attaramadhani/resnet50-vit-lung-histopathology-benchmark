@@ -1,0 +1,85 @@
+{
+  "scenario_number": 10,
+  "scenario": "vit_s_sgd",
+  "seed": 2,
+  "config": {
+    "name": "vit_s_sgd",
+    "model": "ViT-S/16",
+    "arch": "vit_s16",
+    "opt": "SGD",
+    "lr": 0.0001,
+    "wd": 0.0001,
+    "mom": 0.0,
+    "epochs": 50,
+    "patience": 5,
+    "sched": "none",
+    "warmup_epochs": 0,
+    "freeze_vit": 1,
+    "head_dropout": null
+  },
+  "cv_val_accuracy": {
+    "n_val_per_fold": 2400,
+    "per_fold": [
+      98.875,
+      99.2083,
+      99.0417,
+      99.2083,
+      98.6667
+    ],
+    "mean": 99.0,
+    "std": 0.21
+  },
+  "fold_test_accuracy": {
+    "n_test": 3000,
+    "per_fold": [
+      99.2333,
+      99.2333,
+      99.1667,
+      99.1667,
+      98.8667
+    ],
+    "mean": 99.13,
+    "std": 0.14
+  },
+  "ensemble_test": {
+    "n": 3000,
+    "correct": 2976,
+    "acc": 99.2,
+    "bal_acc": 99.2,
+    "macro_f1": 0.991999967999872,
+    "macro_auc": 0.9998601666666667,
+    "acc_ci": [
+      98.81235262924615,
+      99.46180865419912
+    ],
+    "f1_per_class": [
+      0.988,
+      1.0,
+      0.988
+    ],
+    "confusion": [
+      [
+        986,
+        0,
+        14
+      ],
+      [
+        0,
+        1000,
+        0
+      ],
+      [
+        10,
+        0,
+        990
+      ]
+    ]
+  },
+  "epochs_completed": [
+    50,
+    50,
+    50,
+    50,
+    50
+  ]
+}

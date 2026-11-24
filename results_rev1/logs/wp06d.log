@@ -1,0 +1,8 @@
+[Extract] Extracting frozen phikon features on LungHist700 (691 imgs)...
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/200 [00:00<?, ?it/s]Loading weights: 100%|██████████| 200/200 [00:00<00:00, 17993.20it/s]
+[Saved] results_rev1/WP06/wp06d/wp06d_phikon_features.npz: shape=(691, 768)
+[WP06d] phikon     | OOF Acc: 86.69% [81.08-91.37%] | Macro F1: 0.8728 | AUC: 0.9668
+[Extract] Extracting frozen ctranspath features on LungHist700 (691 imgs)...
+[Saved] results_rev1/WP06/wp06d/wp06d_ctranspath_features.npz: shape=(691, 768)
+[WP06d] ctranspath | OOF Acc: 86.11% [80.42-90.94%] | Macro F1: 0.8710 | AUC: 0.9636

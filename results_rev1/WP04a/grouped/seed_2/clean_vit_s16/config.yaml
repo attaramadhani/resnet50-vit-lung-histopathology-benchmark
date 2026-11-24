@@ -1,0 +1,14 @@
+arch: vit_s16
+opt: AdamW
+lr: 0.0001
+wd: 0.0001
+mom: 0.0
+epochs: 50
+patience: 5
+bs: 32
+seed: 2
+sched: none
+warmup_epochs: 0
+freeze_vit: 1
+head_dropout: None
+split: group_aware

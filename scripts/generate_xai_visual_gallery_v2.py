@@ -57,7 +57,7 @@ def main():
     std = np.array(STD).reshape(1, 1, 3)
 
     fig, axes = plt.subplots(len(CASES), 4, figsize=(13, 18), dpi=300)
-    col_titles = ["1. Original H&E Stain", "2. ResNet50 Grad-CAM", "3. ViT-S/16 Attention Rollout", "4. ViT-S/16 Saliency Map"]
+    col_titles = ["1. Original H&E Stain", "2. ResNet50 Grad-CAM", "3. ViT-S/16 Attention Rollout", "4. ViT-S/16 rollout map"]
 
     for row_idx, (cls_dir, fname, case_lbl) in enumerate(CASES):
         img_path = os.path.join(args.data_root, cls_dir, fname)
@@ -81,7 +81,7 @@ def main():
             f"{case_lbl}\n[{fname}]",
             f"Pred: {CLASSES[c_res]} ({p_res[c_res]*100:.1f}%)",
             f"Pred: {CLASSES[c_vit]} ({p_vit[c_vit]*100:.1f}%)",
-            "ViT-S Attention Flow",
+            "ViT-S/16 rollout map",
         ]
         for col_idx, (panel, st) in enumerate(zip(panels, subtitles)):
             ax = axes[row_idx, col_idx]

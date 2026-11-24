@@ -1,0 +1,38 @@
+{
+  "arch": "resnet50",
+  "freeze_vit_blocks": true,
+  "hardware": "Tesla T4, 580.82.07, 15360 MiB",
+  "driver_version": "580.82.07",
+  "cuda_version": "13.0",
+  "torch_version": "2.14.1+cu130",
+  "params_M": 23.51,
+  "trainable_params_M": 23.51,
+  "batch_size": 32,
+  "batch_size_throughput": 32,
+  "batch_size_latency": [
+    32,
+    1
+  ],
+  "warmup_iterations": 20,
+  "repeats": 5,
+  "iters_per_repeat": 100,
+  "precision": "FP16 (torch.autocast)",
+  "MACs_G": 4.11,
+  "GMACs": 4.11,
+  "train_img_per_s": [
+    252.5,
+    3.5
+  ],
+  "train_epoch_s_9600_imgs_gpu_only": 38.0,
+  "peak_mem_GB_train": 1.81,
+  "latency_ms_per_batch_bs32": [
+    38.93,
+    0.152
+  ],
+  "latency_ms_per_image_bs32": 1.217,
+  "latency_ms_per_batch_bs1": [
+    7.376,
+    1.228
+  ],
+  "latency_ms_per_image_bs1": 7.376
+}

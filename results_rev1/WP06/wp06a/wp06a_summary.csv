@@ -1,0 +1,9 @@
+norm,preprocess,arch,acc,cluster_ci_low,cluster_ci_high,bal_acc,macro_f1,macro_auc
+macenko,resize,resnet50,38.78,23.83,55.83,34.29,0.204,0.6018
+macenko,resize,vit_s16,40.67,26.01,57.33,35.83,0.2348,0.6676
+macenko,crop768,resnet50,40.09,25.49,56.82,35.64,0.2355,0.6329
+macenko,crop768,vit_s16,41.53,27.43,57.85,36.6,0.2581,0.6954
+reinhard,resize,resnet50,42.55,29.0,57.24,37.33,0.2686,0.6793
+reinhard,resize,vit_s16,45.59,31.98,59.97,39.79,0.3089,0.6597
+reinhard,crop768,resnet50,48.05,35.76,60.87,42.0,0.3445,0.7445
+reinhard,crop768,vit_s16,52.24,41.21,63.99,45.4,0.3934,0.7532
