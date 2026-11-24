@@ -2,14 +2,14 @@
 
 [![Python](https://img.shields.io/badge/python-3.12.3-blue.svg)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.8.0%20%2B%20CUDA%2012.8-ee4c2c.svg)](https://pytorch.org/)
-[![Release](https://img.shields.io/badge/release-v2.0.0-success.svg)](https://github.com/attaramadhani/resnet50-vit-lung-histopathology-benchmark/releases/tag/v2.0.0)
+[![Release](https://img.shields.io/badge/release-v2.1.1-success.svg)](https://github.com/attaramadhani/resnet50-vit-lung-histopathology-benchmark/releases/tag/v2.1.1)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23271475.svg)](https://doi.org/10.5281/zenodo.23271475)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23271474.svg)](https://doi.org/10.5281/zenodo.23271474)
 [![Elsevier](https://img.shields.io/badge/Elsevier-CMPB_Update-orange.svg)](https://www.sciencedirect.com/journal/computer-methods-and-programs-in-biomedicine-update)
 
-Official **v2.0.0** open-science replication package for manuscript **CMPBUP-D-26-00450** submitted to Elsevier's *Computer Methods and Programs in Biomedicine Update* (CMPB Update).
+Official **v2.1.1** open-science replication package (Revision R1 + complete **v2.0.0** baseline) for manuscript **CMPBUP-D-26-00450** submitted to Elsevier's *Computer Methods and Programs in Biomedicine Update* (CMPB Update).
 
-> **Version Note (`v1.0.0` Superseded):** Release `v1.0.0` (archived at git tag `v1.0.0`) is **superseded and obsolete**. It contained pre-revision draft code and logs that differed from the revised manuscript (`momentum: 0.9` in initial SGD configs, `use_augmentation: false`, `ReduceLROnPlateau` scheduler in `train.py`, HuggingFace ViT loader with dropout 0.1, perceptual-hash-only audit, and a 4-epoch LungHist700 script selecting checkpoints on the held-out fold without inner validation). **`v2.0.0`** contains the exact unified revision pipeline, configs, splits, raw logs, and figure scripts underlying the manuscript. See [`CHANGELOG.md`](CHANGELOG.md) for full details.
+> **Version Note (`v1.0.0` Superseded; `v2.0.0` Preserved):** Release `v1.0.0` (archived at git tag `v1.0.0`) is **superseded and obsolete**. **`v2.0.0` / `v2.0.1`** remain preserved untouched under `logs_and_metrics/` and `figures/`. **`v2.1.1`** adds all Revision R1 experiments, scripts, predictions, and updated figures separately under `results_rev1/`, `figures_rev1/`, and `runpod_rev1/`. See [`CHANGELOG.md`](CHANGELOG.md) for full details.
 
 ---
 
@@ -178,11 +178,15 @@ git clone https://github.com/attaramadhani/resnet50-vit-lung-histopathology-benc
 cd resnet50-vit-lung-histopathology-benchmark
 pip install -r requirements.txt
 
-# 1. Reproduce all manuscript figures (Figs 2-5, 7-8, S1) directly from logs_and_metrics/:
-python scripts/generate_manuscript_figures.py
+# 1. Reproduce updated manuscript figures (Figs 2-5, 7-8, S1) into figures_rev1/:
+python scripts/generate_manuscript_figures.py --out-dir figures_rev1
 
-# 2. Run the full end-to-end training & evaluation pipeline on GPU (requires Kaggle/Figshare datasets):
+# 2. Recompute bootstrap CIs, calibration (ECE/Brier), and per-class sensitivity/specificity from results_rev1/:
+python scripts/wp05_wp06_bootstrap_stats.py --results-root results_rev1 --out results_rev1/Statistik_CI_Kalibrasi_SensSpec.csv
+
+# 3. Run the v2.0.0 baseline or full Revision R1 Paket C pipeline on GPU (requires Kaggle/Figshare datasets):
 bash run_all.sh
+bash runpod_rev1/run_master_rev1.sh --paket C
 ```
 
 ---
@@ -196,7 +200,7 @@ bash run_all.sh
   journal={Computer Methods and Programs in Biomedicine Update},
   year={2026},
   publisher={Elsevier},
-  note={Replication package v2.0.0 archived at Zenodo: https://doi.org/10.5281/zenodo.23271475}
+  note={Replication package archived at Zenodo (Concept DOI): https://doi.org/10.5281/zenodo.23271474}
 }
 ```
 
