@@ -1,0 +1,14 @@
+| Features | Classifier | OOF acc. (%) [95% cluster CI] | Macro F1 | Recall ACA / N / SCC (%) |
+| --- | --- | --- | --- | --- |
+| colour_hist | logreg | 56.87 [50.3-62.9] | 0.5826 | 51.8 / 68.2 / 55.8 |
+| colour_hist | random_forest | 63.24 [56.0-69.8] | 0.6460 | 60.4 / 67.5 / 63.8 |
+| colour_moments | logreg | 65.56 [58.1-72.9] | 0.6750 | 61.4 / 76.2 / 63.8 |
+| colour_moments | random_forest | 60.49 [53.8-66.6] | 0.6218 | 56.4 / 65.6 / 61.9 |
+| thumb16 | logreg | 43.13 [39.0-47.4] | 0.4232 | 41.1 / 33.1 / 51.2 |
+| thumb16 | random_forest | 57.89 [49.8-66.2] | 0.5740 | 58.9 / 48.3 / 62.3 |
+| blur_thumb32 | logreg | 44.72 [40.9-48.6] | 0.4369 | 44.3 / 33.8 / 51.5 |
+| blur_thumb32 | random_forest | 58.18 [51.1-66.1] | 0.5777 | 61.1 / 48.3 / 60.8 |
+| gray_thumb32 | logreg | 36.76 [31.0-42.3] | 0.3383 | 36.1 / 17.9 / 48.5 |
+| gray_thumb32 | random_forest | 49.49 [41.0-58.5] | 0.3783 | 68.6 / 1.3 / 56.9 |
+| reinhard_thumb32 | logreg | 40.23 [33.7-46.3] | 0.3696 | 43.9 / 18.5 / 48.8 |
+| reinhard_thumb32 | random_forest | 51.37 [45.6-57.8] | 0.4522 | 69.6 / 15.2 / 52.7 |

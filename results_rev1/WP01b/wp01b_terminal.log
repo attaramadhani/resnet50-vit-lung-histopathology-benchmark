@@ -1,0 +1,14 @@
+colour_hist       logreg        acc =  56.87% [50.3-62.9]
+colour_hist       random_forest acc =  63.24% [56.0-69.8]
+colour_moments    logreg        acc =  65.56% [58.1-72.9]
+colour_moments    random_forest acc =  60.49% [53.8-66.6]
+thumb16           logreg        acc =  43.13% [39.0-47.4]
+thumb16           random_forest acc =  57.89% [49.8-66.2]
+blur_thumb32      logreg        acc =  44.72% [40.9-48.6]
+blur_thumb32      random_forest acc =  58.18% [51.1-66.1]
+gray_thumb32      logreg        acc =  36.76% [31.0-42.3]
+gray_thumb32      random_forest acc =  49.49% [41.0-58.5]
+reinhard_thumb32  logreg        acc =  40.23% [33.7-46.3]
+reinhard_thumb32  random_forest acc =  51.37% [45.6-57.8]
+
+Fill in the manuscript: colour-histogram RF = 63.24%, LR = 56.87%
