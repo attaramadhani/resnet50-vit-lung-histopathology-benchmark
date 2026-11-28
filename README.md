@@ -118,7 +118,6 @@ Official **v2.1.1** open-science replication package (Revision R1 + complete **v
 - [`run_all.sh`](run_all.sh) — Master shell script executing the full pipeline end-to-end
 - [`requirements.txt`](requirements.txt) — Exact package versions (§3.8)
 - [`CHANGELOG.md`](CHANGELOG.md) | [`CITATION.cff`](CITATION.cff) | [`.zenodo.json`](.zenodo.json) | [`LICENSE`](LICENSE)
-```
 
 ---
 
