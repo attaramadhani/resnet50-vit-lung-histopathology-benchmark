@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.1.2] - 2026-11-28 (WP01b Negative-Control Shortcut Test, Clickable Docs & Full Author ORCIDs)
+- **WP01b (`scripts/wp01b_shortcut_lunghist700.py`, `results_rev1/WP01b/`)**: Added patient-grouped 5-fold negative-control shallow-feature shortcut evaluation on LungHist700 (`n = 691` images, 45 patients, `data_splits/folds_patient.csv`). `colour_hist` + Random Forest drops to **`63.24%`** (`95% cluster CI: 56.0–69.8%`, Macro F1 `0.6460`) and Logistic Regression to **`56.87%`** (`95% CI: 50.3–62.9%`, Macro F1 `0.5826`), confirming that the LC25000 `97.83%` colour shortcut does not transfer to patient-grouped LungHist700 (`Section 5.4`).
+- **Documentation & Author Metadata (`README.md`, `CITATION.cff`, `.zenodo.json`)**: Converted Repository Structure into clickable relative links covering all Revision R1 folders and scripts (including `WP01b`), fixed stray code fence formatting, and added verified ORCID IDs for all three authors (`Wahyudi Setiawan`, `Attala Alif Ramadhani Tri Hida`, and `Ade Verdaus Saputra`).
+
 ## [2.1.1] - 2026-11-24 (Final Minor Polish on Fig. 6 Header)
 - Deduplicated Column 4 top title in `figures_rev1/fig6_xai_gallery_rev1.png` and `results_rev1/FIG6/fig6_xai_gallery_rev1.png` (and `scripts/generate_xai_visual_gallery_v2.py`) to render a single crisp header line: `4. ViT-S/16 rollout map`.
 

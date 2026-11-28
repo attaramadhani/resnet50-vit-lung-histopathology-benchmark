@@ -2,14 +2,14 @@
 
 [![Python](https://img.shields.io/badge/python-3.12.3-blue.svg)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.8.0%20%2B%20CUDA%2012.8-ee4c2c.svg)](https://pytorch.org/)
-[![Release](https://img.shields.io/badge/release-v2.1.1-success.svg)](https://github.com/attaramadhani/resnet50-vit-lung-histopathology-benchmark/releases/tag/v2.1.1)
+[![Release](https://img.shields.io/badge/release-v2.1.2-success.svg)](https://github.com/attaramadhani/resnet50-vit-lung-histopathology-benchmark/releases/tag/v2.1.2)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23271474.svg)](https://doi.org/10.5281/zenodo.23271474)
 [![Elsevier](https://img.shields.io/badge/Elsevier-CMPB_Update-orange.svg)](https://www.sciencedirect.com/journal/computer-methods-and-programs-in-biomedicine-update)
 
-Official **v2.1.1** open-science replication package (Revision R1 + complete **v2.0.0** baseline) for manuscript **CMPBUP-D-26-00450** submitted to Elsevier's *Computer Methods and Programs in Biomedicine Update* (CMPB Update).
+Official **v2.1.2** open-science replication package (Revision R1 + complete **v2.0.0** baseline) for manuscript **CMPBUP-D-26-00450** submitted to Elsevier's *Computer Methods and Programs in Biomedicine Update* (CMPB Update).
 
-> **Version Note (`v1.0.0` Superseded; `v2.0.0` Preserved):** Release `v1.0.0` (archived at git tag `v1.0.0`) is **superseded and obsolete**. **`v2.0.0` / `v2.0.1`** remain preserved untouched under `logs_and_metrics/` and `figures/`. **`v2.1.1`** adds all Revision R1 experiments, scripts, predictions, and updated figures separately under `results_rev1/`, `figures_rev1/`, and `runpod_rev1/`. See [`CHANGELOG.md`](CHANGELOG.md) for full details.
+> **Version Note (`v1.0.0` Superseded; `v2.0.0` Preserved):** Release `v1.0.0` (archived at git tag `v1.0.0`) is **superseded and obsolete**. **`v2.0.0` / `v2.0.1`** remain preserved untouched under `logs_and_metrics/` and `figures/`. **`v2.1.2`** builds on **`v2.1.0`/`v2.1.1`** with all Revision R1 experiments (including **WP01b** LungHist700 negative-control shortcut test), scripts, predictions, clickable documentation, and author ORCIDs under `results_rev1/`, `figures_rev1/`, and `runpod_rev1/`. See [`CHANGELOG.md`](CHANGELOG.md) for full details.
 
 ---
 
