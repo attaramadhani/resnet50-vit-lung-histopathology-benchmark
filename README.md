@@ -17,26 +17,27 @@ Official **v2.1.1** open-science replication package (Revision R1 + complete **v
 
 | Script | Purpose | Manuscript Output(s) |
 | :--- | :--- | :--- |
-| `src/train_scenarios.py` | 14-scenario LC25000 5-fold CV & 3,000-image soft-voting test | **Table 2, Table 3 (rows 1–14), Fig. 2, Fig. 3, Fig. S1** |
-| `src/exp_stats_paired.py` | Paired & Nadeau–Bengio corrected resampled *t*-tests | **Section 4.1, Section 4.2** |
-| `src/exp4_duplicate_audit.py` | Rotation-invariant dihedral ResNet50 + ORB/RANSAC duplicate audit | **Section 3.2, Section 4.1 (1,779 groups)** |
-| `src/train_clean_grouped.py` | Group-aware re-training of S1 & S6 (`G1–G2`) | **Table 3 (rows G1–G2)** |
-| `src/exp3_compute_benchmark.py` | GPU-only throughput/latency/VRAM & wall-clock log summary | **Table 4, Fig. 4** |
-| `src/exp2_faithfulness.py` | Grad-CAM & Attention Rollout deletion/insertion AUC (`K=10/20`, 3 baselines) | **Table 5, Fig. 5** |
-| `src/exp1_zeroshot_ensemble.py` | Zero-shot 5-fold ensemble test on LungHist700 (`N=691`) | **Table 6 (Zero-shot), Fig. 7a–b** |
-| `src/exp7_lunghist_finetune.py` | Patient-grouped & image-level LungHist700 5-fold CV (inner val, patience 8) | **Table 6 (Fine-tuned & Image-level), Fig. 7c–e, Fig. 8** |
-| `src/lunghist_stats.py` | Durkalski clustered McNemar + Holm correction on LungHist700 | **Section 4.5** |
-| `src/verify_vit_checkpoint.py` | Pretrained weight equivalence (`timm` vs `WinKawaks/vit-small-patch16-224`) | **Section 3.3** |
-| `scripts/generate_manuscript_figures.py` | Reproduces 300 DPI plots from `logs_and_metrics/` | **Figs. 2, 3, 4, 5, 7, 8, Fig. S1** |
-| `scripts/generate_xai_visual_gallery_v2.py` | 6 test-image XAI gallery (first 2/class from `exp2_images.csv`) | **Fig. 6** |
-| `scripts/wp01_shortcut_lc25000.py` | LC25000 shallow-feature shortcut test (6 feature sets × 2 classifiers) | **Revision WP01 (`results_rev1/WP01/`)** |
-| `scripts/wp02_audit_validation.py` | Synthetic sibling validation & sensitivity grid for Exp 4 audit | **Revision WP02 (`results_rev1/WP02/`)** |
-| `runpod_rev1/02_run_wp03_wp05.sh` | Matched-recipe (`AdamW`, `wd=0.05`, `warmup=5+cosine`, `freeze=0`) & G1/G2 OOF export | **Revision WP03 & WP05 (`results_rev1/WP03/`, `WP05/`)** |
-| `runpod_rev1/03_run_wp04a_multiseed.sh` | Multi-seed replication (`seeds 1, 2`) across S1–S14 & G1–G2 | **Revision WP04a (`results_rev1/WP04a/`)** |
-| `runpod_rev1/04_run_wp04b_c_sweep.sh` | 7-point LR sweep (`seed 42`, SGDM `m=0.9`) & Warmup+Cosine ablation | **Revision WP04b & WP04c (`results_rev1/WP04b/`, `WP04c/`)** |
-| `scripts/wp06a_stain_norm_zeroshot.py`, `scripts/wp06d_foundation_linear_probe.py`, `scripts/wp06e_stronger_protocol.py`, `scripts/wp06f_domain_shift.py` | LungHist700 stain norm zero-shot, HED jitter, LC25000-init ViT, Phikon/CTransPath linear probe, tiling 512 + orig 80/10/10, & domain shift | **Revision WP06 (`results_rev1/WP06/`)** |
-| `scripts/wp07_xai_lightweight.py` | Adebayo cascading randomization (`WP07-c`), spatially-matched Gaussian random baseline (`WP07-a`), per-class median/IQR (`WP07-d`) | **Revision WP07 (`results_rev1/WP07/`)** |
-| `scripts/wp05_wp06_bootstrap_stats.py` | Wilson 95% CI, 2,000× cluster-bootstrap CI, ECE (15-bin), Brier, per-class sens/spec | **`results_rev1/Statistik_CI_Kalibrasi_SensSpec.csv`** |
+| [`src/train_scenarios.py`](src/train_scenarios.py) | 14-scenario LC25000 5-fold CV & 3,000-image soft-voting test | **Table 2, Table 3 (rows 1–14), Fig. 2, Fig. 3, Fig. S1** |
+| [`src/exp_stats_paired.py`](src/exp_stats_paired.py) | Paired & Nadeau–Bengio corrected resampled *t*-tests | **Section 4.1, Section 4.2** |
+| [`src/exp4_duplicate_audit.py`](src/exp4_duplicate_audit.py) | Rotation-invariant dihedral ResNet50 + ORB/RANSAC duplicate audit | **Section 3.2, Section 4.1 (1,779 groups)** |
+| [`src/train_clean_grouped.py`](src/train_clean_grouped.py) | Group-aware re-training of S1 & S6 (`G1–G2`) | **Table 3 (rows G1–G2)** |
+| [`src/exp3_compute_benchmark.py`](src/exp3_compute_benchmark.py) | GPU-only throughput/latency/VRAM & wall-clock log summary | **Table 4, Fig. 4** |
+| [`src/exp2_faithfulness.py`](src/exp2_faithfulness.py) | Grad-CAM & Attention Rollout deletion/insertion AUC (`K=10/20`, 3 baselines) | **Table 5, Fig. 5** |
+| [`src/exp1_zeroshot_ensemble.py`](src/exp1_zeroshot_ensemble.py) | Zero-shot 5-fold ensemble test on LungHist700 (`N=691`) | **Table 6 (Zero-shot), Fig. 7a–b** |
+| [`src/exp7_lunghist_finetune.py`](src/exp7_lunghist_finetune.py) | Patient-grouped & image-level LungHist700 5-fold CV (inner val, patience 8) | **Table 6 (Fine-tuned & Image-level), Fig. 7c–e, Fig. 8** |
+| [`src/lunghist_stats.py`](src/lunghist_stats.py) | Durkalski clustered McNemar + Holm correction on LungHist700 | **Section 4.5** |
+| [`src/verify_vit_checkpoint.py`](src/verify_vit_checkpoint.py) | Pretrained weight equivalence (`timm` vs `WinKawaks/vit-small-patch16-224`) | **Section 3.3** |
+| [`scripts/generate_manuscript_figures.py`](scripts/generate_manuscript_figures.py) | Reproduces 300 DPI plots from `logs_and_metrics/` | **Figs. 2, 3, 4, 5, 7, 8, Fig. S1** |
+| [`scripts/generate_xai_visual_gallery_v2.py`](scripts/generate_xai_visual_gallery_v2.py) | 6 test-image XAI gallery (first 2/class from `exp2_images.csv`) | **Fig. 6** |
+| [`scripts/wp01_shortcut_lc25000.py`](scripts/wp01_shortcut_lc25000.py) | LC25000 shallow-feature shortcut test (6 feature sets × 2 classifiers) | **Section 5.4, Revision WP01 ([`results_rev1/WP01/`](results_rev1/WP01/))** |
+| [`scripts/wp01b_shortcut_lunghist700.py`](scripts/wp01b_shortcut_lunghist700.py) | LungHist700 negative-control shortcut test (patient-grouped 5-fold CV, `n=691`) | **Section 5.4, Revision WP01b ([`results_rev1/WP01b/`](results_rev1/WP01b/))** |
+| [`scripts/wp02_audit_validation.py`](scripts/wp02_audit_validation.py) | Synthetic sibling validation & sensitivity grid for Exp 4 audit | **Revision WP02 ([`results_rev1/WP02/`](results_rev1/WP02/))** |
+| [`runpod_rev1/02_run_wp03_wp05.sh`](runpod_rev1/02_run_wp03_wp05.sh) | Matched-recipe (`AdamW`, `wd=0.05`, `warmup=5+cosine`, `freeze=0`) & G1/G2 OOF export | **Revision WP03 & WP05 ([`results_rev1/WP03/`](results_rev1/WP03/), [`WP05/`](results_rev1/WP05/))** |
+| [`runpod_rev1/03_run_wp04a_multiseed.sh`](runpod_rev1/03_run_wp04a_multiseed.sh) | Multi-seed replication (`seeds 1, 2`) across S1–S14 & G1–G2 | **Revision WP04a ([`results_rev1/WP04a/`](results_rev1/WP04a/))** |
+| [`runpod_rev1/04_run_wp04b_lr_sweep.sh`](runpod_rev1/04_run_wp04b_lr_sweep.sh), [`05_run_wp04c_warmup_cosine.sh`](runpod_rev1/05_run_wp04c_warmup_cosine.sh) | 7-point LR sweep (`seed 42`, SGDM `m=0.9`) & Warmup+Cosine ablation | **Revision WP04b & WP04c ([`results_rev1/WP04b/`](results_rev1/WP04b/), [`WP04c/`](results_rev1/WP04c/))** |
+| [`scripts/wp06a_stain_norm_zeroshot.py`](scripts/wp06a_stain_norm_zeroshot.py), [`wp06d`](scripts/wp06d_foundation_linear_probe.py), [`wp06e`](scripts/wp06e_stronger_protocol.py), [`wp06f`](scripts/wp06f_domain_shift.py) | LungHist700 stain norm zero-shot, HED jitter, LC25000-init ViT, Phikon/CTransPath linear probe, tiling 512 + orig 80/10/10, & domain shift | **Revision WP06 ([`results_rev1/WP06/`](results_rev1/WP06/))** |
+| [`scripts/wp07_xai_lightweight.py`](scripts/wp07_xai_lightweight.py) | Adebayo cascading randomization (`WP07-c`), spatially-matched Gaussian random baseline (`WP07-a`), per-class median/IQR (`WP07-d`) | **Revision WP07 ([`results_rev1/WP07/`](results_rev1/WP07/))** |
+| [`scripts/wp05_wp06_bootstrap_stats.py`](scripts/wp05_wp06_bootstrap_stats.py) | Wilson 95% CI, 2,000× cluster-bootstrap CI, ECE (15-bin), Brier, per-class sens/spec | **[`results_rev1/Statistik_CI_Kalibrasi_SensSpec.csv`](results_rev1/Statistik_CI_Kalibrasi_SensSpec.csv)** |
 
 ---
 
@@ -52,65 +53,71 @@ Official **v2.1.1** open-science replication package (Revision R1 + complete **v
 
 ## Repository Structure
 
-```text
-resnet50-vit-lung-histopathology-benchmark/
-├── configs/                        # All 14 scenario YAMLs (S1–S14) + group-aware G1–G2
-├── data_splits/                    # Deterministic split manifests & SHA-256 verified CSVs
-│   ├── lc25000_lung_all.csv        # 15,000 LC25000 lung images
-│   ├── lc25000_dev.csv             # 12,000 development images (4,000/class)
-│   ├── lc25000_test.csv            # 3,000 held-out test images (1,000/class)
-│   ├── exp4_grouped_split.csv      # 1,779 rotation-invariant duplicate groups split
-│   ├── exp4_groups.csv             # Image-to-group cluster map (Exp 4)
-│   ├── exp2_images.csv             # 150 test images (50/class, seed 42) for Exp 2
-│   ├── lunghist700.csv             # 691 LungHist700 images with patient & magnification IDs
-│   └── folds_patient.csv           # 5-fold patient-grouped LungHist700 splits (136–142 imgs/fold)
-├── src/                            # Unified PyTorch experimental pipeline (v2.0.0)
-│   ├── common.py                   # ResNet50 & timm ViT-S/16 builders, augmentations, metrics, bootstrap
-│   ├── prepare_cache_256.py        # Pre-caches 256×256 LC25000 copies (runtime I/O optimization)
-│   ├── download_lunghist700.py     # Automatic LungHist700 fetcher (Figshare DOI)
-│   ├── verify_vit_checkpoint.py    # Weight equivalence test: timm augreg vs WinKawaks/vit-small-patch16-224
-│   ├── train_scenarios.py          # 14-scenario 5-fold CV + soft-voting test evaluator
-│   ├── exp4_duplicate_audit.py     # Dihedral ResNet50 embeddings + k-NN + ORB/RANSAC + union-find
-│   ├── train_clean_grouped.py      # Group-aware re-training (G1 & G2)
-│   ├── exp3_compute_benchmark.py   # Synthetic GPU-only profiling + wall-clock log summarizer
-│   ├── exp2_faithfulness.py        # Grad-CAM & Attention Rollout deletion/insertion AUC (K=10/20, 3 baselines)
-│   ├── exp1_zeroshot_ensemble.py   # Zero-shot ensemble evaluation on LungHist700
-│   ├── exp7_lunghist_finetune.py   # Patient-grouped 5-fold CV with inner validation (~15% patients, patience 8)
-│   ├── exp_stats_paired.py         # Paired & Nadeau–Bengio corrected resampled t-tests
-│   └── lunghist_stats.py           # Durkalski clustered McNemar + Holm correction
-├── scripts/                        # Publication figure generators & revision checks
-│   ├── generate_manuscript_figures.py
-│   ├── generate_xai_visual_gallery_v2.py
-│   ├── wp01_shortcut_lc25000.py
-│   └── wp02_audit_validation.py
-├── figures/                        # Original v2.0.0/v2.0.1 manuscript figures (Figs 2–8 & S1, preserved untouched)
-├── figures_rev1/                   # Revision R1 updated figures (Fig. 2, 6, 7, 8 fixes + WP04b LR sweep & WP06 plots)
-├── results_rev1/                   # Complete Revision R1 logs, configs, metrics, & per-image CSV predictions (WP01–WP07, COMPUTE)
-│   ├── WP01/                       # Shallow color/thumbnail shortcut tests
-│   ├── WP02/                       # Near-duplicate audit grid (64 configs, 150 synthetic families)
-│   ├── WP03/                       # Matched-recipe 3-seed comparison (image-level vs group-aware, 72 pred CSVs)
-│   ├── WP04a/ WP04b/ WP04c/        # Multi-seed S1–S14/G1–G2, 7-point LR sweep (SGDM m=0.9), Warmup+Cosine
-│   ├── WP05/                       # Clean baseline G1/G2 5-fold + ensemble predictions (exp4_grouped_split.csv)
-│   ├── WP06/                       # LungHist700: wp06a–wp06f (Phikon, CTransPath, tiling, 80/10/10, FID/MMD)
-│   ├── WP07/                       # Lightweight XAI: Adebayo randomization, spatial-matched random, median/IQR
-│   ├── COMPUTE/                    # Single-session GPU compute profiling (ResNet50, ViT frozen, ViT unfrozen)
-│   ├── FIG6/                       # Updated Fig. 6 ('ViT-S/16 rollout map')
-│   ├── logs/                       # Complete terminal execution logs
-│   └── Statistik_CI_Kalibrasi_SensSpec.csv  # Cluster-bootstrap CIs, ECE, Brier, per-class sens/spec
-├── runpod_rev1/                    # Reproducible Revision R1 orchestration & verification scripts
-├── logs_and_metrics/               # Raw experimental logs & compiled tables
-│   ├── tables_for_manuscript.md    # Auto-compiled Tables 2–6 with file provenance
-│   ├── environment.txt             # Software versions, NVIDIA RTX 4090 info, and SHA-256 checksums
-│   ├── vit_checkpoint_check.json   # Verified max_abs_diff = 2.24e-5, top1_agreement = 1.0
-│   ├── run_all.log                 # Complete RunPod execution log (5,706 lines)
-│   ├── runs/                       # Per-scenario config.yaml, fold histories, and metrics.json (S1–S14, G1–G2)
-│   ├── exp2_faithfulness/          # Per-image & summary CSV/TXT/JSON (K=10/20, grey/blur/tissue_mean, logits)
-│   ├── exp4/                       # Duplicate audit pairs, group stats, and clean benchmark results
-│   └── lunghist700/                # OOF predictions, fold logs, metrics JSONs, and clustered McNemar tests
-├── run_all.sh                      # Master shell script executing the full pipeline end-to-end
-├── requirements.txt                # Exact package versions (§3.8)
-├── CHANGELOG.md
-└── CITATION.cff
+> Click any folder or file name below to jump directly to it on GitHub.
+
+- [`configs/`](configs/) — All 14 scenario YAMLs (`S1–S14`) + group-aware `G1–G2` (`16` YAML configs)
+- [`data_splits/`](data_splits/) — Deterministic split manifests & SHA-256 verified CSVs
+  - [`lc25000_lung_all.csv`](data_splits/lc25000_lung_all.csv) — `15,000` LC25000 lung images
+  - [`lc25000_dev.csv`](data_splits/lc25000_dev.csv) — `12,000` development images (`4,000`/class)
+  - [`lc25000_test.csv`](data_splits/lc25000_test.csv) — `3,000` held-out test images (`1,000`/class)
+  - [`exp4_grouped_split.csv`](data_splits/exp4_grouped_split.csv) — `1,779` rotation-invariant duplicate groups split
+  - [`exp4_groups.csv`](data_splits/exp4_groups.csv) & [`exp4_stats.json`](data_splits/exp4_stats.json) — Image-to-group cluster map & summary (Exp 4)
+  - [`exp2_images.csv`](data_splits/exp2_images.csv) — `150` test images (`50`/class, seed `42`) for Exp 2 XAI
+  - [`lunghist700.csv`](data_splits/lunghist700.csv) — `691` LungHist700 images with patient & magnification IDs
+  - [`folds_patient.csv`](data_splits/folds_patient.csv) — 5-fold patient-grouped LungHist700 splits (`136–142` images/fold)
+- [`src/`](src/) — Unified PyTorch experimental pipeline (`v2.0.0`, `17` modules)
+  - [`common.py`](src/common.py) — ResNet50 & `timm` ViT-S/16 builders, augmentations, metrics, cluster bootstrap
+  - [`prepare_cache_256.py`](src/prepare_cache_256.py) — Pre-caches `256×256` LC25000 copies (runtime I/O optimization)
+  - [`download_lunghist700.py`](src/download_lunghist700.py) — Automatic LungHist700 fetcher (Figshare DOI)
+  - [`verify_vit_checkpoint.py`](src/verify_vit_checkpoint.py) — Weight equivalence test: `timm` augreg vs `WinKawaks/vit-small-patch16-224`
+  - [`train_scenarios.py`](src/train_scenarios.py) & [`train_main_folds.py`](src/train_main_folds.py) — 14-scenario 5-fold CV + soft-voting test evaluator
+  - [`exp4_duplicate_audit.py`](src/exp4_duplicate_audit.py) — Dihedral ResNet50 embeddings + *k*-NN + ORB/RANSAC + union-find
+  - [`train_clean_grouped.py`](src/train_clean_grouped.py) — Group-aware re-training (`G1` & `G2`)
+  - [`exp5_train_sgdm.py`](src/exp5_train_sgdm.py) — SGD with momentum (`m=0.9`) training runner
+  - [`exp3_compute_benchmark.py`](src/exp3_compute_benchmark.py) — Synthetic GPU-only profiling + wall-clock log summarizer
+  - [`exp2_faithfulness.py`](src/exp2_faithfulness.py) — Grad-CAM & Attention Rollout deletion/insertion AUC (`K=10/20`, 3 baselines)
+  - [`exp1_zeroshot_ensemble.py`](src/exp1_zeroshot_ensemble.py) — Zero-shot ensemble evaluation on LungHist700
+  - [`exp7_lunghist_finetune.py`](src/exp7_lunghist_finetune.py) — Patient-grouped 5-fold CV with inner validation (`~15%` patients, patience `8`)
+  - [`exp_stats_paired.py`](src/exp_stats_paired.py) & [`lunghist_stats.py`](src/lunghist_stats.py) — Nadeau–Bengio *t*-tests & Durkalski clustered McNemar + Holm correction
+  - [`package_results.py`](src/package_results.py) & [`sync_results_aliases.py`](src/sync_results_aliases.py) — Result aggregation & path alias sync utilities
+- [`scripts/`](scripts/) — Publication figure generators & Revision R1 experiments (`12` scripts)
+  - [`generate_manuscript_figures.py`](scripts/generate_manuscript_figures.py) — Reproduces Figs. 2–5, 7–8, S1
+  - [`generate_xai_visual_gallery_v2.py`](scripts/generate_xai_visual_gallery_v2.py) — Generates updated Fig. 6 XAI visual gallery
+  - [`wp01_shortcut_lc25000.py`](scripts/wp01_shortcut_lc25000.py) — Shallow-feature shortcut test on LC25000
+  - [`wp01b_shortcut_lunghist700.py`](scripts/wp01b_shortcut_lunghist700.py) — Negative-control shallow-feature shortcut test on LungHist700
+  - [`wp02_audit_validation.py`](scripts/wp02_audit_validation.py) — Near-duplicate audit validation & sensitivity grid
+  - [`wp05_export_old_g1_g2_preds.py`](scripts/wp05_export_old_g1_g2_preds.py) & [`wp05_wp06_bootstrap_stats.py`](scripts/wp05_wp06_bootstrap_stats.py) — G1/G2 predictions export & cluster-bootstrap/calibration stats
+  - [`wp06a_stain_norm_zeroshot.py`](scripts/wp06a_stain_norm_zeroshot.py), [`wp06d_foundation_linear_probe.py`](scripts/wp06d_foundation_linear_probe.py), [`wp06e_stronger_protocol.py`](scripts/wp06e_stronger_protocol.py), [`wp06f_domain_shift.py`](scripts/wp06f_domain_shift.py) — LungHist700 robustness, foundation probes, & domain shift
+  - [`wp07_xai_lightweight.py`](scripts/wp07_xai_lightweight.py) — Lightweight XAI sanity checks (Adebayo randomization, matched random, median/IQR)
+- [`figures/`](figures/) — Original `v2.0.0/v2.0.1` manuscript figures (`Figs 2–8` & `Fig. S1`, preserved untouched)
+- [`figures_rev1/`](figures_rev1/) — Revision R1 updated figures (`Fig. 2, 6, 7, 8` fixes + `WP04b` LR sweep & `WP06` plots)
+- [`results_rev1/`](results_rev1/) — Complete Revision R1 logs, configs, metrics, & per-image CSV predictions
+  - [`WP01/`](results_rev1/WP01/) — LC25000 shallow color/thumbnail shortcut tests
+  - [`WP01b/`](results_rev1/WP01b/) — LungHist700 negative-control shortcut test ([`wp01b_results.md`](results_rev1/WP01b/wp01b_results.md), [`wp01b_results.csv`](results_rev1/WP01b/wp01b_results.csv), [`wp01b_terminal.log`](results_rev1/WP01b/wp01b_terminal.log))
+  - [`WP02/`](results_rev1/WP02/) — Near-duplicate audit grid (`64` configs, `150` synthetic families)
+  - [`WP03/`](results_rev1/WP03/) — Matched-recipe 3-seed comparison (image-level vs group-aware, `72` pred CSVs)
+  - [`WP04a/`](results_rev1/WP04a/), [`WP04b/`](results_rev1/WP04b/), [`WP04c/`](results_rev1/WP04c/) — Multi-seed `S1–S14/G1–G2`, 7-point LR sweep (SGDM `m=0.9`), Warmup+Cosine
+  - [`WP05/`](results_rev1/WP05/) — Clean baseline `G1/G2` 5-fold + ensemble predictions ([`exp4_grouped_split.csv`](data_splits/exp4_grouped_split.csv))
+  - [`WP06/`](results_rev1/WP06/) — LungHist700: `wp06a–wp06f` (Phikon, CTransPath, tiling, 80/10/10, FID/MMD)
+  - [`WP07/`](results_rev1/WP07/) — Lightweight XAI: Adebayo randomization, spatial-matched random, median/IQR
+  - [`COMPUTE/`](results_rev1/COMPUTE/) — Single-session GPU compute profiling (ResNet50, ViT frozen, ViT unfrozen)
+  - [`FIG6/`](results_rev1/FIG6/) — Updated `Fig. 6` (`ViT-S/16 rollout map`)
+  - [`logs/`](results_rev1/logs/) — Complete terminal execution logs
+  - [`Statistik_CI_Kalibrasi_SensSpec.csv`](results_rev1/Statistik_CI_Kalibrasi_SensSpec.csv) — Cluster-bootstrap CIs, ECE, Brier, per-class sens/spec
+  - [`COMPLETENESS_AUDIT.txt`](results_rev1/COMPLETENESS_AUDIT.txt), [`MANIFEST_SHA256.txt`](results_rev1/MANIFEST_SHA256.txt), [`environment_rev1.txt`](results_rev1/environment_rev1.txt), [`scripts_sha256_rev1.txt`](results_rev1/scripts_sha256_rev1.txt)
+- [`runpod_rev1/`](runpod_rev1/) — Reproducible Revision R1 orchestration & verification scripts ([`RUNPOD_SETUP_AND_SYNC_GUIDE.md`](runpod_rev1/RUNPOD_SETUP_AND_SYNC_GUIDE.md), [`run_master_rev1.sh`](runpod_rev1/run_master_rev1.sh))
+- [`logs_and_metrics/`](logs_and_metrics/) — Raw experimental logs & compiled tables (`v2.0.0/v2.0.1`)
+  - [`tables_for_manuscript.md`](logs_and_metrics/tables_for_manuscript.md) — Auto-compiled Tables 2–6 with file provenance
+  - [`environment.txt`](logs_and_metrics/environment.txt) — Software versions, NVIDIA RTX 4090 info, and SHA-256 checksums
+  - [`vit_checkpoint_check.json`](logs_and_metrics/vit_checkpoint_check.json) — Verified `max_abs_diff = 2.24e-5`, `top1_agreement = 1.0`
+  - [`run_all.log`](logs_and_metrics/run_all.log) — Complete RunPod execution log (`5,706` lines)
+  - [`runs/`](logs_and_metrics/runs/) — Per-scenario `config.yaml`, fold histories, and `metrics.json` (`S1–S14`, `G1–G2`)
+  - [`exp2_faithfulness/`](logs_and_metrics/exp2_faithfulness/) — Per-image & summary CSV/TXT/JSON (`K=10/20`, `grey`/`blur`/`tissue_mean`, logits)
+  - [`exp4/`](logs_and_metrics/exp4/) — Duplicate audit pairs, group stats, and clean benchmark results
+  - [`lunghist700/`](logs_and_metrics/lunghist700/) — OOF predictions, fold logs, metrics JSONs, and clustered McNemar tests
+- [`run_all.sh`](run_all.sh) — Master shell script executing the full pipeline end-to-end
+- [`requirements.txt`](requirements.txt) — Exact package versions (§3.8)
+- [`CHANGELOG.md`](CHANGELOG.md) | [`CITATION.cff`](CITATION.cff) | [`.zenodo.json`](.zenodo.json) | [`LICENSE`](LICENSE)
 ```
 
 ---
@@ -184,7 +191,10 @@ python scripts/generate_manuscript_figures.py --out-dir figures_rev1
 # 2. Recompute bootstrap CIs, calibration (ECE/Brier), and per-class sensitivity/specificity from results_rev1/:
 python scripts/wp05_wp06_bootstrap_stats.py --results-root results_rev1 --out results_rev1/Statistik_CI_Kalibrasi_SensSpec.csv
 
-# 3. Run the v2.0.0 baseline or full Revision R1 Paket C pipeline on GPU (requires Kaggle/Figshare datasets):
+# 3. Run the WP01b negative-control shortcut test on LungHist700 (CPU):
+python scripts/wp01b_shortcut_lunghist700.py --root /path/to/LungHist700 --out results_rev1/WP01b
+
+# 4. Run the v2.0.0 baseline or full Revision R1 Paket C pipeline on GPU (requires Kaggle/Figshare datasets):
 bash run_all.sh
 bash runpod_rev1/run_master_rev1.sh --paket C
 ```
