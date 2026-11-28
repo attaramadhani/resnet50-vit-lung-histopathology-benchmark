@@ -45,7 +45,7 @@ Official **v2.1.1** open-science replication package (Revision R1 + complete **v
 
 - **Wahyudi Setiawan** (Corresponding author: `wsetiawan@trunojoyo.ac.id`, ORCID: [0000-0003-0068-1443](https://orcid.org/0000-0003-0068-1443))
 - **Attala Alif Ramadhani Tri Hida** (ORCID: [0009-0009-3006-5482](https://orcid.org/0009-0009-3006-5482))
-- **Ade Verdaus Saputra**
+- **Ade Verdaus Saputra** (ORCID: [0009-0008-8499-7472](https://orcid.org/0009-0008-8499-7472))
 
 *Department of Information Systems, Faculty of Engineering, Universitas Trunojoyo Madura, Bangkalan 69162, East Java, Indonesia*
 
